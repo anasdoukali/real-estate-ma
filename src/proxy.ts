@@ -6,7 +6,7 @@ const secret = new TextEncoder().encode(
   process.env.ADMIN_JWT_SECRET || "marrakech-premium-dev-secret-change-me-please-0001",
 );
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (pathname.startsWith("/admin/login")) return NextResponse.next();
 
