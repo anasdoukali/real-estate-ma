@@ -159,7 +159,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 z-20 translate-y-[45%] px-4 md:px-0">
+        <div className="absolute inset-x-0 bottom-0 z-20 translate-y-[22%] px-4 md:px-0">
           <div className="mx-auto w-full max-w-[1400px] md:w-[86vw]">
             <SearchPanel lang={lang} neighborhoods={hoods.map((n) => ({ name: n.name, slug: n.slug }))} />
           </div>
@@ -167,7 +167,7 @@ export default async function HomePage() {
       </section>
 
       {/* 02 QUICK TYPES */}
-      <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[300px] md:px-10 md:pt-[260px]">
+      <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[240px] md:px-10 md:pt-[220px]">
         <div className="grid grid-cols-2 gap-px bg-sand md:grid-cols-3 lg:grid-cols-6">
           {PROPERTY_TYPES.slice(0, 6).map((t, i) => (
             <Reveal key={t.value} delay={i * 60}>
