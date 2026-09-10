@@ -28,6 +28,15 @@ const STATS_IMAGE =
   "https://images.pexels.com/photos/15260622/pexels-photo-15260622.jpeg?auto=compress&cs=tinysrgb&w=1600";
 const VALUATION_IMAGE =
   "https://images.pexels.com/photos/8134745/pexels-photo-8134745.jpeg?auto=compress&cs=tinysrgb&w=1600";
+const QUICK_TYPE_ICONS: Record<string, string> = {
+  villa: "/icons/Villas.png",
+  appartement: "/icons/Appartements.png",
+  riad: "/icons/Riads.png",
+  maison: "/icons/Maisons.png",
+  terrain: "/icons/Terrains.png",
+  bureau: "/icons/Bureaux.png",
+};
+
 const COLLECTION_IMAGES: Record<string, string> = {
   villa: "https://images.pexels.com/photos/9730025/pexels-photo-9730025.jpeg?auto=compress&cs=tinysrgb&w=1200",
   appartement: "https://images.pexels.com/photos/7005300/pexels-photo-7005300.jpeg?auto=compress&cs=tinysrgb&w=1200",
@@ -100,7 +109,7 @@ export default async function HomePage() {
   return (
     <>
       {/* 01 HERO */}
-      <section className="relative min-h-[100svh] w-full overflow-hidden bg-charcoal">
+      <section className="relative h-[650px] min-h-[75svh] max-h-[900px] w-full overflow-hidden bg-charcoal md:h-[80svh]">
         <div className="absolute inset-0">
           <Image
             src={HERO_IMAGE}
@@ -108,80 +117,65 @@ export default async function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="hero-zoom object-cover"
+            className="hero-zoom scale-[1.03] object-cover blur-[3px]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/25 to-charcoal/75" />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/25 to-charcoal/65" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-center px-5 pb-[320px] pt-32 md:px-10 md:pb-[280px]">
+        <div className="relative mx-auto flex h-full max-w-[1600px] flex-col items-center justify-center px-5 pb-24 pt-24 text-center md:px-10">
           <p className="label-xs fade-up text-white/75">
             {en ? "Exceptional real estate • Marrakech" : "Immobilier d'exception • Marrakech"}
           </p>
           <h1
-            className="display fade-up mt-7 max-w-5xl text-[42px] text-white sm:text-[62px] lg:text-[84px]"
+            className="fade-up mt-5 max-w-5xl font-sans text-[36px] font-bold leading-[1.06] tracking-[-0.045em] text-white sm:text-[48px] lg:text-[60px]"
             style={{ animationDelay: "120ms" }}
           >
             {en ? (
               <>
-                Find more than a property.
-                <br />
-                Find your place in Marrakech.
+                Find your ideal property
+                <br className="hidden sm:block" />
+                in Marrakech.
               </>
             ) : (
               <>
-                Trouvez plus qu&apos;une propriété.
-                <br />
-                Trouvez votre place à Marrakech.
+                Trouvez votre propriété idéale
+                <br className="hidden sm:block" />
+                à Marrakech.
               </>
             )}
           </h1>
           <p
-            className="fade-up mt-8 max-w-xl text-[15px] leading-relaxed text-white/75 md:text-[16px]"
+            className="fade-up mt-5 max-w-2xl text-[14px] leading-relaxed text-white/80 md:text-[16px]"
             style={{ animationDelay: "240ms" }}
           >
             {en
               ? "Villas, apartments, riads and exceptional properties curated in the most beautiful neighborhoods of Marrakech."
               : "Villas, appartements, riads et propriétés d'exception sélectionnés dans les plus beaux quartiers de Marrakech."}
           </p>
-          <div className="fade-up mt-10 flex flex-wrap gap-4" style={{ animationDelay: "340ms" }}>
-            <Link
-              href="/biens"
-              className="label-xs bg-white px-8 py-4 text-charcoal transition-colors hover:bg-champagne hover:text-white"
-            >
-              {en ? "Explore properties" : "Explorer les biens"}
-            </Link>
-            <Link
-              href="/estimation"
-              className="label-xs border border-white/60 px-8 py-4 text-white transition-colors hover:bg-white hover:text-charcoal"
-            >
-              {en ? "List my property" : "Confier mon bien"}
-            </Link>
-          </div>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-0 z-20 translate-y-[22%] px-4 md:px-0">
-          <div className="mx-auto w-full max-w-[1400px] md:w-[86vw]">
+          <div className="fade-up mt-10 w-full max-w-[1380px]" style={{ animationDelay: "340ms" }}>
             <SearchPanel lang={lang} neighborhoods={hoods.map((n) => ({ name: n.name, slug: n.slug }))} />
           </div>
         </div>
       </section>
 
       {/* 02 QUICK TYPES */}
-      <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[240px] md:px-10 md:pt-[220px]">
-        <div className="grid grid-cols-2 gap-px bg-sand md:grid-cols-3 lg:grid-cols-6">
+      <section className="relative z-10 mx-auto -mt-6 max-w-[1600px] px-0 pb-24 pt-0 md:-mt-10 md:px-10 md:pb-28">
+        <div className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto border-y border-sand bg-sand md:grid md:grid-cols-3 lg:grid-cols-6">
           {PROPERTY_TYPES.slice(0, 6).map((t, i) => (
-            <Reveal key={t.value} delay={i * 60}>
+            <Reveal key={t.value} delay={i * 60} className="min-w-[155px] snap-start border-r border-sand last:border-r-0 md:min-w-0">
               <Link
                 href={`/types/${t.value}`}
-                className="group flex h-full flex-col justify-between bg-warm p-6 transition-colors hover:bg-white"
+                className="group relative flex h-full min-h-[176px] flex-col items-center justify-center bg-warm px-5 py-7 text-center transition-colors duration-300 hover:bg-white"
               >
-                <span className="label-xs text-champagne">{String(i + 1).padStart(2, "0")}</span>
-                <div className="mt-10">
-                  <p className="text-[16px] font-semibold tracking-[-0.01em] group-hover:text-champagne">
+                <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-champagne transition-transform duration-300 group-hover:scale-x-100" />
+                <Image src={QUICK_TYPE_ICONS[t.value]} alt="" width={42} height={42} className="h-14 w-14 object-contain transition-transform duration-300 group-hover:-translate-y-0.5" />
+                <span className="label-xs mt-3 text-muted">{String(i + 1).padStart(2, "0")}</span>
+                <div className="mt-2">
+                  <p className="text-[16px] font-semibold tracking-[-0.01em] transition-colors duration-300 group-hover:text-champagne">
                     {propertyTypePlural(t.value, lang)}
                   </p>
                   <p className="mt-1 text-[13px] text-muted">
-                    {counts[t.value] ?? 0} {en ? "listings" : "biens"}
+                    {counts[t.value] ?? 0} {en ? ((counts[t.value] ?? 0) === 1 ? "listing" : "listings") : (counts[t.value] ?? 0) === 1 ? "bien" : "biens"}
                   </p>
                 </div>
               </Link>
@@ -224,31 +218,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 04 IMMERSIVE MARRAKECH */}
-      <section className="relative h-[80vh] min-h-[520px] w-full overflow-hidden">
-        <Image src={MARRAKECH_IMAGE} alt="Marrakech" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-charcoal/55" />
-        <div className="relative mx-auto flex h-full max-w-[1600px] flex-col justify-center px-5 md:px-10">
-          <Reveal>
-            <p className="label-xs text-white/70">Marrakech</p>
-            <h2 className="display mt-5 text-[44px] text-white sm:text-[68px] lg:text-[92px]">
-              {en ? "An art of living" : "Un art de vivre"}
-            </h2>
-            <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-white/75">
-              {en
-                ? "Between contemporary architecture, historic riads, golf courses and Atlas landscapes, discover another way to live Marrakech."
-                : "Entre architecture contemporaine, riads historiques, golfs et paysages de l'Atlas, découvrez une autre manière de vivre Marrakech."}
-            </p>
-            <Link
-              href="/quartiers"
-              className="label-xs mt-10 inline-block border border-white/60 px-8 py-4 text-white transition-colors hover:bg-white hover:text-charcoal"
-            >
-              {en ? "Discover Marrakech" : "Découvrir Marrakech"}
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
       {/* 05 LATEST */}
       <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10">
         <Reveal>
@@ -278,6 +247,32 @@ export default async function HomePage() {
               <PropertyCard property={toCard(p)} lang={lang} />
             </Reveal>
           ))}
+        </div>
+      </section>
+
+
+      {/* 04 IMMERSIVE MARRAKECH */}
+      <section className="relative h-[80vh] min-h-[520px] w-full overflow-hidden">
+        <Image src={MARRAKECH_IMAGE} alt="Marrakech" fill sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-charcoal/55" />
+        <div className="relative mx-auto flex h-full max-w-[1600px] flex-col justify-center px-5 md:px-10">
+          <Reveal>
+            <p className="label-xs text-white/70">Marrakech</p>
+            <h2 className="display mt-5 text-[44px] text-white sm:text-[68px] lg:text-[92px]">
+              {en ? "An art of living" : "Un art de vivre"}
+            </h2>
+            <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-white/75">
+              {en
+                ? "Between contemporary architecture, historic riads, golf courses and Atlas landscapes, discover another way to live Marrakech."
+                : "Entre architecture contemporaine, riads historiques, golfs et paysages de l'Atlas, découvrez une autre manière de vivre Marrakech."}
+            </p>
+            <Link
+              href="/quartiers"
+              className="label-xs mt-10 inline-block border border-white/60 px-8 py-4 text-white transition-colors hover:bg-white hover:text-charcoal"
+            >
+              {en ? "Discover Marrakech" : "Découvrir Marrakech"}
+            </Link>
+          </Reveal>
         </div>
       </section>
 
