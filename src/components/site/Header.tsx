@@ -8,13 +8,16 @@ import { useFavorites } from "@/lib/client-store";
 
 const NAV = [
   { fr: "Accueil", en: "Home", href: "/" },
+  { fr: "Agence", en: "Agency", href: "/agence" },
+  { fr: "Journal", en: "Journal", href: "/blog" },
+  { fr: "Contact", en: "Contact", href: "/contact" },
+];
+
+const LISTING_NAV = [
   { fr: "Acheter", en: "Buy", href: "/biens?transaction=sale" },
   { fr: "Louer", en: "Rent", href: "/biens?transaction=rent" },
   { fr: "Propriétés", en: "Properties", href: "/biens" },
   { fr: "Quartiers", en: "Neighborhoods", href: "/quartiers" },
-  { fr: "Agence", en: "Agency", href: "/agence" },
-  { fr: "Journal", en: "Journal", href: "/blog" },
-  { fr: "Contact", en: "Contact", href: "/contact" },
 ];
 
 export default function Header({
@@ -90,14 +93,24 @@ export default function Header({
           </Link>
 
           <nav className="hidden items-center gap-7 xl:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-[13px] font-medium tracking-[0.02em] transition-colors hover:text-champagne ${
-                  solid ? "text-charcoal" : "text-white"
-                }`}
-              >
+            <Link href="/" className={solid ? "text-[13px] font-medium tracking-[0.02em] text-charcoal transition-colors hover:text-champagne" : "text-[13px] font-medium tracking-[0.02em] text-white transition-colors hover:text-champagne"}>
+              {lang === "en" ? "Home" : "Accueil"}
+            </Link>
+            <div className="group relative">
+              <Link href="/biens" className={solid ? "flex items-center gap-1 text-[13px] font-medium tracking-[0.02em] text-charcoal transition-colors hover:text-champagne" : "flex items-center gap-1 text-[13px] font-medium tracking-[0.02em] text-white transition-colors hover:text-champagne"}>
+                {lang === "en" ? "Listings" : "Propriétés"}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+              </Link>
+              <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-52 -translate-x-1/2 border border-stone bg-warm p-2 opacity-0 shadow-[0_16px_40px_-18px_rgba(22,22,22,0.35)] transition-all duration-200 group-hover:visible group-hover:translate-y-1 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-1 group-focus-within:opacity-100">
+                {LISTING_NAV.map((item) => (
+                  <Link key={item.href} href={item.href} className="block px-4 py-3 text-[12px] font-medium tracking-[0.02em] text-charcoal transition-colors hover:bg-white hover:text-champagne">
+                    {lang === "en" ? item.en : item.fr}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            {NAV.slice(1).map((item) => (
+              <Link key={item.href} href={item.href} className={solid ? "text-[13px] font-medium tracking-[0.02em] text-charcoal transition-colors hover:text-champagne" : "text-[13px] font-medium tracking-[0.02em] text-white transition-colors hover:text-champagne"}>
                 {lang === "en" ? item.en : item.fr}
               </Link>
             ))}
@@ -188,15 +201,19 @@ export default function Header({
           </button>
         </div>
         <nav className="flex h-[calc(100%-86px)] flex-col justify-center gap-1 overflow-y-auto px-8 pb-16">
-          {NAV.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{ animationDelay: `${i * 45}ms` }}
-              className={`font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px] ${
-                open ? "fade-up" : ""
-              }`}
-            >
+          {NAV.slice(0, 1).map((item) => (
+            <Link key={item.href} href={item.href} className={open ? "fade-up font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px]" : "font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px]"}>
+              {lang === "en" ? item.en : item.fr}
+            </Link>
+          ))}
+          <Link href="/biens" className={open ? "fade-up font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px]" : "font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px]"}>
+            {lang === "en" ? "Listings" : "Propriétés"}
+          </Link>
+          <div className="mb-3 flex flex-wrap gap-x-5 gap-y-2 border-l border-white/20 pl-4 text-[12px] font-semibold tracking-[0.08em] text-white/60">
+            {LISTING_NAV.map((item) => <Link key={item.href} href={item.href} className="hover:text-champagne">{lang === "en" ? item.en : item.fr}</Link>)}
+          </div>
+          {NAV.slice(1).map((item) => (
+            <Link key={item.href} href={item.href} className={open ? "fade-up font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px]" : "font-display text-[38px] leading-[1.25] text-white/90 transition-colors hover:text-champagne md:text-[52px]"}>
               {lang === "en" ? item.en : item.fr}
             </Link>
           ))}
