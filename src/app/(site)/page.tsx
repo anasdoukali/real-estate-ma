@@ -162,12 +162,12 @@ export default async function HomePage() {
 
       {/* 02 QUICK TYPES */}
       <section className="relative z-10 mx-auto -mt-6 max-w-[1600px] px-0 pb-24 pt-0 md:-mt-10 md:px-10 md:pb-28">
-        <div className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto border-y border-sand bg-sand md:grid md:grid-cols-3 lg:grid-cols-6">
+        <div className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-[20px] border border-sand bg-sand md:grid md:grid-cols-3 lg:grid-cols-6">
           {PROPERTY_TYPES.slice(0, 6).map((t, i) => (
             <Reveal key={t.value} delay={i * 60} className="min-w-[155px] snap-start border-r border-sand last:border-r-0 md:min-w-0">
               <Link
                 href={`/types/${t.value}`}
-                className="group relative flex h-full min-h-[176px] flex-col items-center justify-center bg-warm px-5 py-7 text-center transition-colors duration-300 hover:bg-white"
+                className="group relative m-1 flex h-[calc(100%-0.5rem)] min-h-[168px] flex-col items-center justify-center rounded-[20px] bg-warm px-5 py-7 text-center transition-colors duration-300 hover:bg-white"
               >
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-champagne transition-transform duration-300 group-hover:scale-x-100" />
                 <Image src={QUICK_TYPE_ICONS[t.value]} alt="" width={42} height={42} className="h-14 w-14 object-contain transition-transform duration-300 group-hover:-translate-y-0.5" />

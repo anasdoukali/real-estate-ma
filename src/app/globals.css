@@ -128,3 +128,30 @@
 input[type="range"] {
   accent-color: #a98b5b;
 }
+
+/* Shared interface radius */
+:root {
+  --interface-radius: 20px;
+}
+
+button:not([class*="rounded-full"]),
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea,
+form[class*="border"],
+[class*="rounded-"]:not([class*="rounded-full"]) {
+  border-radius: var(--interface-radius) !important;
+}
+
+main > section[class*="bg-"],
+main > section[class*="overflow-hidden"] {
+  border-radius: var(--interface-radius);
+  overflow: hidden;
+}
+
+.search-transaction-tab {
+  border-radius: 0 !important;
+}
+.search-transaction-tab:first-child {
+  border-top-left-radius: var(--interface-radius) !important;
+}

@@ -101,9 +101,9 @@ export default function Header({
                 {lang === "en" ? "Listings" : "Propriétés"}
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </Link>
-              <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-52 -translate-x-1/2 border border-stone bg-warm p-2 opacity-0 shadow-[0_16px_40px_-18px_rgba(22,22,22,0.35)] transition-all duration-200 group-hover:visible group-hover:translate-y-1 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-1 group-focus-within:opacity-100">
+              <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-52 -translate-x-1/2 rounded-[20px] border border-stone bg-warm p-2 opacity-0 shadow-[0_16px_40px_-18px_rgba(22,22,22,0.35)] transition-all duration-200 group-hover:visible group-hover:translate-y-1 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-1 group-focus-within:opacity-100">
                 {LISTING_NAV.map((item) => (
-                  <Link key={item.href} href={item.href} className="block px-4 py-3 text-[12px] font-medium tracking-[0.02em] text-charcoal transition-colors hover:bg-white hover:text-champagne">
+                  <Link key={item.href} href={item.href} className="block rounded-[20px] px-4 py-3 text-[12px] font-medium tracking-[0.02em] text-charcoal transition-colors hover:bg-white hover:text-champagne">
                     {lang === "en" ? item.en : item.fr}
                   </Link>
                 ))}

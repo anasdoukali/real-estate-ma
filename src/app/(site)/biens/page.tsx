@@ -66,7 +66,7 @@ export default async function BiensPage({ searchParams }: { searchParams: Promis
         </div>
       </section>
 
-      <div className="mx-auto -mt-10 max-w-[1600px] px-5 md:px-10">
+      <div className="mx-auto mt-8 max-w-[1600px] px-5 md:mt-10 md:px-10">
         <SearchPanel
           lang={lang}
           variant="bar"

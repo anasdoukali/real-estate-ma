@@ -23,7 +23,7 @@ const SALE_BUDGETS = [1_000_000, 2_000_000, 3_000_000, 5_000_000, 8_000_000, 12_
 const RENT_BUDGETS = [5_000, 10_000, 15_000, 25_000, 40_000, 60_000, 100_000];
 
 const inputCls =
-  "h-12 w-full border border-sand bg-white px-3 text-[13.5px] text-charcoal outline-none transition-colors focus:border-champagne";
+  "h-12 w-full rounded-[20px] border border-sand bg-white px-3 text-[13.5px] text-charcoal outline-none transition-colors focus:border-champagne";
 
 export default function SearchPanel({
   lang,
@@ -73,7 +73,7 @@ export default function SearchPanel({
   return (
     <form
       onSubmit={submit}
-      className={`w-full bg-warm shadow-[0_24px_70px_-30px_rgba(22,22,22,0.45)] ${
+      className={`w-full overflow-hidden rounded-[20px] bg-warm shadow-[0_24px_70px_-30px_rgba(22,22,22,0.45)] ${
         variant === "hero" ? "" : "border border-stone"
       }`}
     >
@@ -86,7 +86,7 @@ export default function SearchPanel({
             key={tab.value}
             type="button"
             onClick={() => setTransaction(tab.value)}
-            className={`label-xs px-8 py-4 transition-colors ${
+            className={`search-transaction-tab label-xs px-8 py-4 transition-colors ${
               transaction === tab.value ? "bg-warm text-charcoal" : "bg-charcoal/90 text-white/70 hover:text-white"
             }`}
           >
@@ -139,7 +139,7 @@ export default function SearchPanel({
 
           <button
             type="submit"
-            className="label-xs h-12 bg-charcoal px-6 text-white transition-colors hover:bg-champagne"
+            className="label-xs h-12 rounded-[20px] bg-charcoal px-6 text-white transition-colors hover:bg-champagne"
           >
             {en ? "Search" : "Rechercher"}
           </button>
@@ -200,7 +200,7 @@ export default function SearchPanel({
                         prev.includes(f.value) ? prev.filter((x) => x !== f.value) : [...prev, f.value],
                       )
                     }
-                    className={`border px-3.5 py-2 text-[12px] transition-colors ${
+                    className={`rounded-[20px] border px-3.5 py-2 text-[12px] transition-colors ${
                       active
                         ? "border-champagne bg-champagne text-white"
                         : "border-sand bg-white text-muted hover:border-champagne hover:text-charcoal"
