@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ValuationForm from "@/components/site/ValuationForm";
 import { getLang } from "@/lib/lang";
 import { listNeighborhoods } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 export default async function ValuationPage() {
   const lang = await getLang();
   const en = lang === "en";
-  const hoods = await listNeighborhoods();
+  const hoods = await loadPublicData(() => listNeighborhoods(), []);
 
   return (
     <>

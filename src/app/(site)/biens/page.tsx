@@ -4,6 +4,7 @@ import SearchPanel from "@/components/site/SearchPanel";
 import ListingResults from "@/components/site/ListingResults";
 import { getLang } from "@/lib/lang";
 import { countProperties, listNeighborhoods, listProperties, type PropertyFilters } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 import { toCard, toPoint } from "@/lib/mappers";
 
 export const dynamic = "force-dynamic";
@@ -49,9 +50,9 @@ export default async function BiensPage({ searchParams }: { searchParams: Promis
   const en = lang === "en";
   const filters = parseFilters(sp);
   const [items, total, hoods] = await Promise.all([
-    listProperties({ ...filters, limit: 48 }),
-    countProperties(filters),
-    listNeighborhoods(),
+    loadPublicData(() => listProperties({ ...filters, limit: 48 }), []),
+    loadPublicData(() => countProperties(filters), 0),
+    loadPublicData(() => listNeighborhoods(), []),
   ]);
 
   return (

@@ -10,6 +10,7 @@ import {
   propertyImages,
   testimonials,
   type Agent,
+  type AgencySettings,
   type Neighborhood,
   type Property,
 } from "@/db/schema";
@@ -189,30 +190,30 @@ export async function getPropertyBySlug(slug: string): Promise<PropertyWithRelat
   };
 }
 
+export const DEFAULT_AGENCY_SETTINGS: AgencySettings = {
+  id: 0,
+  agencyName: "[AGENCY NAME]",
+  logo: null,
+  logoDark: null,
+  phone: "+212 5 24 00 00 00",
+  whatsapp: "+212600000000",
+  email: "contact@agency.ma",
+  address: "Marrakech, Maroc",
+  instagram: null,
+  facebook: null,
+  linkedin: null,
+  defaultCurrency: "MAD",
+  seoTitle: null,
+  seoDescription: null,
+  yearsExperience: 12,
+  propertiesSold: 450,
+  activeProperties: 250,
+  clientCount: 20,
+};
+
 export async function getSettings() {
   const rows = await db.select().from(agencySettings).limit(1);
-  return (
-    rows[0] ?? {
-      id: 0,
-      agencyName: "[AGENCY NAME]",
-      logo: null,
-      logoDark: null,
-      phone: "+212 5 24 00 00 00",
-      whatsapp: "+212600000000",
-      email: "contact@agency.ma",
-      address: "Marrakech, Maroc",
-      instagram: null,
-      facebook: null,
-      linkedin: null,
-      defaultCurrency: "MAD",
-      seoTitle: null,
-      seoDescription: null,
-      yearsExperience: 12,
-      propertiesSold: 450,
-      activeProperties: 250,
-      clientCount: 20,
-    }
-  );
+  return rows[0] ?? DEFAULT_AGENCY_SETTINGS;
 }
 
 export async function listNeighborhoods(onlyPublished = true) {

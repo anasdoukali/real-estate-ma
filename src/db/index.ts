@@ -17,6 +17,11 @@ export const pool =
     connectionString: databaseUrl,
     // Supabase's hosted PostgreSQL pooler requires TLS.
     ssl: { rejectUnauthorized: false },
+    // Fail quickly so public pages can render their fallback state instead of
+    // sitting on the Next.js loading screen while a remote database is offline.
+    connectionTimeoutMillis: 5_000,
+    idleTimeoutMillis: 30_000,
+    keepAlive: true,
   });
 
 if (process.env.NODE_ENV !== "production") {

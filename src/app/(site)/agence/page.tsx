@@ -4,7 +4,8 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { pick } from "@/lib/i18n";
 import { getLang } from "@/lib/lang";
-import { getSettings, listAgents } from "@/lib/queries";
+import { DEFAULT_AGENCY_SETTINGS, getSettings, listAgents } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,10 @@ const SIDE = "https://images.pexels.com/photos/27945049/pexels-photo-27945049.jp
 export default async function AgencyPage() {
   const lang = await getLang();
   const en = lang === "en";
-  const [settings, team] = await Promise.all([getSettings(), listAgents()]);
+  const [settings, team] = await Promise.all([
+    loadPublicData(() => getSettings(), DEFAULT_AGENCY_SETTINGS),
+    loadPublicData(() => listAgents(), []),
+  ]);
 
   const values = [
     {

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/site/ContactForm";
 import { getLang } from "@/lib/lang";
-import { getSettings } from "@/lib/queries";
+import { DEFAULT_AGENCY_SETTINGS, getSettings } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 export default async function ContactPage() {
   const lang = await getLang();
   const en = lang === "en";
-  const settings = await getSettings();
+  const settings = await loadPublicData(() => getSettings(), DEFAULT_AGENCY_SETTINGS);
 
   return (
     <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">

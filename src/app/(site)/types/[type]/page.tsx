@@ -4,6 +4,7 @@ import PropertyCard from "@/components/PropertyCard";
 import SearchPanel from "@/components/site/SearchPanel";
 import { getLang } from "@/lib/lang";
 import { countProperties, listNeighborhoods, listProperties } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 import { toCard } from "@/lib/mappers";
 import { PROPERTY_TYPES, propertyTypePlural } from "@/lib/site";
 
@@ -28,9 +29,9 @@ export default async function TypePage({ params }: { params: Promise<{ type: str
   if (!found) notFound();
 
   const [items, total, hoods] = await Promise.all([
-    listProperties({ type, limit: 36 }),
-    countProperties({ type }),
-    listNeighborhoods(),
+    loadPublicData(() => listProperties({ type, limit: 36 }), []),
+    loadPublicData(() => countProperties({ type }), 0),
+    loadPublicData(() => listNeighborhoods(), []),
   ]);
 
   return (

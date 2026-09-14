@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import { pick } from "@/lib/i18n";
 import { getLang } from "@/lib/lang";
 import { listArticles } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const lang = await getLang();
   const en = lang === "en";
-  const items = await listArticles(true, 24);
+  const items = await loadPublicData(() => listArticles(true, 24), []);
 
   return (
     <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">

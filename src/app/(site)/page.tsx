@@ -10,6 +10,7 @@ import { pick } from "@/lib/i18n";
 import { getLang } from "@/lib/lang";
 import { PROPERTY_TYPES, propertyTypePlural } from "@/lib/site";
 import {
+  DEFAULT_AGENCY_SETTINGS,
   getSettings,
   listAgents,
   listArticles,
@@ -18,6 +19,7 @@ import {
   listTestimonials,
   typeCounts,
 } from "@/lib/queries";
+import { loadPublicData } from "@/lib/public-data";
 import { toCard, toPoint } from "@/lib/mappers";
 
 const HERO_IMAGE =
@@ -53,15 +55,15 @@ export default async function HomePage() {
   const lang = await getLang();
   const en = lang === "en";
   const [settings, hoods, featured, latest, mapProps, agentList, articleList, quotes, counts] = await Promise.all([
-    getSettings(),
-    listNeighborhoods(),
-    listProperties({ featured: true, limit: 9 }),
-    listProperties({ limit: 6 }),
-    listProperties({ limit: 60 }),
-    listAgents(),
-    listArticles(true, 3),
-    listTestimonials(),
-    typeCounts(),
+    loadPublicData(() => getSettings(), DEFAULT_AGENCY_SETTINGS),
+    loadPublicData(() => listNeighborhoods(), []),
+    loadPublicData(() => listProperties({ featured: true, limit: 9 }), []),
+    loadPublicData(() => listProperties({ limit: 6 }), []),
+    loadPublicData(() => listProperties({ limit: 60 }), []),
+    loadPublicData(() => listAgents(), []),
+    loadPublicData(() => listArticles(true, 3), []),
+    loadPublicData(() => listTestimonials(), []),
+    loadPublicData(() => typeCounts(), {}),
   ]);
 
   const services = [
