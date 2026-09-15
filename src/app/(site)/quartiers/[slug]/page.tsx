@@ -15,10 +15,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const hood = await getNeighborhoodBySlug(slug);
   if (!hood) return { title: "Quartier introuvable" };
+  const title = `Immobilier à ${hood.name}, Marrakech`;
+  const description = (hood.descriptionFr ?? "").slice(0, 180);
+  const images = hood.coverImage ? [hood.coverImage] : [];
   return {
-    title: `Immobilier à ${hood.name}, Marrakech`,
-    description: (hood.descriptionFr ?? "").slice(0, 180),
+    title,
+    description,
     alternates: { canonical: `/quartiers/${hood.slug}` },
+    openGraph: { title, description, images },
+    twitter: { card: "summary_large_image", title, description, images },
   };
 }
 

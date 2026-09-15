@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -75,21 +76,28 @@ export default function Header({
         }`}
       >
         <div className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-5 md:h-[86px] md:px-10">
-          <Link href="/" className="flex flex-col leading-none">
-            <span
-              className={`font-display text-[22px] tracking-[0.02em] transition-colors md:text-[26px] ${
-                solid ? "text-charcoal" : "text-white"
-              }`}
-            >
-              {agencyName}
-            </span>
-            <span
-              className={`label-xs mt-1 text-[9px] transition-colors ${
-                solid ? "text-muted" : "text-white/70"
-              }`}
-            >
-              Marrakech Real Estate
-            </span>
+          <Link
+            href="/"
+            className="relative block h-12 w-[150px] shrink-0 md:h-14 md:w-[174px]"
+            aria-label={`${agencyName} — Home`}
+          >
+            <Image
+              src="/brand/maygo-logo-orange.svg"
+              alt={agencyName}
+              fill
+              priority
+              sizes="174px"
+              className={`object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
+            />
+            <Image
+              src="/brand/maygo-logo-white.svg"
+              alt=""
+              fill
+              priority
+              sizes="174px"
+              aria-hidden="true"
+              className={`object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
+            />
           </Link>
 
           <nav className="hidden items-center gap-7 xl:flex">
@@ -193,7 +201,16 @@ export default function Header({
         }`}
       >
         <div className="flex h-[72px] items-center justify-between px-5 md:h-[86px] md:px-10">
-          <span className="font-display text-[22px]">{agencyName}</span>
+          <Link href="/" className="relative block h-12 w-[150px]" aria-label={`${agencyName} — Home`}>
+            <Image
+              src="/brand/maygo-logo-white.svg"
+              alt={agencyName}
+              fill
+              priority
+              sizes="150px"
+              className="object-contain"
+            />
+          </Link>
           <button onClick={() => setOpen(false)} aria-label="close">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
               <path d="M5 5l14 14M19 5 5 19" />

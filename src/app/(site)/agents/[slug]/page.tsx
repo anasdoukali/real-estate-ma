@@ -13,7 +13,16 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const agent = await getAgentBySlug(slug);
-  return { title: agent ? `${agent.name} — ${agent.jobTitle ?? "Conseiller immobilier"}` : "Agent" };
+  if (!agent) return { title: "Agent" };
+  const title = `${agent.name} — ${agent.jobTitle ?? "Conseiller immobilier"}`;
+  const description = (agent.bioFr ?? "").slice(0, 180);
+  const images = agent.photoUrl ? [agent.photoUrl] : [];
+  return {
+    title,
+    description,
+    openGraph: { title, description, images },
+    twitter: { card: "summary_large_image", title, description, images },
+  };
 }
 
 export default async function AgentPage({ params }: { params: Promise<{ slug: string }> }) {

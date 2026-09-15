@@ -11,11 +11,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
   if (!article) return { title: "Article introuvable" };
+  const title = article.titleFr;
+  const description = (article.excerptFr ?? "").slice(0, 180);
+  const images = article.coverImage ? [article.coverImage] : [];
   return {
-    title: article.titleFr,
-    description: (article.excerptFr ?? "").slice(0, 180),
+    title,
+    description,
     alternates: { canonical: `/blog/${article.slug}` },
-    openGraph: { images: article.coverImage ? [article.coverImage] : [] },
+    openGraph: { title, description, images },
+    twitter: { card: "summary_large_image", title, description, images },
   };
 }
 

@@ -181,7 +181,7 @@ export const testimonials = pgTable("testimonials", {
 
 export const agencySettings = pgTable("agency_settings", {
   id: serial("id").primaryKey(),
-  agencyName: varchar("agency_name", { length: 160 }).notNull().default("[AGENCY NAME]"),
+  agencyName: varchar("agency_name", { length: 160 }).notNull().default("MAPYGO REAL ESTATE"),
   logo: text("logo"),
   logoDark: text("logo_dark"),
   phone: varchar("phone", { length: 60 }),

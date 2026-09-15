@@ -354,7 +354,7 @@ export async function saveSettingsAction(formData: FormData) {
     return Number.isFinite(v) ? v : fallback;
   };
   const values = {
-    agencyName: String(formData.get("agencyName") ?? "[AGENCY NAME]"),
+    agencyName: String(formData.get("agencyName") ?? "MAPYGO REAL ESTATE"),
     phone: String(formData.get("phone") ?? "") || null,
     whatsapp: String(formData.get("whatsapp") ?? "") || null,
     email: String(formData.get("email") ?? "") || null,
@@ -383,5 +383,3 @@ export async function toggleSubscriberAction(id: number, active: boolean) {
   await db.update(newsletterSubscribers).set({ active }).where(eq(newsletterSubscribers.id, id));
   revalidatePath("/admin/newsletter");
 }
-
-

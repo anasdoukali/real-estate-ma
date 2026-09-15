@@ -101,8 +101,14 @@ export default function PropertyCard({
               className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.035]"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-xs tracking-[0.2em] text-muted">
-              [AGENCY NAME]
+            <div className="flex h-full items-center justify-center p-10">
+              <Image
+                src="/brand/maygo-logo-orange.svg"
+                alt="MAPYGO REAL ESTATE"
+                width={347}
+                height={111}
+                className="h-auto w-36 opacity-70"
+              />
             </div>
           )}
         </div>

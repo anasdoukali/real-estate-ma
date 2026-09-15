@@ -13,16 +13,37 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.SITE_URL ?? "https://mapygo-real-estate.amine-27.chatgpt.site",
+  ),
   title: {
-    default: "[AGENCY NAME] — Immobilier d'exception à Marrakech",
-    template: "%s | [AGENCY NAME]",
+    default: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
+    template: "%s | MAPYGO REAL ESTATE",
   },
   description:
     "Villas, riads, appartements et propriétés d'exception à Marrakech. Achat, location, investissement et estimation par une agence locale.",
   openGraph: {
     type: "website",
     locale: "fr_MA",
-    siteName: "[AGENCY NAME]",
+    siteName: "MAPYGO REAL ESTATE",
+    title: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
+    description:
+      "Villas, riads, appartements et propriétés d'exception à Marrakech.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "MAPYGO REAL ESTATE",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
+    description:
+      "Villas, riads, appartements et propriétés d'exception à Marrakech.",
+    images: ["/og.png"],
   },
 };
 

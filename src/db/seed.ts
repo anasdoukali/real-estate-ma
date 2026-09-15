@@ -257,7 +257,9 @@ async function main() {
   );
 
   await db.insert(agencySettings).values({
-    agencyName: "[AGENCY NAME]",
+    agencyName: "MAPYGO REAL ESTATE",
+    logo: "/brand/maygo-logo-orange.svg",
+    logoDark: "/brand/maygo-logo-white.svg",
     phone: "+212 524 00 00 00",
     whatsapp: "+212661123456",
     email: "contact@agency.ma",

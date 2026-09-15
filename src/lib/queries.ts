@@ -192,9 +192,9 @@ export async function getPropertyBySlug(slug: string): Promise<PropertyWithRelat
 
 export const DEFAULT_AGENCY_SETTINGS: AgencySettings = {
   id: 0,
-  agencyName: "[AGENCY NAME]",
-  logo: null,
-  logoDark: null,
+  agencyName: "MAPYGO REAL ESTATE",
+  logo: "/brand/maygo-logo-orange.svg",
+  logoDark: "/brand/maygo-logo-white.svg",
   phone: "+212 5 24 00 00 00",
   whatsapp: "+212600000000",
   email: "contact@agency.ma",
@@ -213,7 +213,17 @@ export const DEFAULT_AGENCY_SETTINGS: AgencySettings = {
 
 export async function getSettings() {
   const rows = await db.select().from(agencySettings).limit(1);
-  return rows[0] ?? DEFAULT_AGENCY_SETTINGS;
+  const settings = rows[0];
+  if (!settings) return DEFAULT_AGENCY_SETTINGS;
+  return {
+    ...settings,
+    agencyName:
+      !settings.agencyName || settings.agencyName === "[AGENCY NAME]"
+        ? DEFAULT_AGENCY_SETTINGS.agencyName
+        : settings.agencyName,
+    logo: settings.logo || DEFAULT_AGENCY_SETTINGS.logo,
+    logoDark: settings.logoDark || DEFAULT_AGENCY_SETTINGS.logoDark,
+  };
 }
 
 export async function listNeighborhoods(onlyPublished = true) {

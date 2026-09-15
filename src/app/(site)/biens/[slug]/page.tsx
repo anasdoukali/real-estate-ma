@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!property) return { title: "Bien introuvable" };
   const title = `${property.titleFr} — ${property.neighborhood?.name ?? "Marrakech"}`;
   const description = (property.descriptionFr ?? "").slice(0, 180);
+  const images = property.coverImage ? [property.coverImage] : [];
   return {
     title,
     description,
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title,
       description,
-      images: property.coverImage ? [property.coverImage] : [],
+      images,
     },
+    twitter: { card: "summary_large_image", title, description, images },
   };
 }
 

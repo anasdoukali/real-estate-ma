@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Lang } from "@/lib/i18n";
 import type { AgencySettings } from "@/db/schema";
@@ -18,8 +19,15 @@ export default function Footer({
       <div className="mx-auto max-w-[1600px] px-5 py-20 md:px-10 md:py-28">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="font-display text-[30px] leading-none">{settings.agencyName}</p>
-            <p className="label-xs mt-2 text-white/50">Marrakech Real Estate</p>
+            <div className="relative h-[68px] w-[212px]">
+              <Image
+                src="/brand/maygo-logo-white.svg"
+                alt={settings.agencyName}
+                fill
+                sizes="212px"
+                className="object-contain"
+              />
+            </div>
             <p className="mt-7 max-w-sm text-[14px] leading-relaxed text-white/60">
               {en
                 ? "A Marrakech-based agency dedicated to exceptional properties: contemporary villas, historic riads, apartments and confidential estates."
@@ -112,9 +120,20 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-[12px] text-white/40 md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 grid gap-6 border-t border-white/10 pt-8 text-[12px] text-white/40 md:grid-cols-[1fr_auto] md:items-center xl:grid-cols-[1fr_auto_1fr]">
           <p>© {new Date().getFullYear()} {settings.agencyName}. {en ? "All rights reserved." : "Tous droits réservés."}</p>
-          <div className="flex gap-6">
+          <div className="flex items-center gap-3 md:justify-self-end xl:order-2 xl:justify-self-center">
+            <span className="whitespace-nowrap">{en ? "Website by" : "Site conçu par"}</span>
+            <Image
+              src="/brand/feedback-logo.png"
+              alt="Feedback Branding Studio"
+              width={320}
+              height={98}
+              sizes="112px"
+              className="h-auto w-28 opacity-75"
+            />
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 md:col-span-2 xl:col-span-1 xl:order-3 xl:justify-self-end">
             <span>{en ? "Legal notice" : "Mentions légales"}</span>
             <span>{en ? "Privacy" : "Confidentialité"}</span>
             <span>Cookies</span>
