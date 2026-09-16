@@ -4,15 +4,20 @@ import Footer from "@/components/site/Footer";
 import { getLang } from "@/lib/lang";
 import { DEFAULT_AGENCY_SETTINGS, getSettings, listNeighborhoods } from "@/lib/queries";
 import { loadPublicData } from "@/lib/public-data";
+import { getMaintenance } from "@/lib/maintenance";
+import MaintenanceScreen from "@/components/site/MaintenanceScreen";
 
 export default async function SiteLayout({ children }: { children: ReactNode }) {
   const lang = await getLang();
-  const [settings, hoods] = await Promise.all([
+  const [settings, hoods, maintenance] = await Promise.all([
     loadPublicData(() => getSettings(), DEFAULT_AGENCY_SETTINGS),
     loadPublicData(() => listNeighborhoods(), []).then((items) =>
       items.map((n) => ({ name: n.name, slug: n.slug })),
     ),
+    loadPublicData(getMaintenance, { enabled: false, description: "" }),
   ]);
+
+  if (maintenance.enabled) return <MaintenanceScreen agency={settings} description={maintenance.description} />;
 
   return (
     <div className="site-layout flex min-h-screen flex-col bg-warm">
