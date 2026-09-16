@@ -201,6 +201,14 @@ export const agencySettings = pgTable("agency_settings", {
 });
 
 export type Property = typeof properties.$inferSelect;
+// Singleton row (id = 1), kept separate from agency contact settings.
+export const siteMaintenance = pgTable("site_maintenance", {
+  id: integer("id").primaryKey(),
+  enabled: boolean("enabled").notNull().default(false),
+  description: text("description").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export type PropertyImage = typeof propertyImages.$inferSelect;
 export type Neighborhood = typeof neighborhoods.$inferSelect;
 export type Agent = typeof agents.$inferSelect;

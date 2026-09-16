@@ -14,6 +14,7 @@ const NAV = [
   { href: "/admin/articles", label: "Articles" },
   { href: "/admin/newsletter", label: "Newsletter" },
   { href: "/admin/settings", label: "Paramètres" },
+  { href: "/admin/maintenance", label: "Maintenance du site" },
 ];
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
@@ -52,12 +53,13 @@ export default async function AdminLayout({ children }: { children: ReactNode })
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex items-center justify-between border-b border-[#e4e4e7] bg-white px-5 py-4 lg:hidden">
           <span className="text-[15px] font-semibold">Admin</span>
-          <div className="flex gap-3 text-[12px]">
+          <div className="flex flex-wrap gap-3 text-[12px]">
             {NAV.slice(0, 5).map((n) => (
               <Link key={n.href} href={n.href} className="text-[#3f3f46]">
                 {n.label}
               </Link>
             ))}
+            <Link href="/admin/maintenance" className="text-[#3f3f46]">Maintenance</Link>
           </div>
         </header>
         <main className="min-w-0 flex-1 p-5 lg:p-9">{children}</main>

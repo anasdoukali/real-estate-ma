@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:maintenance": "tsx scripts/setup-maintenance.ts"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.22",

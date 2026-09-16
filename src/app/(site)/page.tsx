@@ -119,7 +119,7 @@ export default async function HomePage() {
   return (
     <>
       {/* 01 HERO */}
-      <section className="relative h-[650px] min-h-[75svh] max-h-[900px] w-full overflow-hidden bg-charcoal md:h-[80svh]">
+      <section className="relative w-full overflow-hidden bg-charcoal">
         <div className="absolute inset-0">
           <Image
             src={HERO_IMAGE}
@@ -132,7 +132,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/25 to-charcoal/65" />
         </div>
 
-        <div className="relative mx-auto flex h-full max-w-[1600px] flex-col items-center justify-center px-5 pb-24 pt-24 text-center md:px-10">
+        <div className="relative mx-auto flex min-h-[max(650px,75svh)] max-w-[1600px] flex-col items-center justify-center px-5 pb-24 pt-32 text-center md:min-h-[80svh] md:px-10 md:pt-40">
           <p className="label-xs fade-up text-white/75">
             {en ? "Exceptional real estate • Marrakech" : "Immobilier d'exception • Marrakech"}
           </p>
@@ -296,6 +296,40 @@ export default async function HomePage() {
           <div className="mt-12">
             <HomeMapSection points={mapProps.map((p) => toPoint(p, lang))} lang={lang} />
           </div>
+        </div>
+      </section>
+
+      {/* HOME STAGING */}
+      <section className="relative isolate flex min-h-[85svh] w-full items-center overflow-hidden bg-charcoal py-24 text-white md:min-h-screen md:py-32">
+          <div className="absolute inset-0 -z-10">
+            <Image
+              src="https://images.pexels.com/photos/7005300/pexels-photo-7005300.jpeg?auto=compress&cs=tinysrgb&w=2400"
+              alt={en ? "A bright, welcoming interior" : "Un intérieur lumineux et accueillant"}
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/55" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+          </div>
+        <div className="mx-auto w-full max-w-[1600px] px-6 md:px-12 lg:px-20">
+          <Reveal>
+            <p className="label-xs text-white/90">Home Staging</p>
+            <h2 className="display mt-6 max-w-3xl text-[38px] text-white sm:text-[54px] lg:text-[72px]">
+              {en ? "Reveal your property's potential." : "Révélez le potentiel de votre bien."}
+            </h2>
+            <p className="mt-7 max-w-xl text-[16px] leading-relaxed text-white/90 sm:text-[18px]">
+              {en
+                ? "Decluttering, thoughtful layouts and styling: prepare your property for sale or rental and help visitors picture themselves at home, in photos and in person."
+                : "Désencombrement, réorganisation et décoration : préparez votre bien à la vente ou à la location et aidez les visiteurs à s’y projeter, en photo comme en visite."}
+            </p>
+            <Link
+              href="/home-staging"
+              className="label-xs mt-9 inline-block rounded-[20px] bg-white px-8 py-5 text-charcoal transition-colors hover:bg-sand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              {en ? "Discover Home Staging" : "Découvrir le Home Staging"} →
+            </Link>
+          </Reveal>
         </div>
       </section>
 

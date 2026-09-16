@@ -94,7 +94,6 @@ export default function SearchPanel({
             {tab.label}
           </button>
         ))}
-        <Link href="/home-staging" className="search-transaction-tab label-xs bg-charcoal/90 px-5 py-4 text-white/70 transition-colors hover:text-white">Home Staging</Link>
       </div>
 
       <div className="p-5 md:p-7">
