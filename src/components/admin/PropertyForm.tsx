@@ -32,6 +32,7 @@ export default function PropertyForm({
     (initial?.images ?? []).map((i) => ({ imageUrl: i.imageUrl, isCover: i.isCover })),
   );
   const [features, setFeatures] = useState<string[]>(initial?.features ?? []);
+  const [customFeature, setCustomFeature] = useState("");
   const [form, setForm] = useState({
     reference: initial?.reference ?? `MK-${Math.floor(1000 + Math.random() * 8999)}`,
     transactionType: initial?.transactionType ?? "sale",
@@ -68,6 +69,15 @@ export default function PropertyForm({
 
   function set(key: keyof typeof form, value: string | boolean) {
     setForm((f) => ({ ...f, [key]: value }));
+  }
+
+  function addCustomFeature() {
+    const value = customFeature.trim().replace(/\s+/g, " ").slice(0, 80);
+    if (!value) return;
+    if (!features.some((feature) => feature.toLocaleLowerCase() === value.toLocaleLowerCase())) {
+      setFeatures((prev) => [...prev, value]);
+    }
+    setCustomFeature("");
   }
 
   async function upload(files: FileList | null) {
@@ -311,6 +321,32 @@ export default function PropertyForm({
               </button>
             );
           })}
+          {features
+            .filter((feature) => !FEATURES.some((item) => item.value === feature))
+            .map((feature) => (
+              <button
+                key={feature}
+                type="button"
+                onClick={() => setFeatures((prev) => prev.filter((item) => item !== feature))}
+                className="group rounded-md border border-black bg-black px-3 py-2 text-[12.5px] text-white"
+                title="Cliquer pour retirer"
+              >
+                {feature} <span className="ml-1 text-white/60 group-hover:text-white">×</span>
+              </button>
+            ))}
+        </div>
+        <div className="mt-4 flex max-w-xl gap-2">
+          <input
+            value={customFeature}
+            maxLength={80}
+            placeholder="Ajouter un équipement personnalisé"
+            className={input}
+            onChange={(event) => setCustomFeature(event.target.value)}
+            onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); addCustomFeature(); } }}
+          />
+          <button type="button" onClick={addCustomFeature} className="shrink-0 rounded-md bg-black px-4 text-[12.5px] text-white hover:bg-[#333]">
+            + Ajouter
+          </button>
         </div>
       </Section>
 
