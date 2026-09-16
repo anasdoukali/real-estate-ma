@@ -16,7 +16,9 @@ const NAV = [
 
 const LISTING_NAV = [
   { fr: "Acheter", en: "Buy", href: "/biens?transaction=sale" },
+  { fr: "Vendre", en: "Sell", href: "/confiez-nous-votre-bien" },
   { fr: "Louer", en: "Rent", href: "/biens?transaction=rent" },
+  { fr: "Home Staging", en: "Home Staging", href: "/home-staging" },
   { fr: "Propriétés", en: "Properties", href: "/biens" },
   { fr: "Quartiers", en: "Neighborhoods", href: "/quartiers" },
 ];
@@ -159,7 +161,7 @@ export default function Header({
             </div>
 
             <Link
-              href="/estimation"
+              href="/confiez-nous-votre-bien"
               className={`label-xs hidden border px-5 py-3 transition-colors lg:inline-block ${
                 solid
                   ? "border-charcoal text-charcoal hover:bg-charcoal hover:text-white"
@@ -243,6 +245,9 @@ export default function Header({
             </Link>
             <Link href="/estimation" className="label-xs text-white/70">
               {lang === "en" ? "Valuation" : "Estimation"}
+            </Link>
+            <Link href="/confiez-nous-votre-bien" className="label-xs text-champagne">
+              {lang === "en" ? "List your property" : "Confiez-nous votre bien"}
             </Link>
             <div className="flex items-center gap-2 font-semibold">
               <button onClick={() => switchLang("fr")} className={lang === "fr" ? "text-champagne" : "text-white/60"}>

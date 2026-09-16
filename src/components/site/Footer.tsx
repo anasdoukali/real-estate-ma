@@ -82,6 +82,8 @@ export default function Footer({
               <li><Link href="/agence" className="hover:text-white">{en ? "About us" : "Notre agence"}</Link></li>
               <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
               <li><Link href="/estimation" className="hover:text-white">{en ? "Valuation" : "Estimation"}</Link></li>
+              <li><Link href="/home-staging" className="hover:text-white">Home Staging</Link></li>
+              <li><Link href="/confiez-nous-votre-bien" className="hover:text-white">{en ? "List your property" : "Confiez-nous votre bien"}</Link></li>
               <li><Link href="/blog" className="hover:text-white">{en ? "Journal" : "Journal"}</Link></li>
               <li><Link href="/favoris" className="hover:text-white">{en ? "Favorites" : "Favoris"}</Link></li>
             </ul>

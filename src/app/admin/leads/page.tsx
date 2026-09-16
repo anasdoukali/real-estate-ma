@@ -23,6 +23,8 @@ export default async function AdminLeadsPage() {
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="text-[15px] font-semibold">{r.l.name}</p>
+                {r.l.intent === "home-staging" && <span className="mt-2 inline-block rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-orange-800">Home Staging · Demande de service</span>}
+                {r.l.source === "confier" && <span className="mt-2 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-800">Confiez-nous votre bien</span>}
                 <p className="mt-1 text-[13px] text-[#6b7280]">
                   {r.l.phone} · {r.l.email} · source: {r.l.source}
                   {r.l.intent ? ` · intention: ${r.l.intent}` : ""}

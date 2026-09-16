@@ -15,7 +15,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
   ]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-warm">
+    <div className="site-layout flex min-h-screen flex-col bg-warm">
       <Header lang={lang} agencyName={settings.agencyName} whatsapp={settings.whatsapp} />
       <main className="flex-1">{children}</main>
       <Footer lang={lang} settings={settings} neighborhoods={hoods} />

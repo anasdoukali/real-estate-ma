@@ -81,7 +81,7 @@ export default async function HomePage() {
       en: "Sell",
       dfr: "Estimation, mise en valeur et commercialisation de votre propriété.",
       den: "Valuation, staging and marketing of your property.",
-      href: "/estimation",
+      href: "/confiez-nous-votre-bien",
     },
     {
       n: "03",
@@ -93,6 +93,14 @@ export default async function HomePage() {
     },
     {
       n: "04",
+      fr: "Home Staging",
+      en: "Home Staging",
+      dfr: "Désencombrement, aménagement et décoration pour révéler le potentiel de votre bien.",
+      den: "Decluttering, layout and styling to reveal your property's potential.",
+      href: "/home-staging",
+    },
+    {
+      n: "05",
       fr: "Investir",
       en: "Invest",
       dfr: "Identification des opportunités et conseil immobilier à Marrakech.",
@@ -335,7 +343,7 @@ export default async function HomePage() {
               {en ? "How we work with you." : "Notre accompagnement."}
             </h2>
           </Reveal>
-          <div className="mt-14 grid gap-px bg-sand md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-px bg-sand md:grid-cols-2 lg:grid-cols-5">
             {services.map((s, i) => (
               <Reveal key={s.n} delay={i * 80}>
                 <Link href={s.href} className="group flex h-full flex-col bg-white p-8 transition-colors hover:bg-warm">

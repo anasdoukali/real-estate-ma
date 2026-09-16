@@ -22,6 +22,7 @@ export default function ContactForm({ lang }: { lang: Lang }) {
     { value: "acheter", fr: "Acheter", en: "Buy" },
     { value: "vendre", fr: "Vendre", en: "Sell" },
     { value: "louer", fr: "Louer", en: "Rent" },
+    { value: "home-staging", fr: "Home Staging", en: "Home Staging" },
     { value: "investir", fr: "Investir", en: "Invest" },
     { value: "estimer", fr: "Estimer", en: "Get a valuation" },
   ];

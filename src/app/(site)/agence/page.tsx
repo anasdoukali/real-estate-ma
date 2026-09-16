@@ -63,7 +63,7 @@ export default async function AgencyPage() {
         <div className="grid gap-16 lg:grid-cols-[55%_45%]">
           <Reveal>
             <p className="label-xs text-champagne">{en ? "Our mission" : "Notre mission"}</p>
-            <p className="mt-8 font-display text-[28px] leading-[1.35] sm:text-[36px]">
+            <p className="display mt-8 text-[28px] sm:text-[36px]">
               {en
                 ? "Connecting exceptional properties with the people who will truly live in them."
                 : "Relier des propriétés d'exception aux personnes qui sauront réellement les habiter."}

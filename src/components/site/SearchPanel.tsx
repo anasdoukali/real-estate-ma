@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 import type { Lang } from "@/lib/i18n";
 import { FEATURES, PROPERTY_TYPES } from "@/lib/site";
@@ -77,10 +78,10 @@ export default function SearchPanel({
         variant === "hero" ? "" : "border border-stone"
       }`}
     >
-      <div className="flex">
+      <div className="flex flex-wrap">
         {[
-          { value: "sale", label: en ? "Buy" : "Acheter" },
-          { value: "rent", label: en ? "Rent" : "Louer" },
+          { value: "sale", label: en ? "Sale" : "Vente" },
+          { value: "rent", label: en ? "Rental" : "Location" },
         ].map((tab) => (
           <button
             key={tab.value}
@@ -93,10 +94,15 @@ export default function SearchPanel({
             {tab.label}
           </button>
         ))}
+        <Link href="/home-staging" className="search-transaction-tab label-xs bg-charcoal/90 px-5 py-4 text-white/70 transition-colors hover:text-white">Home Staging</Link>
       </div>
 
       <div className="p-5 md:p-7">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+          <select aria-label={en ? "Sale or rental" : "Vente ou location"} className={inputCls} value={transaction} onChange={e => setTransaction(e.target.value)}>
+            <option value="sale">{en ? "Sale" : "Vente"}</option>
+            <option value="rent">{en ? "Rental" : "Location"}</option>
+          </select>
           <select className={inputCls} value={form.type} onChange={(e) => set("type", e.target.value)}>
             <option value="">{en ? "Property type" : "Type de bien"}</option>
             {PROPERTY_TYPES.map((t) => (
@@ -120,19 +126,10 @@ export default function SearchPanel({
           </select>
 
           <select className={inputCls} value={form.maxPrice} onChange={(e) => set("maxPrice", e.target.value)}>
-            <option value="">{en ? "Budget" : "Budget"}</option>
+            <option value="">{en ? "Desired budget" : "Budget souhaité"}</option>
             {budgets.map((b) => (
               <option key={b} value={b}>
                 {en ? "Up to" : "Jusqu'à"} {new Intl.NumberFormat("fr-FR").format(b)} MAD
-              </option>
-            ))}
-          </select>
-
-          <select className={inputCls} value={form.bedrooms} onChange={(e) => set("bedrooms", e.target.value)}>
-            <option value="">{en ? "Bedrooms" : "Chambres"}</option>
-            {[1, 2, 3, 4, 5, 6].map((b) => (
-              <option key={b} value={b}>
-                {b}+ {en ? "bedrooms" : "chambres"}
               </option>
             ))}
           </select>
@@ -152,6 +149,10 @@ export default function SearchPanel({
         >
           <div className="min-h-0">
             <div className="grid gap-3 border-t border-sand pt-5 md:grid-cols-3 lg:grid-cols-5">
+              <select aria-label={en ? "Bedrooms" : "Chambres"} className={inputCls} value={form.bedrooms} onChange={e => set("bedrooms", e.target.value)}>
+                <option value="">{en ? "Bedrooms" : "Chambres"}</option>
+                {[1, 2, 3, 4, 5, 6].map(b => <option key={b} value={b}>{b}+</option>)}
+              </select>
               <input
                 className={inputCls}
                 placeholder={en ? "Reference" : "Référence"}
@@ -221,6 +222,7 @@ export default function SearchPanel({
         >
           <span>{advanced ? (en ? "Fewer filters" : "Moins de critères") : en ? "More filters" : "+ Plus de critères"}</span>
         </button>
+        <Link href="/confiez-nous-votre-bien" className="label-xs mt-5 inline-block text-charcoal underline underline-offset-4">{en ? "List your property" : "Confiez-nous votre bien"} →</Link>
       </div>
     </form>
   );
