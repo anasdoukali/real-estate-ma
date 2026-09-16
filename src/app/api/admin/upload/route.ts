@@ -1,6 +1,5 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import sharp from "sharp";
 import { getSession } from "@/lib/auth";
 
 export const runtime = "nodejs";
@@ -42,13 +41,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "L’image doit faire moins de 4 Mo après compression." }, { status: 413 });
   }
 
-  let optimized: Buffer;
+  let optimized: ArrayBuffer;
   try {
-    optimized = await sharp(Buffer.from(await file.arrayBuffer()), { limitInputPixels: 40_000_000 })
-      .rotate()
-      .resize({ width: 2000, height: 2000, fit: "inside", withoutEnlargement: true })
-      .webp({ quality: 82 })
-      .toBuffer();
+    optimized = await file.arrayBuffer();
   } catch {
     return NextResponse.json(
       { error: "Image illisible ou trop grande. Essayez un autre fichier." },
@@ -68,7 +63,7 @@ export async function POST(request: Request) {
           "Content-Type": "image/webp",
           "x-upsert": "false",
         },
-        body: new Uint8Array(optimized),
+        body: optimized,
         signal: AbortSignal.timeout(25_000),
       },
     );
