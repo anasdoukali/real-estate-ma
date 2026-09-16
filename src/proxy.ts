@@ -28,7 +28,11 @@ export async function proxy(request: NextRequest) {
   }
 
   // Keep the preview and health checks reachable; assets are excluded below.
-  if (pathname === "/maintenance" || pathname === "/api/health") return NextResponse.next();
+  if (
+    pathname === "/maintenance" ||
+    pathname === "/api/health" ||
+    pathname.startsWith("/api/admin/")
+  ) return NextResponse.next();
 
   let enabled: boolean;
   try {

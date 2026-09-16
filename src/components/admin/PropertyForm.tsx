@@ -81,17 +81,33 @@ export default function PropertyForm({
           const image = await prepareImage(file);
           const fd = new FormData();
           fd.append("files", image, "property-image.webp");
-          const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-          const data = await res.json().catch(() => null);
+          const res = await fetch("/api/admin/upload", {
+            method: "POST",
+            body: fd,
+            credentials: "same-origin",
+          });
+          const responseText = await res.text();
+          let data: { error?: string; urls?: unknown[] } | null = null;
+          try {
+            data = responseText ? JSON.parse(responseText) : null;
+          } catch {
+            data = null;
+          }
           if (!res.ok) {
-            throw new Error(data?.error || (res.status === 413 ? "Image trop volumineuse." : "Envoi impossible."));
+            throw new Error(
+              data?.error ||
+                (res.status === 413
+                  ? "Image trop volumineuse pour Vercel."
+                  : `Envoi impossible (erreur ${res.status}).`),
+            );
           }
           if (!Array.isArray(data?.urls) || !data.urls.every((url: unknown) => typeof url === "string")) {
             throw new Error("Réponse du stockage invalide.");
           }
+          const uploadedUrls = data.urls as string[];
           setImages((prev) => [
             ...prev,
-            ...data.urls.map((imageUrl: string) => ({ imageUrl, isCover: false })),
+            ...uploadedUrls.map((imageUrl) => ({ imageUrl, isCover: false })),
           ]);
         } catch (error) {
           failures.push(`${file.name} : ${error instanceof Error ? error.message : "Envoi impossible."}`);
