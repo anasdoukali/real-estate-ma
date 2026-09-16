@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { savePropertyAction, type PropertyPayload } from "@/app/admin/actions";
+import { prepareImage } from "@/lib/prepare-image";
 import { FEATURES, PROPERTY_TYPES, PROPERTY_STATUSES } from "@/lib/site";
 
 type ImageItem = { imageUrl: string; isCover: boolean };
@@ -70,18 +71,36 @@ export default function PropertyForm({
   }
 
   async function upload(files: FileList | null) {
-    if (!files?.length) return;
+    if (!files?.length || uploading) return;
     setUploading(true);
-    const fd = new FormData();
-    Array.from(files).forEach((f) => fd.append("files", f));
-    const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
-    if (res.ok) {
-      const data = await res.json();
-      setImages((prev) => [...prev, ...data.urls.map((u: string) => ({ imageUrl: u, isCover: false }))]);
-    } else {
-      setError("Échec du téléversement des images.");
+    setError(null);
+    const failures: string[] = [];
+    try {
+      for (const file of Array.from(files)) {
+        try {
+          const image = await prepareImage(file);
+          const fd = new FormData();
+          fd.append("files", image, "property-image.webp");
+          const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+          const data = await res.json().catch(() => null);
+          if (!res.ok) {
+            throw new Error(data?.error || (res.status === 413 ? "Image trop volumineuse." : "Envoi impossible."));
+          }
+          if (!Array.isArray(data?.urls) || !data.urls.every((url: unknown) => typeof url === "string")) {
+            throw new Error("Réponse du stockage invalide.");
+          }
+          setImages((prev) => [
+            ...prev,
+            ...data.urls.map((imageUrl: string) => ({ imageUrl, isCover: false })),
+          ]);
+        } catch (error) {
+          failures.push(`${file.name} : ${error instanceof Error ? error.message : "Envoi impossible."}`);
+        }
+      }
+      if (failures.length) setError(failures.join(" · "));
+    } finally {
+      setUploading(false);
     }
-    setUploading(false);
   }
 
   function move(index: number, dir: number) {
@@ -321,6 +340,7 @@ export default function PropertyForm({
           <input
             type="file"
             multiple
+            disabled={uploading || saving}
             accept="image/png,image/jpeg,image/webp"
             onChange={(e) => upload(e.target.files)}
             className="mx-auto block text-[13px]"
@@ -391,14 +411,14 @@ export default function PropertyForm({
       <div className="sticky bottom-0 flex flex-wrap gap-3 border-t border-[#e4e4e7] bg-white/95 px-1 py-4 backdrop-blur">
         <button
           onClick={() => save("draft")}
-          disabled={saving || !form.titleFr}
+          disabled={saving || uploading || !form.titleFr}
           className="rounded-md border border-[#d4d4d8] px-5 py-2.5 text-[13px] disabled:opacity-50"
         >
           Enregistrer le brouillon
         </button>
         <button
           onClick={() => save("published")}
-          disabled={saving || !form.titleFr}
+          disabled={saving || uploading || !form.titleFr}
           className="rounded-md bg-black px-5 py-2.5 text-[13px] text-white disabled:opacity-50"
         >
           {saving ? "Enregistrement..." : "Publier"}
