@@ -257,9 +257,9 @@ async function main() {
   );
 
   await db.insert(agencySettings).values({
-    agencyName: "MAPYGO REAL ESTATE",
-    logo: "/brand/maygo-logo-orange.svg",
-    logoDark: "/brand/maygo-logo-white.svg",
+    agencyName: "Louka & Vendy Real Estate",
+    logo: "/brand/louka-vendy-gold.png",
+    logoDark: "/brand/louka-vendy-gold.png",
     phone: "+212 524 00 00 00",
     whatsapp: "+212661123456",
     email: "contact@agency.ma",

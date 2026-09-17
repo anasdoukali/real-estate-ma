@@ -22,8 +22,6 @@ import {
 import { loadPublicData } from "@/lib/public-data";
 import { toCard, toPoint } from "@/lib/mappers";
 
-const HERO_IMAGE =
-  "https://images.pexels.com/photos/12715498/pexels-photo-12715498.jpeg?auto=compress&cs=tinysrgb&w=2400";
 const MARRAKECH_IMAGE =
   "https://images.pexels.com/photos/38891222/pexels-photo-38891222.jpeg?auto=compress&cs=tinysrgb&w=2000";
 const STATS_IMAGE =
@@ -121,15 +119,18 @@ export default async function HomePage() {
       {/* 01 HERO */}
       <section className="relative w-full overflow-hidden bg-charcoal">
         <div className="absolute inset-0">
-          <Image
-            src={HERO_IMAGE}
-            alt="Villa contemporaine à Marrakech"
-            fill
-            priority
-            sizes="100vw"
-            className="hero-zoom scale-[1.03] object-cover blur-[3px]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/25 to-charcoal/65" />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover"
+            aria-label="Villa contemporaine à Marrakech"
+          >
+            <source src="/hero%20section.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-color-overlay absolute inset-0" />
         </div>
 
         <div className="relative mx-auto flex min-h-[max(650px,75svh)] max-w-[1600px] flex-col items-center justify-center px-5 pb-24 pt-32 text-center md:min-h-[80svh] md:px-10 md:pt-40">
@@ -170,15 +171,15 @@ export default async function HomePage() {
 
       {/* 02 QUICK TYPES */}
       <section className="relative z-10 mx-auto -mt-6 max-w-[1600px] px-0 pb-24 pt-0 md:-mt-10 md:px-10 md:pb-28">
-        <div className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-[20px] border border-sand bg-sand md:grid md:grid-cols-3 lg:grid-cols-6">
+        <div className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-[20px] bg-transparent md:grid md:grid-cols-3 lg:grid-cols-6">
           {PROPERTY_TYPES.slice(0, 6).map((t, i) => (
-            <Reveal key={t.value} delay={i * 60} className="min-w-[155px] snap-start border-r border-sand last:border-r-0 md:min-w-0">
+            <Reveal key={t.value} delay={i * 60} className="min-w-[155px] snap-start md:min-w-0">
               <Link
                 href={`/types/${t.value}`}
-                className="group relative m-1 flex h-[calc(100%-0.5rem)] min-h-[168px] flex-col items-center justify-center rounded-[20px] bg-warm px-5 py-7 text-center transition-colors duration-300 hover:bg-white"
+                className="group relative m-1 flex h-[calc(100%-0.5rem)] min-h-[168px] flex-col items-center justify-center rounded-[20px] bg-white px-5 py-7 text-center transition-colors duration-300 hover:bg-warm"
               >
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-champagne transition-transform duration-300 group-hover:scale-x-100" />
-                <Image src={QUICK_TYPE_ICONS[t.value]} alt="" width={42} height={42} className="h-14 w-14 object-contain transition-transform duration-300 group-hover:-translate-y-0.5" />
+                <Image src={QUICK_TYPE_ICONS[t.value]} alt="" width={42} height={42} className="h-[84px] w-[84px] object-contain transition-transform duration-300 group-hover:-translate-y-0.5" />
                 <span className="label-xs mt-3 text-muted">{String(i + 1).padStart(2, "0")}</span>
                 <div className="mt-2">
                   <p className="text-[16px] font-semibold tracking-[-0.01em] transition-colors duration-300 group-hover:text-champagne">
@@ -199,7 +200,7 @@ export default async function HomePage() {
         <section className="pb-28">
           <div className="mx-auto max-w-[1600px] px-5 md:px-10">
             <Reveal>
-              <p className="label-xs text-champagne">{en ? "Agency selection" : "Sélection de l'agence"}</p>
+              <p className="label-xs text-accent">{en ? "Agency selection" : "Sélection de l'agence"}</p>
               <div className="mt-6 flex flex-wrap items-end justify-between gap-6">
                 <h2 className="display max-w-2xl text-[34px] sm:text-[46px] lg:text-[58px]">
                   {en ? (
@@ -216,7 +217,7 @@ export default async function HomePage() {
                     </>
                   )}
                 </h2>
-                <Link href="/biens" className="label-xs border-b border-charcoal pb-2 hover:text-champagne">
+                <Link href="/biens" className="label-xs border-b border-charcoal pb-2 hover:text-accent">
                   {en ? "View all" : "Voir tous les biens"}
                 </Link>
               </div>
@@ -233,11 +234,11 @@ export default async function HomePage() {
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="label-xs text-champagne">{en ? "New listings" : "Nouveautés"}</p>
+              <p className="label-xs text-accent">{en ? "New listings" : "Nouveautés"}</p>
               <h2 className="display mt-5 text-[34px] sm:text-[46px]">
                 {en ? "Latest properties" : "Dernières propriétés"}
               </h2>
-              <p className="mt-4 max-w-md text-[14.5px] text-muted">
+              <p className="mt-4 max-w-md text-[14.5px] text-secondary">
                 {en
                   ? "The latest opportunities added by our team."
                   : "Les dernières opportunités ajoutées par notre équipe."}
@@ -245,7 +246,7 @@ export default async function HomePage() {
             </div>
             <Link
               href="/biens"
-              className="label-xs bg-charcoal px-8 py-4 text-white transition-colors hover:bg-champagne"
+              className="label-xs bg-charcoal px-8 py-4 text-white transition-colors hover:bg-ink"
             >
               {en ? "View all properties" : "Voir tous les biens"}
             </Link>
@@ -278,7 +279,7 @@ export default async function HomePage() {
             </p>
             <Link
               href="/quartiers"
-              className="label-xs mt-10 inline-block border border-white/60 px-8 py-4 text-white transition-colors hover:bg-white hover:text-charcoal"
+              className="label-xs mt-10 inline-block border border-white/60 px-8 py-4 text-white transition-colors hover:bg-surface hover:text-charcoal"
             >
               {en ? "Discover Marrakech" : "Découvrir Marrakech"}
             </Link>
@@ -287,10 +288,10 @@ export default async function HomePage() {
       </section>
 
       {/* 06 MAP */}
-      <section className="bg-white py-28">
+      <section className="bg-stone py-28">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
           <Reveal>
-            <p className="label-xs text-champagne">{en ? "Interactive map" : "Carte interactive"}</p>
+            <p className="label-xs text-accent">{en ? "Interactive map" : "Carte interactive"}</p>
             <h2 className="display mt-5 text-[34px] sm:text-[46px]">{en ? "Explore Marrakech" : "Explorez Marrakech"}</h2>
           </Reveal>
           <div className="mt-12">
@@ -325,7 +326,7 @@ export default async function HomePage() {
             </p>
             <Link
               href="/home-staging"
-              className="label-xs mt-9 inline-block rounded-[20px] bg-white px-8 py-5 text-charcoal transition-colors hover:bg-sand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="label-xs mt-9 inline-block rounded-[20px] bg-surface px-8 py-5 text-charcoal transition-colors hover:bg-sand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               {en ? "Discover Home Staging" : "Découvrir le Home Staging"} →
             </Link>
@@ -336,7 +337,7 @@ export default async function HomePage() {
       {/* 07 NEIGHBORHOODS */}
       <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10">
         <Reveal>
-          <p className="label-xs text-champagne">{en ? "Neighborhoods" : "Quartiers"}</p>
+          <p className="label-xs text-accent">{en ? "Neighborhoods" : "Quartiers"}</p>
           <h2 className="display mt-5 max-w-2xl text-[34px] sm:text-[46px] lg:text-[56px]">
             {en ? (
               <>
@@ -362,31 +363,31 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="mt-10">
-          <Link href="/quartiers" className="label-xs border-b border-charcoal pb-2 hover:text-champagne">
+          <Link href="/quartiers" className="label-xs border-b border-charcoal pb-2 hover:text-accent">
             {en ? "All neighborhoods" : "Tous les quartiers"}
           </Link>
         </div>
       </section>
 
       {/* 08 SERVICES */}
-      <section className="bg-white py-28">
+      <section className="bg-page py-28">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
           <Reveal>
-            <p className="label-xs text-champagne">{en ? "Services" : "Services"}</p>
+            <p className="label-xs text-accent">{en ? "Services" : "Services"}</p>
             <h2 className="display mt-5 text-[34px] sm:text-[46px]">
               {en ? "How we work with you." : "Notre accompagnement."}
             </h2>
           </Reveal>
-          <div className="mt-14 grid gap-px bg-sand md:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-14 grid gap-px border-b border-charcoal/15 bg-charcoal/15 md:grid-cols-2 lg:grid-cols-5">
             {services.map((s, i) => (
               <Reveal key={s.n} delay={i * 80}>
-                <Link href={s.href} className="group flex h-full flex-col bg-white p-8 transition-colors hover:bg-warm">
-                  <span className="font-display text-[40px] text-sand transition-colors group-hover:text-champagne">
+                <Link href={s.href} className="service-color-card group flex h-full flex-col bg-page p-8 transition-colors duration-300 hover:bg-sand focus-visible:bg-sand">
+                  <span className="font-display text-[40px] text-sand transition-colors duration-300 group-hover:text-charcoal group-focus-visible:text-charcoal">
                     {s.n}
                   </span>
                   <h3 className="mt-8 text-[19px] font-semibold uppercase tracking-[0.06em]">{en ? s.en : s.fr}</h3>
-                  <p className="mt-4 text-[14px] leading-relaxed text-muted">{en ? s.den : s.dfr}</p>
-                  <span className="label-xs mt-10 inline-flex items-center gap-2 text-champagne">
+                  <p className="mt-4 text-[14px] leading-relaxed text-secondary">{en ? s.den : s.dfr}</p>
+                  <span className="label-xs mt-10 inline-flex items-center gap-2 text-accent">
                     {en ? "Learn more" : "En savoir plus"}
                     <span className="transition-transform group-hover:translate-x-1">→</span>
                   </span>
@@ -405,7 +406,7 @@ export default async function HomePage() {
           </div>
           <div className="flex flex-col justify-center px-5 py-20 md:px-16">
             <Reveal>
-              <p className="label-xs text-champagne">{en ? "Our expertise" : "Notre expertise"}</p>
+              <p className="label-xs text-accent">{en ? "Our expertise" : "Notre expertise"}</p>
               <h2 className="display mt-6 text-[34px] sm:text-[48px]">
                 {en ? (
                   <>
@@ -425,14 +426,14 @@ export default async function HomePage() {
             <div className="mt-14 grid grid-cols-2 gap-10">
               {stats.map((s, i) => (
                 <Reveal key={s.en} delay={i * 70}>
-                  <p className="font-display text-[46px] leading-none text-champagne">{s.value}</p>
+                  <p className="font-display text-[46px] leading-none text-accent">{s.value}</p>
                   <p className="label-xs mt-3 text-white/60">{en ? s.en : s.fr}</p>
                 </Reveal>
               ))}
             </div>
             <Link
               href="/agence"
-              className="label-xs mt-14 inline-block w-fit border border-white/50 px-8 py-4 transition-colors hover:bg-white hover:text-charcoal"
+              className="label-xs mt-14 inline-block w-fit border border-white/50 px-8 py-4 transition-colors hover:bg-surface hover:text-charcoal"
             >
               {en ? "Our agency" : "Notre agence"}
             </Link>
@@ -443,7 +444,7 @@ export default async function HomePage() {
       {/* 10 COLLECTIONS */}
       <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10">
         <Reveal>
-          <p className="label-xs text-champagne">Collections</p>
+          <p className="label-xs text-accent">Collections</p>
           <h2 className="display mt-5 max-w-xl text-[34px] sm:text-[46px]">
             {en ? (
               <>
@@ -489,10 +490,10 @@ export default async function HomePage() {
 
       {/* 11 AGENTS */}
       {agentList.length > 0 && (
-        <section className="bg-white py-28">
+        <section className="bg-page py-28">
           <div className="mx-auto max-w-[1600px] px-5 md:px-10">
             <Reveal>
-              <p className="label-xs text-champagne">{en ? "Our team" : "Notre équipe"}</p>
+              <p className="label-xs text-accent">{en ? "Our team" : "Notre équipe"}</p>
               <h2 className="display mt-5 max-w-xl text-[34px] sm:text-[46px]">
                 {en ? (
                   <>
@@ -526,13 +527,13 @@ export default async function HomePage() {
                       <div className="absolute inset-0 flex items-end bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                         <div className="flex w-full flex-wrap gap-4 p-6 text-white">
                           {a.phone && <span className="label-xs">{a.phone}</span>}
-                          <span className="label-xs text-champagne">WhatsApp</span>
+                          <span className="label-xs text-accent">WhatsApp</span>
                         </div>
                       </div>
                     </div>
                     <p className="mt-5 text-[18px] font-medium">{a.name}</p>
-                    <p className="mt-1 text-[13px] text-muted">{a.jobTitle}</p>
-                    {a.languages && <p className="label-xs mt-3 text-champagne">{a.languages}</p>}
+                    <p className="mt-1 text-[13px] text-secondary">{a.jobTitle}</p>
+                    {a.languages && <p className="label-xs mt-3 text-accent">{a.languages}</p>}
                   </Link>
                 </Reveal>
               ))}
@@ -545,7 +546,7 @@ export default async function HomePage() {
       {quotes.length > 0 && (
         <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10">
           <Reveal>
-            <p className="label-xs mb-12 text-champagne">{en ? "Client stories" : "Ils nous ont fait confiance"}</p>
+            <p className="label-xs mb-12 text-accent">{en ? "Client stories" : "Ils nous ont fait confiance"}</p>
             <Testimonials items={quotes} lang={lang} />
           </Reveal>
         </section>
@@ -553,12 +554,12 @@ export default async function HomePage() {
 
       {/* 13 INSIGHTS */}
       {articleList.length > 0 && (
-        <section className="bg-white py-28">
+        <section className="bg-stone py-28">
           <div className="mx-auto max-w-[1600px] px-5 md:px-10">
             <Reveal>
               <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
-                  <p className="label-xs text-champagne">{en ? "Market insights" : "Le journal"}</p>
+                  <p className="label-xs text-accent">{en ? "Market insights" : "Le journal"}</p>
                   <h2 className="display mt-5 text-[34px] sm:text-[46px]">
                     {en ? (
                       <>
@@ -575,7 +576,7 @@ export default async function HomePage() {
                     )}
                   </h2>
                 </div>
-                <Link href="/blog" className="label-xs border-b border-charcoal pb-2 hover:text-champagne">
+                <Link href="/blog" className="label-xs border-b border-charcoal pb-2 hover:text-accent">
                   {en ? "All articles" : "Tous les articles"}
                 </Link>
               </div>
@@ -595,11 +596,11 @@ export default async function HomePage() {
                         />
                       )}
                     </div>
-                    <p className="label-xs mt-6 text-champagne">{a.category}</p>
-                    <h3 className="mt-3 font-display text-[26px] leading-tight group-hover:text-champagne">
+                    <p className="label-xs mt-6 text-accent">{a.category}</p>
+                    <h3 className="mt-3 font-display text-[26px] leading-tight group-hover:text-accent">
                       {pick(lang, a.titleFr, a.titleEn)}
                     </h3>
-                    <p className="mt-3 line-clamp-2 text-[14px] text-muted">{pick(lang, a.excerptFr, a.excerptEn)}</p>
+                    <p className="mt-3 line-clamp-2 text-[14px] text-secondary">{pick(lang, a.excerptFr, a.excerptEn)}</p>
                   </Link>
                 </Reveal>
               ))}
@@ -615,7 +616,7 @@ export default async function HomePage() {
         </div>
         <div className="flex flex-col justify-center bg-stone px-5 py-20 md:px-16">
           <Reveal>
-            <p className="label-xs text-champagne">{en ? "Sell with us" : "Vendre avec nous"}</p>
+            <p className="label-xs text-accent">{en ? "Sell with us" : "Vendre avec nous"}</p>
             <h2 className="display mt-6 text-[34px] sm:text-[52px]">
               {en ? (
                 <>
@@ -631,14 +632,14 @@ export default async function HomePage() {
                 </>
               )}
             </h2>
-            <p className="mt-7 max-w-md text-[15px] leading-relaxed text-muted">
+            <p className="mt-7 max-w-md text-[15px] leading-relaxed text-secondary">
               {en
                 ? "Receive a personalised valuation from a specialist of the Marrakech property market."
                 : "Recevez une estimation personnalisée réalisée par un spécialiste du marché immobilier marrakchi."}
             </p>
             <Link
               href="/estimation"
-              className="label-xs mt-10 inline-block bg-charcoal px-9 py-4 text-white transition-colors hover:bg-champagne"
+              className="label-xs mt-10 inline-block bg-charcoal px-9 py-4 text-white transition-colors hover:bg-ink"
             >
               {en ? "Request a valuation" : "Demander une estimation"}
             </Link>
@@ -680,7 +681,7 @@ function NeighborhoodCard({
             <p className="mt-3 max-w-xs text-[13px] text-white/70">
               {lang === "en" ? hood.descriptorEn ?? hood.descriptorFr : hood.descriptorFr}
             </p>
-            <p className="label-xs mt-3 text-champagne">
+            <p className="label-xs mt-3 text-accent">
               {hood.propertyCount} {lang === "en" ? "listings" : "biens"}
             </p>
           </div>

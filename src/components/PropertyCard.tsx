@@ -86,7 +86,7 @@ export default function PropertyCard({
 
   return (
     <article
-      className="group relative flex flex-col bg-white"
+      className="property-color-card group relative flex flex-col bg-surface"
       onMouseEnter={() => onHover?.(property.id)}
       onMouseLeave={() => onHover?.(null)}
     >
@@ -103,7 +103,7 @@ export default function PropertyCard({
           ) : (
             <div className="flex h-full items-center justify-center p-10">
               <Image
-                src="/brand/maygo-logo-orange.svg"
+                src="/brand/louka-vendy-gold.png"
                 alt="MAPYGO REAL ESTATE"
                 width={347}
                 height={111}
@@ -117,7 +117,7 @@ export default function PropertyCard({
             <span
               key={b.text}
               className={`label-xs px-2.5 py-1.5 backdrop-blur-sm ${
-                b.dark ? "bg-charcoal/85 text-white" : "bg-champagne text-white"
+                b.dark ? "bg-charcoal/85 text-white" : "bg-sand text-charcoal"
               }`}
             >
               {b.text}
@@ -132,7 +132,7 @@ export default function PropertyCard({
           aria-label="favorite"
           onClick={() => toggleFav(property.id)}
           className={`flex h-9 w-9 items-center justify-center rounded-full backdrop-blur transition ${
-            isFav ? "bg-champagne text-white" : "bg-white/85 text-charcoal hover:bg-white"
+            isFav ? "bg-charcoal text-white" : "bg-surface/85 text-charcoal hover:bg-surface"
           }`}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill={isFav ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.6">
@@ -144,7 +144,7 @@ export default function PropertyCard({
           aria-label="compare"
           onClick={() => toggleCmp(property.id)}
           className={`flex h-9 w-9 items-center justify-center rounded-full backdrop-blur transition ${
-            inCompare ? "bg-charcoal text-white" : "bg-white/85 text-charcoal hover:bg-white"
+            inCompare ? "bg-charcoal text-white" : "bg-surface/85 text-charcoal hover:bg-surface"
           }`}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -153,22 +153,22 @@ export default function PropertyCard({
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 border border-t-0 border-stone px-5 py-5">
+      <div className="flex flex-1 flex-col gap-3 property-color-details border border-t-0 border-charcoal/15 px-5 py-5">
         <div className="flex items-start justify-between gap-4">
           <div>
             <Link href={`/biens/${property.slug}`}>
-              <h3 className="text-[17px] font-medium leading-snug tracking-[-0.01em] transition-colors group-hover:text-champagne">
+              <h3 className="text-[17px] font-medium leading-snug tracking-[-0.01em] transition-colors group-hover:text-accent">
                 {title}
               </h3>
             </Link>
-            <p className="mt-1.5 text-[13px] text-muted">
+            <p className="mt-1.5 text-[13px] text-secondary">
               {property.neighborhoodName ? `${property.neighborhoodName}, ` : ""}
               {property.city ?? "Marrakech"}
             </p>
           </div>
         </div>
         <p className="font-display text-[26px] leading-none text-charcoal">{priceLabel(property, lang)}</p>
-        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-stone pt-3 text-[12.5px] text-muted">
+        <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-charcoal/15 pt-3 text-[12.5px] text-secondary">
           {property.bedrooms ? (
             <span>
               {property.bedrooms} {lang === "en" ? "bed" : "ch."}
@@ -181,7 +181,7 @@ export default function PropertyCard({
           ) : null}
           {property.livingArea ? <span>{property.livingArea} m²</span> : null}
           {!property.livingArea && property.landArea ? <span>{property.landArea} m²</span> : null}
-          <span className="ml-auto label-xs text-champagne">{propertyTypeLabel(property.propertyType, lang)}</span>
+          <span className="ml-auto label-xs text-accent">{propertyTypeLabel(property.propertyType, lang)}</span>
         </div>
       </div>
     </article>

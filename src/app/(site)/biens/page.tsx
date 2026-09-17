@@ -59,7 +59,7 @@ export default async function BiensPage({ searchParams }: { searchParams: Promis
     <>
       <section className="relative bg-charcoal pb-16 pt-[150px] text-white md:pt-[190px]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <p className="label-xs text-champagne">Marrakech</p>
+          <p className="label-xs text-accent">Marrakech</p>
           <h1 className="display mt-5 text-[38px] sm:text-[54px]">
             {en ? "Properties in Marrakech" : "Propriétés à Marrakech"}
           </h1>

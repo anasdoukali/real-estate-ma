@@ -38,7 +38,7 @@ export default async function TypePage({ params }: { params: Promise<{ type: str
     <>
       <section className="bg-charcoal pb-20 pt-[150px] text-white md:pt-[190px]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <p className="label-xs text-champagne">Collection</p>
+          <p className="label-xs text-accent">Collection</p>
           <h1 className="display mt-5 text-[40px] sm:text-[60px]">{propertyTypePlural(type, lang)}</h1>
           <p className="mt-5 text-[14px] text-white/60">
             {total} {en ? "properties available in Marrakech" : "biens disponibles à Marrakech"}
@@ -62,7 +62,7 @@ export default async function TypePage({ params }: { params: Promise<{ type: str
           ))}
         </div>
         {items.length === 0 && (
-          <p className="py-24 text-center text-muted">
+          <p className="py-24 text-center text-secondary">
             {en ? "No property available yet in this category." : "Aucun bien disponible dans cette catégorie."}
           </p>
         )}

@@ -84,21 +84,21 @@ export default function Header({
             aria-label={`${agencyName} — Home`}
           >
             <Image
-              src="/brand/maygo-logo-orange.svg"
+              src="/brand/louka-vendy-black.png"
               alt={agencyName}
               fill
               priority
               sizes="120px"
-              className={`object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
+              className={`origin-left scale-[2.15] object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
             />
             <Image
-              src="/brand/maygo-logo-white.svg"
+              src="/brand/louka-vendy-gold.png"
               alt=""
               fill
               priority
               sizes="120px"
               aria-hidden="true"
-              className={`object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
+              className={`origin-left scale-[2.15] object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
             />
           </Link>
 
@@ -205,7 +205,7 @@ export default function Header({
         <div className="flex h-[72px] items-center justify-between px-5 md:h-[86px] md:px-10">
           <Link href="/" className="relative block h-9 w-[104px]" aria-label={`${agencyName} — Home`}>
             <Image
-              src="/brand/maygo-logo-white.svg"
+              src="/brand/louka-vendy-gold.png"
               alt={agencyName}
               fill
               priority

@@ -62,7 +62,7 @@ export default async function AgencyPage() {
       <section className="mx-auto max-w-[1600px] px-5 py-24 md:px-10">
         <div className="grid gap-16 lg:grid-cols-[55%_45%]">
           <Reveal>
-            <p className="label-xs text-champagne">{en ? "Our mission" : "Notre mission"}</p>
+            <p className="label-xs text-accent">{en ? "Our mission" : "Notre mission"}</p>
             <p className="display mt-8 text-[28px] sm:text-[36px]">
               {en
                 ? "Connecting exceptional properties with the people who will truly live in them."
@@ -91,7 +91,7 @@ export default async function AgencyPage() {
             { v: `${settings.clientCount}+`, l: en ? "Neighborhoods" : "Quartiers couverts" },
           ].map((s) => (
             <Reveal key={s.l}>
-              <p className="font-display text-[46px] leading-none text-champagne">{s.v}</p>
+              <p className="font-display text-[46px] leading-none text-accent">{s.v}</p>
               <p className="label-xs mt-4 text-white/60">{s.l}</p>
             </Reveal>
           ))}
@@ -102,9 +102,9 @@ export default async function AgencyPage() {
         <div className="grid gap-px bg-sand md:grid-cols-3">
           {values.map((v) => (
             <Reveal key={v.en}>
-              <div className="h-full bg-warm p-9">
+              <div className="h-full bg-page p-9">
                 <h3 className="font-display text-[26px]">{en ? v.en : v.fr}</h3>
-                <p className="mt-4 text-[14.5px] leading-relaxed text-muted">{en ? v.den : v.dfr}</p>
+                <p className="mt-4 text-[14.5px] leading-relaxed text-secondary">{en ? v.den : v.dfr}</p>
               </div>
             </Reveal>
           ))}
@@ -113,7 +113,7 @@ export default async function AgencyPage() {
 
       {team.length > 0 && (
         <section className="mx-auto max-w-[1600px] px-5 pb-24 md:px-10">
-          <p className="label-xs text-champagne">{en ? "Our team" : "Notre équipe"}</p>
+          <p className="label-xs text-accent">{en ? "Our team" : "Notre équipe"}</p>
           <h2 className="display mt-5 text-[34px] sm:text-[46px]">
             {en ? "The people behind the agency." : "Les visages de l'agence."}
           </h2>
@@ -132,9 +132,9 @@ export default async function AgencyPage() {
                       />
                     )}
                   </div>
-                  <p className="mt-5 text-[18px] font-medium group-hover:text-champagne">{a.name}</p>
-                  <p className="mt-1 text-[13px] text-muted">{a.jobTitle}</p>
-                  <p className="mt-4 line-clamp-3 text-[13.5px] text-muted">{pick(lang, a.bioFr, a.bioEn)}</p>
+                  <p className="mt-5 text-[18px] font-medium group-hover:text-accent">{a.name}</p>
+                  <p className="mt-1 text-[13px] text-secondary">{a.jobTitle}</p>
+                  <p className="mt-4 line-clamp-3 text-[13.5px] text-secondary">{pick(lang, a.bioFr, a.bioEn)}</p>
                 </Link>
               </Reveal>
             ))}
@@ -147,7 +147,7 @@ export default async function AgencyPage() {
           <h2 className="display max-w-xl text-[30px] sm:text-[42px]">
             {en ? "Let's discuss your project." : "Discutons de votre projet."}
           </h2>
-          <Link href="/contact" className="label-xs bg-charcoal px-10 py-4 text-white hover:bg-champagne">
+          <Link href="/contact" className="label-xs bg-charcoal px-10 py-4 text-white hover:bg-ink">
             {en ? "Contact us" : "Nous contacter"}
           </Link>
         </div>

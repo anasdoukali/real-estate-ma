@@ -120,14 +120,14 @@ export default function PropertyGallery({
             <button
               onClick={prev}
               aria-label="previous"
-              className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-white/10 text-white backdrop-blur hover:bg-white/20 md:left-8"
+              className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-surface/10 text-white backdrop-blur hover:bg-surface/20 md:left-8"
             >
               ←
             </button>
             <button
               onClick={next}
               aria-label="next"
-              className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-white/10 text-white backdrop-blur hover:bg-white/20 md:right-8"
+              className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center bg-surface/10 text-white backdrop-blur hover:bg-surface/20 md:right-8"
             >
               →
             </button>

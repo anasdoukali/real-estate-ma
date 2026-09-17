@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Lang } from "@/lib/i18n";
 
 const field =
-  "h-12 w-full border border-sand bg-white px-4 text-[14px] outline-none transition-colors focus:border-champagne";
+  "h-12 w-full border border-sand bg-surface px-4 text-[14px] outline-none transition-colors focus:border-champagne";
 
 export default function InquiryForm({
   lang,
@@ -44,9 +44,9 @@ export default function InquiryForm({
 
   if (state === "done") {
     return (
-      <div className="border border-champagne bg-white p-6 text-[14px]">
-        <p className="label-xs text-champagne">{en ? "Message sent" : "Message envoyé"}</p>
-        <p className="mt-3 text-muted">
+      <div className="border border-champagne bg-surface p-6 text-[14px]">
+        <p className="label-xs text-accent">{en ? "Message sent" : "Message envoyé"}</p>
+        <p className="mt-3 text-secondary">
           {en
             ? "Thank you. One of our advisors will contact you shortly."
             : "Merci. Un conseiller vous recontacte dans les meilleurs délais."}
@@ -80,7 +80,7 @@ export default function InquiryForm({
         onChange={(e) => setForm({ ...form, email: e.target.value })}
       />
       <textarea
-        className="min-h-[110px] w-full border border-sand bg-white p-4 text-[14px] outline-none transition-colors focus:border-champagne"
+        className="min-h-[110px] w-full border border-sand bg-surface p-4 text-[14px] outline-none transition-colors focus:border-champagne"
         placeholder="Message"
         value={form.message}
         onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -88,7 +88,7 @@ export default function InquiryForm({
       <button
         type="submit"
         disabled={state === "loading"}
-        className="label-xs w-full bg-charcoal py-4 text-white transition-colors hover:bg-champagne disabled:opacity-60"
+        className="label-xs w-full bg-charcoal py-4 text-white transition-colors hover:bg-ink disabled:opacity-60"
       >
         {state === "loading" ? "..." : en ? "Request information" : "Demander des informations"}
       </button>

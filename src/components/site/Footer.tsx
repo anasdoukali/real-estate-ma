@@ -21,7 +21,7 @@ export default function Footer({
           <div className="lg:col-span-4">
             <div className="relative h-[68px] w-[212px]">
               <Image
-                src="/brand/maygo-logo-white.svg"
+                src="/brand/louka-vendy-gold.png"
                 alt={settings.agencyName}
                 fill
                 sizes="212px"
@@ -127,7 +127,7 @@ export default function Footer({
           <div className="flex items-center gap-3 md:justify-self-end xl:order-2 xl:justify-self-center">
             <span className="whitespace-nowrap">{en ? "Website by" : "Site conçu par"}</span>
             <Image
-              src="/brand/feedback-logo.png"
+              src="/brand/feedback-logo.svg"
               alt="Feedback Branding Studio"
               width={320}
               height={98}

@@ -21,7 +21,7 @@ export default async function BlogPage() {
 
   return (
     <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">
-      <p className="label-xs text-champagne">{en ? "Market insights" : "Le journal"}</p>
+      <p className="label-xs text-accent">{en ? "Market insights" : "Le journal"}</p>
       <h1 className="display mt-5 max-w-2xl text-[40px] sm:text-[58px]">
         {en ? (
           <>
@@ -53,18 +53,18 @@ export default async function BlogPage() {
                   />
                 )}
               </div>
-              <p className="label-xs mt-6 text-champagne">{a.category}</p>
-              <h2 className="mt-3 font-display text-[27px] leading-tight group-hover:text-champagne">
+              <p className="label-xs mt-6 text-accent">{a.category}</p>
+              <h2 className="mt-3 font-display text-[27px] leading-tight group-hover:text-accent">
                 {pick(lang, a.titleFr, a.titleEn)}
               </h2>
-              <p className="mt-3 line-clamp-3 text-[14px] leading-relaxed text-muted">
+              <p className="mt-3 line-clamp-3 text-[14px] leading-relaxed text-secondary">
                 {pick(lang, a.excerptFr, a.excerptEn)}
               </p>
             </Link>
           </Reveal>
         ))}
       </div>
-      {items.length === 0 && <p className="py-24 text-muted">{en ? "No article yet." : "Aucun article pour le moment."}</p>}
+      {items.length === 0 && <p className="py-24 text-secondary">{en ? "No article yet." : "Aucun article pour le moment."}</p>}
     </section>
   );
 }

@@ -25,11 +25,11 @@ export default function Testimonials({ items, lang }: { items: TestimonialItem[]
         </p>
         <div className="mt-10">
           <p className="text-[15px] font-semibold tracking-[0.01em]">{current.authorName}</p>
-          {current.detail && <p className="label-xs mt-2 text-champagne">{current.detail}</p>}
+          {current.detail && <p className="label-xs mt-2 text-accent">{current.detail}</p>}
         </div>
       </div>
       <div className="flex items-center gap-3 lg:col-span-3 lg:justify-end">
-        <span className="mr-4 text-[12px] text-muted">
+        <span className="mr-4 text-[12px] text-secondary">
           {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
         </span>
         <button

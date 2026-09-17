@@ -23,7 +23,7 @@ export default async function NeighborhoodsPage() {
     <>
       <section className="bg-charcoal pb-20 pt-[150px] text-white md:pt-[190px]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <p className="label-xs text-champagne">Marrakech</p>
+          <p className="label-xs text-accent">Marrakech</p>
           <h1 className="display mt-5 max-w-3xl text-[38px] sm:text-[58px]">
             {en ? "The neighborhoods of Marrakech" : "Les quartiers de Marrakech"}
           </h1>
@@ -55,7 +55,7 @@ export default async function NeighborhoodsPage() {
                   <p className="mt-3 line-clamp-2 text-[13px] text-white/70">
                     {pick(lang, h.descriptorFr, h.descriptorEn)}
                   </p>
-                  <p className="label-xs mt-4 text-champagne">
+                  <p className="label-xs mt-4 text-accent">
                     {h.propertyCount} {en ? "listings" : "biens"}
                   </p>
                 </div>

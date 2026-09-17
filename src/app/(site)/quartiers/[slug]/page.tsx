@@ -60,22 +60,22 @@ export default async function NeighborhoodPage({ params }: { params: Promise<{ s
       <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10">
         <div className="grid gap-14 lg:grid-cols-[60%_40%]">
           <Reveal>
-            <p className="label-xs text-champagne">{en ? "The area" : "Le quartier"}</p>
+            <p className="label-xs text-accent">{en ? "The area" : "Le quartier"}</p>
             <p className="mt-6 whitespace-pre-line text-[16.5px] leading-[1.9] text-ink/85">
               {pick(lang, hood.descriptionFr, hood.descriptionEn)}
             </p>
           </Reveal>
           <Reveal delay={100}>
             <div className="grid grid-cols-2 gap-px bg-sand">
-              <div className="bg-warm p-8">
-                <p className="font-display text-[40px] leading-none text-champagne">{total}</p>
-                <p className="label-xs mt-3 text-muted">{en ? "Available listings" : "Biens disponibles"}</p>
+              <div className="bg-page p-8">
+                <p className="font-display text-[40px] leading-none text-accent">{total}</p>
+                <p className="label-xs mt-3 text-secondary">{en ? "Available listings" : "Biens disponibles"}</p>
               </div>
-              <div className="bg-warm p-8">
-                <p className="font-display text-[40px] leading-none text-champagne">
+              <div className="bg-page p-8">
+                <p className="font-display text-[40px] leading-none text-accent">
                   {avgPrice ? `${Math.round(avgPrice / 1_000_000)}M` : "—"}
                 </p>
-                <p className="label-xs mt-3 text-muted">{en ? "Average price MAD" : "Prix moyen MAD"}</p>
+                <p className="label-xs mt-3 text-secondary">{en ? "Average price MAD" : "Prix moyen MAD"}</p>
               </div>
             </div>
           </Reveal>

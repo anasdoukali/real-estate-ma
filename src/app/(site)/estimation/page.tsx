@@ -20,7 +20,7 @@ export default async function ValuationPage() {
     <>
       <section className="bg-charcoal pb-24 pt-[150px] text-white md:pt-[190px]">
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <p className="label-xs text-champagne">{en ? "Valuation" : "Estimation"}</p>
+          <p className="label-xs text-accent">{en ? "Valuation" : "Estimation"}</p>
           <h1 className="display mt-5 max-w-3xl text-[38px] sm:text-[58px]">
             {en ? "What is your property worth in Marrakech?" : "Quelle est la valeur de votre bien à Marrakech ?"}
           </h1>

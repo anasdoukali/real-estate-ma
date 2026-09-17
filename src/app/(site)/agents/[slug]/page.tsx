@@ -44,9 +44,9 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
           </div>
         </div>
         <div>
-          <p className="label-xs text-champagne">{agent.jobTitle}</p>
+          <p className="label-xs text-accent">{agent.jobTitle}</p>
           <h1 className="display mt-4 text-[40px] sm:text-[58px]">{agent.name}</h1>
-          {agent.languages && <p className="label-xs mt-5 text-muted">{agent.languages}</p>}
+          {agent.languages && <p className="label-xs mt-5 text-secondary">{agent.languages}</p>}
           <p className="mt-8 max-w-2xl whitespace-pre-line text-[16px] leading-[1.9] text-ink/80">
             {pick(lang, agent.bioFr, agent.bioEn)}
           </p>
@@ -72,8 +72,8 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
               </a>
             )}
           </div>
-          <div className="mt-12 max-w-lg border border-stone bg-white p-7">
-            <p className="label-xs text-champagne">{en ? "Contact" : "Écrire à"} {agent.name}</p>
+          <div className="mt-12 max-w-lg border border-stone bg-surface p-7">
+            <p className="label-xs text-accent">{en ? "Contact" : "Écrire à"} {agent.name}</p>
             <div className="mt-5">
               <InquiryForm lang={lang} agentId={agent.id} source="contact" />
             </div>

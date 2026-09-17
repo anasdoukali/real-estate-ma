@@ -192,9 +192,9 @@ export async function getPropertyBySlug(slug: string): Promise<PropertyWithRelat
 
 export const DEFAULT_AGENCY_SETTINGS: AgencySettings = {
   id: 0,
-  agencyName: "MAPYGO REAL ESTATE",
-  logo: "/brand/maygo-logo-orange.svg",
-  logoDark: "/brand/maygo-logo-white.svg",
+  agencyName: "Louka & Vendy Real Estate",
+  logo: "/brand/louka-vendy-gold.png",
+  logoDark: "/brand/louka-vendy-gold.png",
   phone: "+212 5 24 00 00 00",
   whatsapp: "+212600000000",
   email: "contact@agency.ma",
@@ -218,7 +218,7 @@ export async function getSettings() {
   return {
     ...settings,
     agencyName:
-      !settings.agencyName || settings.agencyName === "[AGENCY NAME]"
+      !settings.agencyName || settings.agencyName === "[AGENCY NAME]" || settings.agencyName.toUpperCase() === "MAPYGO REAL ESTATE"
         ? DEFAULT_AGENCY_SETTINGS.agencyName
         : settings.agencyName,
     logo: settings.logo || DEFAULT_AGENCY_SETTINGS.logo,

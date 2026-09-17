@@ -49,14 +49,14 @@ export default function ListingResults({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-5 border-b border-sand pb-6">
-        <p className="text-[14px] text-muted">
+        <p className="text-[14px] text-secondary">
           <span className="font-semibold text-charcoal">{total}</span> {en ? "properties found" : "biens trouvés"}
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="h-11 border border-sand bg-white px-4 text-[13px] outline-none focus:border-champagne"
+            className="h-11 border border-sand bg-surface px-4 text-[13px] outline-none focus:border-champagne"
           >
             <option value="recent">{en ? "Most recent" : "Plus récents"}</option>
             <option value="price_asc">{en ? "Price ascending" : "Prix croissant"}</option>
@@ -71,7 +71,7 @@ export default function ListingResults({
                 className={`label-xs border px-4 py-3 transition-colors ${
                   view === v.key
                     ? "border-charcoal bg-charcoal text-white"
-                    : "border-sand text-muted hover:border-charcoal hover:text-charcoal"
+                    : "border-sand text-secondary hover:border-charcoal hover:text-charcoal"
                 }`}
               >
                 {v.label}
@@ -82,7 +82,7 @@ export default function ListingResults({
       </div>
 
       {items.length === 0 && (
-        <p className="py-24 text-center text-[15px] text-muted">
+        <p className="py-24 text-center text-[15px] text-secondary">
           {en ? "No property matches your search." : "Aucun bien ne correspond à votre recherche."}
         </p>
       )}
@@ -124,7 +124,7 @@ export default function ListingResults({
 function ListRow({ property, lang }: { property: CardProperty; lang: Lang }) {
   const en = lang === "en";
   return (
-    <article className="group grid gap-0 border border-stone bg-white md:grid-cols-[38%_62%]">
+    <article className="property-color-card group grid gap-0 border border-charcoal/15 bg-surface md:grid-cols-[38%_62%]">
       <Link href={`/biens/${property.slug}`} className="relative aspect-[4/3] overflow-hidden bg-stone md:aspect-auto md:min-h-[280px]">
         {property.coverImage && (
           <Image
@@ -141,24 +141,24 @@ function ListRow({ property, lang }: { property: CardProperty; lang: Lang }) {
       </Link>
       <div className="flex flex-col justify-between p-7">
         <div>
-          <p className="label-xs text-champagne">{propertyTypeLabel(property.propertyType, lang)}</p>
+          <p className="label-xs text-accent">{propertyTypeLabel(property.propertyType, lang)}</p>
           <Link href={`/biens/${property.slug}`}>
-            <h3 className="mt-3 font-display text-[28px] leading-tight group-hover:text-champagne">
+            <h3 className="mt-3 font-display text-[28px] leading-tight group-hover:text-accent">
               {en ? property.titleEn || property.titleFr : property.titleFr}
             </h3>
           </Link>
-          <p className="mt-2 text-[13.5px] text-muted">
+          <p className="mt-2 text-[13.5px] text-secondary">
             {property.neighborhoodName ? `${property.neighborhoodName}, ` : ""}
             {property.city}
           </p>
         </div>
         <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-          <div className="flex flex-wrap gap-x-6 gap-y-1 text-[13px] text-muted">
+          <div className="flex flex-wrap gap-x-6 gap-y-1 text-[13px] text-secondary">
             {property.bedrooms ? <span>{property.bedrooms} {en ? "bed" : "ch."}</span> : null}
             {property.bathrooms ? <span>{property.bathrooms} {en ? "bath" : "sdb"}</span> : null}
             {property.livingArea ? <span>{property.livingArea} m²</span> : null}
             {property.landArea ? <span>{en ? "Land" : "Terrain"} {property.landArea} m²</span> : null}
-            <span className="text-champagne">{property.reference}</span>
+            <span className="text-accent">{property.reference}</span>
           </div>
           <p className="font-display text-[28px] leading-none">{priceLabel(property, lang)}</p>
         </div>

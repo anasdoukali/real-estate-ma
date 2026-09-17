@@ -7,7 +7,7 @@ export default function MaintenanceScreen({ agency, description }: { agency: Age
     <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/90 via-black/75 to-black/50" />
     <div className="mx-auto grid min-h-svh max-w-[1500px] items-center gap-12 px-6 py-14 md:px-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
       <div>
-        <Image src={agency.logoDark || "/brand/maygo-logo-white.svg"} alt={agency.agencyName} width={200} height={80} className="mb-16 h-auto w-[180px] object-contain" />
+        <Image src="/brand/louka-vendy-gold.png" alt={agency.agencyName} width={200} height={80} className="mb-16 h-auto w-[180px] object-contain" />
         <p className="label-xs text-white/80">{agency.agencyName} · Marrakech</p>
         <h1 className="display mt-6 text-[54px] sm:text-[80px] lg:text-[96px]">Coming soon.</h1>
         <h2 className="mt-6 text-xl font-semibold sm:text-2xl">Une nouvelle expérience se prépare.</h2>

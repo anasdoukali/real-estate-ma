@@ -42,8 +42,8 @@ export default function FavoritesClient({ lang, mode }: { lang: Lang; mode: "fav
 
   if (!items.length) {
     return (
-      <div className="border border-stone bg-white p-14 text-center">
-        <p className="text-[15px] text-muted">
+      <div className="border border-stone bg-surface p-14 text-center">
+        <p className="text-[15px] text-secondary">
           {mode === "favorites"
             ? en
               ? "You have no saved properties yet."
@@ -52,7 +52,7 @@ export default function FavoritesClient({ lang, mode }: { lang: Lang; mode: "fav
               ? "Add up to 3 properties to compare."
               : "Ajoutez jusqu'à 3 biens à comparer."}
         </p>
-        <Link href="/biens" className="label-xs mt-8 inline-block bg-charcoal px-8 py-4 text-white hover:bg-champagne">
+        <Link href="/biens" className="label-xs mt-8 inline-block bg-charcoal px-8 py-4 text-white hover:bg-ink">
           {en ? "Browse properties" : "Parcourir les biens"}
         </Link>
       </div>
@@ -84,18 +84,18 @@ export default function FavoritesClient({ lang, mode }: { lang: Lang; mode: "fav
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[760px] border-collapse bg-white text-[14px]">
+      <table className="w-full min-w-[760px] border-collapse bg-surface text-[14px]">
         <thead>
           <tr>
             <th className="w-40 border border-stone p-4" />
             {items.map((p) => (
               <th key={p.id} className="border border-stone p-5 text-left align-top">
-                <Link href={`/biens/${p.slug}`} className="font-display text-[22px] hover:text-champagne">
+                <Link href={`/biens/${p.slug}`} className="font-display text-[22px] hover:text-accent">
                   {en ? p.titleEn || p.titleFr : p.titleFr}
                 </Link>
                 <button
                   onClick={() => cmp.remove(p.id)}
-                  className="label-xs mt-3 block text-muted hover:text-champagne"
+                  className="label-xs mt-3 block text-secondary hover:text-accent"
                 >
                   {en ? "Remove" : "Retirer"}
                 </button>
@@ -106,7 +106,7 @@ export default function FavoritesClient({ lang, mode }: { lang: Lang; mode: "fav
         <tbody>
           {rows.map((r) => (
             <tr key={r.label}>
-              <td className="label-xs border border-stone bg-warm p-4 text-muted">{r.label}</td>
+              <td className="label-xs border border-stone bg-page p-4 text-secondary">{r.label}</td>
               {items.map((p) => (
                 <td key={p.id} className="border border-stone p-4">
                   {r.render(p)}

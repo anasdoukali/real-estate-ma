@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Lang } from "@/lib/i18n";
 
 const field =
-  "h-13 w-full border border-sand bg-white px-4 py-4 text-[14px] outline-none transition-colors focus:border-champagne";
+  "h-13 w-full border border-black bg-surface px-4 py-4 text-[14px] outline-none transition-colors focus:border-black focus:ring-1 focus:ring-black";
 
 export default function ContactForm({ lang }: { lang: Lang }) {
   const en = lang === "en";
@@ -20,11 +20,7 @@ export default function ContactForm({ lang }: { lang: Lang }) {
 
   const intents = [
     { value: "acheter", fr: "Acheter", en: "Buy" },
-    { value: "vendre", fr: "Vendre", en: "Sell" },
-    { value: "louer", fr: "Louer", en: "Rent" },
-    { value: "home-staging", fr: "Home Staging", en: "Home Staging" },
     { value: "investir", fr: "Investir", en: "Invest" },
-    { value: "estimer", fr: "Estimer", en: "Get a valuation" },
   ];
 
   async function submit(e: React.FormEvent) {
@@ -47,9 +43,9 @@ export default function ContactForm({ lang }: { lang: Lang }) {
 
   if (state === "done") {
     return (
-      <div className="border border-champagne bg-white p-10">
+      <div className="border border-champagne bg-surface p-10">
         <p className="font-display text-[30px]">{en ? "Thank you." : "Merci."}</p>
-        <p className="mt-4 text-[15px] text-muted">
+        <p className="mt-4 text-[15px] text-secondary">
           {en
             ? "Your message has been received. An advisor will contact you shortly."
             : "Votre message a bien été reçu. Un conseiller vous recontacte très rapidement."}
@@ -93,7 +89,7 @@ export default function ContactForm({ lang }: { lang: Lang }) {
       </div>
 
       <div>
-        <p className="label-xs mb-3 text-muted">{en ? "I would like to" : "Je souhaite"}</p>
+        <p className="label-xs mb-3 text-secondary">{en ? "I would like to" : "Je souhaite"}</p>
         <div className="flex flex-wrap gap-2">
           {intents.map((i) => (
             <button
@@ -103,7 +99,7 @@ export default function ContactForm({ lang }: { lang: Lang }) {
               className={`border px-5 py-3 text-[13px] transition-colors ${
                 form.intent === i.value
                   ? "border-charcoal bg-charcoal text-white"
-                  : "border-sand bg-white text-muted hover:border-charcoal hover:text-charcoal"
+                  : "border-black bg-surface text-secondary hover:border-charcoal hover:text-charcoal"
               }`}
             >
               {en ? i.en : i.fr}
@@ -113,7 +109,7 @@ export default function ContactForm({ lang }: { lang: Lang }) {
       </div>
 
       <textarea
-        className="min-h-[160px] w-full border border-sand bg-white p-4 text-[14px] outline-none focus:border-champagne"
+        className="min-h-[160px] w-full border border-black bg-surface p-4 text-[14px] outline-none focus:border-black focus:ring-1 focus:ring-black"
         placeholder="Message"
         value={form.message}
         onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -122,7 +118,7 @@ export default function ContactForm({ lang }: { lang: Lang }) {
       <button
         type="submit"
         disabled={state === "loading"}
-        className="label-xs bg-charcoal px-10 py-4 text-white transition-colors hover:bg-champagne disabled:opacity-60"
+        className="label-xs bg-charcoal px-10 py-4 text-white transition-colors hover:bg-ink disabled:opacity-60"
       >
         {state === "loading" ? "..." : en ? "Send message" : "Envoyer le message"}
       </button>

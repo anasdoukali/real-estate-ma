@@ -20,7 +20,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
   if (maintenance.enabled) return <MaintenanceScreen agency={settings} description={maintenance.description} />;
 
   return (
-    <div className="site-layout flex min-h-screen flex-col bg-warm">
+    <div className="site-layout flex min-h-screen flex-col bg-page">
       <Header lang={lang} agencyName={settings.agencyName} whatsapp={settings.whatsapp} />
       <main className="flex-1">{children}</main>
       <Footer lang={lang} settings={settings} neighborhoods={hoods} />

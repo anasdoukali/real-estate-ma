@@ -9,6 +9,12 @@
   --color-champagne: #a98b5b;
   --color-muted: #77736d;
 
+  /* Public-site roles reuse the original palette. */
+  --color-page: #a98b5b;
+  --color-surface: #ded5c7;
+  --color-secondary: #1e1e1e;
+  --color-accent: #161616;
+
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cormorant), Georgia, serif;
 }
@@ -153,8 +159,13 @@ form[class*="border"],
 
 main > section[class*="bg-"],
 main > section[class*="overflow-hidden"] {
-  border-radius: var(--interface-radius);
   overflow: hidden;
+}
+
+/* Sections have square corners; the search panel and property-type tiles
+   keep their own rounded interface styles. */
+section {
+  border-radius: 0 !important;
 }
 
 .search-transaction-tab {
@@ -162,4 +173,70 @@ main > section[class*="overflow-hidden"] {
 }
 .search-transaction-tab:first-child {
   border-top-left-radius: var(--interface-radius) !important;
+}
+
+/* Gold pages use dark accents; dark and photographic sections keep gold accents. */
+.site-layout {
+  --color-accent: #161616;
+  color: var(--color-ink);
+}
+.site-layout :is(.bg-charcoal, .text-white) {
+  --color-accent: #a98b5b;
+}
+.site-layout :is(.bg-page, .bg-surface, .bg-stone, .bg-sand) {
+  --color-accent: #161616;
+}
+
+/* A warm architectural palette, with clear contrast around each property. */
+.hero-color-overlay {
+  background: linear-gradient(180deg,
+    rgb(22 22 22 / 68%) 0%,
+    rgb(22 22 22 / 32%) 48%,
+    rgb(169 139 91 / 24%) 76%,
+    rgb(22 22 22 / 70%) 100%);
+}
+
+.site-layout :is(.bg-surface, .bg-stone, .bg-sand) {
+  --color-secondary: color-mix(in srgb, var(--color-ink) 82%, transparent);
+}
+
+.property-color-card {
+  box-shadow: 0 8px 28px rgb(22 22 22 / 7%);
+  transition: background-color 280ms ease, box-shadow 280ms ease;
+}
+.property-color-card:is(:hover, :focus-within) {
+  background-color: var(--color-warm);
+  box-shadow: 0 14px 38px rgb(22 22 22 / 14%);
+}
+.property-color-details {
+  background: linear-gradient(145deg, rgb(248 247 243 / 32%), transparent 70%);
+}
+
+.site-layout a.border-b:hover {
+  color: var(--color-ink);
+  border-color: var(--color-warm);
+}
+.property-color-card :is(a, button):focus-visible,
+.service-color-card:focus-visible {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .property-color-card {
+    transition: none;
+  }
+}
+
+/* Photos stay square, including frames and sections that clip their corners.
+   Icon tiles and other rounded interface controls retain their existing shape. */
+img,
+.overflow-hidden:has(img.object-cover),
+main > section:has(img.object-cover) {
+  border-radius: 0 !important;
+}
+
+.contact-form-panel {
+  border-radius: 30px;
+  overflow: hidden;
 }

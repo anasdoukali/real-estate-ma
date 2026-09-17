@@ -48,7 +48,7 @@ export default function HomeMapSection({ points, lang }: { points: MapPoint[]; l
             className={`label-xs border px-5 py-3 transition-colors ${
               transaction === c.value
                 ? "border-charcoal bg-charcoal text-white"
-                : "border-sand text-muted hover:border-charcoal hover:text-charcoal"
+                : "border-sand text-secondary hover:border-charcoal hover:text-charcoal"
             }`}
           >
             {c.label}
@@ -61,8 +61,8 @@ export default function HomeMapSection({ points, lang }: { points: MapPoint[]; l
             onClick={() => setType(c.value)}
             className={`label-xs border px-5 py-3 transition-colors ${
               type === c.value
-                ? "border-champagne bg-champagne text-white"
-                : "border-sand text-muted hover:border-champagne hover:text-charcoal"
+                ? "border-champagne bg-champagne text-charcoal"
+                : "border-sand text-secondary hover:border-champagne hover:text-charcoal"
             }`}
           >
             {c.label}

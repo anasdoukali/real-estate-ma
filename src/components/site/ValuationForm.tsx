@@ -5,7 +5,7 @@ import type { Lang } from "@/lib/i18n";
 import { PROPERTY_TYPES } from "@/lib/site";
 
 const field =
-  "h-12 w-full border border-sand bg-white px-4 text-[14px] outline-none transition-colors focus:border-champagne";
+  "h-12 w-full border border-sand bg-surface px-4 text-[14px] outline-none transition-colors focus:border-champagne";
 
 export default function ValuationForm({
   lang,
@@ -56,9 +56,9 @@ export default function ValuationForm({
 
   if (state === "done") {
     return (
-      <div className="border border-champagne bg-white p-12">
+      <div className="border border-champagne bg-surface p-12">
         <p className="font-display text-[34px]">{en ? "Request received." : "Demande reçue."}</p>
-        <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
+        <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-secondary">
           {en
             ? "Thank you. One of our valuation specialists will get back to you with a personalised estimate."
             : "Merci. Un spécialiste de l'estimation vous recontacte avec une évaluation personnalisée de votre bien."}
@@ -68,16 +68,16 @@ export default function ValuationForm({
   }
 
   return (
-    <form onSubmit={submit} className="border border-stone bg-white">
+    <form onSubmit={submit} className="border border-stone bg-surface">
       <div className="grid grid-cols-4 border-b border-stone">
         {steps.map((s) => (
           <button
             type="button"
             key={s.n}
             onClick={() => setStep(s.n)}
-            className={`px-3 py-5 text-left transition-colors ${step === s.n ? "bg-warm" : "hover:bg-warm/60"}`}
+            className={`px-3 py-5 text-left transition-colors ${step === s.n ? "bg-page" : "hover:bg-page/60"}`}
           >
-            <span className={`label-xs ${step >= s.n ? "text-champagne" : "text-muted"}`}>0{s.n}</span>
+            <span className={`label-xs ${step >= s.n ? "text-accent" : "text-secondary"}`}>0{s.n}</span>
             <p className="mt-2 hidden text-[13px] font-medium sm:block">{en ? s.en : s.fr}</p>
           </button>
         ))}
@@ -86,7 +86,7 @@ export default function ValuationForm({
       <div className="p-7 md:p-10">
         {step === 1 && (
           <div>
-            <p className="label-xs text-muted">{en ? "What type of property?" : "Quel type de bien ?"}</p>
+            <p className="label-xs text-secondary">{en ? "What type of property?" : "Quel type de bien ?"}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               {PROPERTY_TYPES.map((t) => (
                 <button
@@ -96,7 +96,7 @@ export default function ValuationForm({
                   className={`border px-6 py-4 text-[14px] transition-colors ${
                     form.propertyType === t.value
                       ? "border-charcoal bg-charcoal text-white"
-                      : "border-sand text-muted hover:border-charcoal hover:text-charcoal"
+                      : "border-sand text-secondary hover:border-charcoal hover:text-charcoal"
                   }`}
                 >
                   {en ? t.en : t.fr}
@@ -200,7 +200,7 @@ export default function ValuationForm({
           <button
             type="button"
             onClick={() => setStep((s) => Math.max(1, s - 1))}
-            className={`label-xs text-muted hover:text-charcoal ${step === 1 ? "invisible" : ""}`}
+            className={`label-xs text-secondary hover:text-charcoal ${step === 1 ? "invisible" : ""}`}
           >
             ← {en ? "Back" : "Retour"}
           </button>
@@ -208,7 +208,7 @@ export default function ValuationForm({
             <button
               type="button"
               onClick={() => setStep((s) => Math.min(4, s + 1))}
-              className="label-xs bg-charcoal px-9 py-4 text-white transition-colors hover:bg-champagne"
+              className="label-xs bg-charcoal px-9 py-4 text-white transition-colors hover:bg-ink"
             >
               {en ? "Continue" : "Continuer"}
             </button>
@@ -216,7 +216,7 @@ export default function ValuationForm({
             <button
               type="submit"
               disabled={state === "loading"}
-              className="label-xs bg-champagne px-9 py-4 text-white transition-colors hover:bg-charcoal disabled:opacity-60"
+              className="label-xs bg-charcoal px-9 py-4 text-white transition-colors hover:bg-charcoal disabled:opacity-60"
             >
               {state === "loading" ? "..." : en ? "Request my valuation" : "Demander mon estimation"}
             </button>

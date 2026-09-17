@@ -111,7 +111,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           <div>
             <div className="flex flex-wrap gap-2">
               {property.isExclusive && (
-                <span className="label-xs bg-champagne px-3 py-1.5 text-white">{en ? "Exclusive" : "Exclusivité"}</span>
+                <span className="label-xs bg-charcoal px-3 py-1.5 text-white">{en ? "Exclusive" : "Exclusivité"}</span>
               )}
               <span className="label-xs bg-charcoal px-3 py-1.5 text-white">
                 {property.transactionType === "rent" ? (en ? "For rent" : "À louer") : en ? "For sale" : "À vendre"}
@@ -121,7 +121,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
               )}
             </div>
             <h1 className="display mt-6 max-w-3xl text-[34px] sm:text-[48px]">{title}</h1>
-            <p className="mt-4 text-[14px] text-muted">
+            <p className="mt-4 text-[14px] text-secondary">
               {property.neighborhood?.name ? `${property.neighborhood.name} • ` : ""}
               {property.city} · {en ? "Ref." : "Réf."} {property.reference}
             </p>
@@ -136,9 +136,9 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
         <div className="grid grid-cols-2 gap-px border-b border-sand bg-sand md:grid-cols-3 lg:grid-cols-6">
           {specs.map((s) => (
-            <div key={s.label} className="bg-warm px-5 py-8 text-center">
+            <div key={s.label} className="bg-page px-5 py-8 text-center">
               <p className="font-display text-[28px] leading-none">{s.value}</p>
-              <p className="label-xs mt-3 text-muted">{s.label}</p>
+              <p className="label-xs mt-3 text-secondary">{s.label}</p>
             </div>
           ))}
         </div>
@@ -146,12 +146,12 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
         <div className="grid gap-16 py-16 lg:grid-cols-[64%_36%]">
           <div>
             <Reveal>
-              <h2 className="label-xs text-champagne">{en ? "About this property" : "À propos"}</h2>
+              <h2 className="label-xs text-accent">{en ? "About this property" : "À propos"}</h2>
               <div className="mt-6 whitespace-pre-line text-[16px] leading-[1.9] text-ink/85">{description}</div>
             </Reveal>
 
             <Reveal className="mt-16">
-              <h2 className="label-xs text-champagne">{en ? "Details" : "Détails"}</h2>
+              <h2 className="label-xs text-accent">{en ? "Details" : "Détails"}</h2>
               <dl className="mt-6 grid gap-x-10 gap-y-4 sm:grid-cols-2">
                 {[
                   [en ? "Reference" : "Référence", property.reference],
@@ -164,7 +164,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
                   [en ? "Status" : "Statut", property.status],
                 ].map(([k, v]) => (
                   <div key={String(k)} className="flex justify-between border-b border-stone pb-3 text-[14px]">
-                    <dt className="text-muted">{k}</dt>
+                    <dt className="text-secondary">{k}</dt>
                     <dd className="font-medium">{String(v)}</dd>
                   </div>
                 ))}
@@ -173,11 +173,11 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
             {property.features.length > 0 && (
               <Reveal className="mt-16">
-                <h2 className="label-xs text-champagne">{en ? "Features" : "Équipements"}</h2>
+                <h2 className="label-xs text-accent">{en ? "Features" : "Équipements"}</h2>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {property.features.map((f) => (
                     <li key={f} className="flex items-center gap-3 text-[14.5px]">
-                      <span className="h-1.5 w-1.5 bg-champagne" />
+                      <span className="h-1.5 w-1.5 bg-charcoal" />
                       {featureLabel(f, lang)}
                     </li>
                   ))}
@@ -187,8 +187,8 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
             {property.latitude && property.longitude && property.locationVisibility !== "hidden" && (
               <Reveal className="mt-16">
-                <h2 className="label-xs text-champagne">{en ? "Location" : "Localisation"}</h2>
-                <p className="mt-3 text-[14px] text-muted">
+                <h2 className="label-xs text-accent">{en ? "Location" : "Localisation"}</h2>
+                <p className="mt-3 text-[14px] text-secondary">
                   {property.locationVisibility === "approximate"
                     ? en
                       ? "Approximate location"
@@ -207,7 +207,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
             {property.videoUrl && (
               <Reveal className="mt-16">
-                <h2 className="label-xs text-champagne">{en ? "Video" : "Vidéo"}</h2>
+                <h2 className="label-xs text-accent">{en ? "Video" : "Vidéo"}</h2>
                 <div className="mt-6 aspect-video w-full">
                   <iframe src={property.videoUrl} className="h-full w-full" allowFullScreen title="video" />
                 </div>
@@ -216,17 +216,17 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           </div>
 
           <aside>
-            <div className="sticky top-[110px] border border-stone bg-white p-7">
+            <div className="sticky top-[110px] border border-stone bg-surface p-7">
               {agent && (
                 <div className="flex items-center gap-4 border-b border-stone pb-6">
                   <div className="relative h-16 w-16 overflow-hidden bg-stone">
                     {agent.photoUrl && <Image src={agent.photoUrl} alt={agent.name} fill sizes="64px" className="object-cover" />}
                   </div>
                   <div>
-                    <Link href={`/agents/${agent.slug}`} className="text-[16px] font-medium hover:text-champagne">
+                    <Link href={`/agents/${agent.slug}`} className="text-[16px] font-medium hover:text-accent">
                       {agent.name}
                     </Link>
-                    <p className="mt-1 text-[12.5px] text-muted">{agent.jobTitle}</p>
+                    <p className="mt-1 text-[12.5px] text-secondary">{agent.jobTitle}</p>
                   </div>
                 </div>
               )}
@@ -273,7 +273,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
       </div>
 
       {/* Mobile sticky bar */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-stone bg-white lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-stone bg-surface lg:hidden">
         <a href={`tel:${agent?.phone ?? settings.phone}`} className="label-xs py-4 text-center">
           {en ? "Call" : "Appeler"}
         </a>
