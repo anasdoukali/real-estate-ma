@@ -80,7 +80,7 @@ export default function Header({
         <div className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-5 md:h-[86px] md:px-10">
           <Link
             href="/"
-            className="relative block h-[50px] w-[143px] shrink-0 md:h-[55px] md:w-[165px]"
+            className="relative block h-[65px] w-[186px] shrink-0 md:h-[72px] md:w-[215px]"
             aria-label={`${agencyName} — Home`}
           >
             <Image
@@ -88,7 +88,7 @@ export default function Header({
               alt={agencyName}
               fill
               priority
-              sizes="(min-width: 768px) 165px, 143px"
+              sizes="(min-width: 768px) 215px, 186px"
               className={`object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
             />
             <Image
@@ -96,7 +96,7 @@ export default function Header({
               alt=""
               fill
               priority
-              sizes="(min-width: 768px) 165px, 143px"
+              sizes="(min-width: 768px) 215px, 186px"
               aria-hidden="true"
               className={`object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
             />
@@ -203,13 +203,13 @@ export default function Header({
         }`}
       >
         <div className="flex h-[72px] items-center justify-between px-5 md:h-[86px] md:px-10">
-          <Link href="/" className="relative block h-[50px] w-[143px] shrink-0 md:h-[55px] md:w-[165px]" aria-label={`${agencyName} — Home`}>
+          <Link href="/" className="relative block h-[65px] w-[186px] shrink-0 md:h-[72px] md:w-[215px]" aria-label={`${agencyName} — Home`}>
             <Image
               src="/brand/louka-vendy-gold.png"
               alt={agencyName}
               fill
               priority
-              sizes="(min-width: 768px) 165px, 143px"
+              sizes="(min-width: 768px) 215px, 186px"
               className="object-contain"
             />
           </Link>
