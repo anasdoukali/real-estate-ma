@@ -80,7 +80,7 @@ export default function Header({
         <div className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-5 md:h-[86px] md:px-10">
           <Link
             href="/"
-            className="relative block h-9 w-[104px] shrink-0 md:h-10 md:w-[120px]"
+            className="relative block h-[45px] w-[130px] shrink-0 md:h-[50px] md:w-[150px]"
             aria-label={`${agencyName} — Home`}
           >
             <Image
@@ -88,7 +88,7 @@ export default function Header({
               alt={agencyName}
               fill
               priority
-              sizes="120px"
+              sizes="(min-width: 768px) 150px, 130px"
               className={`object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
             />
             <Image
@@ -96,7 +96,7 @@ export default function Header({
               alt=""
               fill
               priority
-              sizes="120px"
+              sizes="(min-width: 768px) 150px, 130px"
               aria-hidden="true"
               className={`object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
             />
@@ -203,13 +203,13 @@ export default function Header({
         }`}
       >
         <div className="flex h-[72px] items-center justify-between px-5 md:h-[86px] md:px-10">
-          <Link href="/" className="relative block h-9 w-[104px]" aria-label={`${agencyName} — Home`}>
+          <Link href="/" className="relative block h-[45px] w-[130px] shrink-0 md:h-[50px] md:w-[150px]" aria-label={`${agencyName} — Home`}>
             <Image
               src="/brand/louka-vendy-gold.png"
               alt={agencyName}
               fill
               priority
-              sizes="104px"
+              sizes="(min-width: 768px) 150px, 130px"
               className="object-contain"
             />
           </Link>
