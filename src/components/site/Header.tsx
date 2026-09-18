@@ -89,7 +89,7 @@ export default function Header({
               fill
               priority
               sizes="120px"
-              className={`origin-left scale-[2.15] object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
+              className={`object-contain transition-opacity duration-300 ${solid ? "opacity-100" : "opacity-0"}`}
             />
             <Image
               src="/brand/louka-vendy-gold.png"
@@ -98,7 +98,7 @@ export default function Header({
               priority
               sizes="120px"
               aria-hidden="true"
-              className={`origin-left scale-[2.15] object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
+              className={`object-contain transition-opacity duration-300 ${solid ? "opacity-0" : "opacity-100"}`}
             />
           </Link>
 
