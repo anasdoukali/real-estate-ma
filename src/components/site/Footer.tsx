@@ -19,13 +19,15 @@ export default function Footer({
       <div className="mx-auto max-w-[1600px] px-5 py-20 md:px-10 md:py-28">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <div className="relative h-[68px] w-[212px]">
+            <div className="relative aspect-[1035/454] w-full max-w-[420px] overflow-hidden">
+              {/* Frame the artwork without the source image's generous outer margins. */}
               <Image
-                src="/brand/louka-vendy-gold.png"
+                src="/brand/Louka&Vendy-RealEstate-Quadri_Horiz.png"
                 alt={settings.agencyName}
-                fill
-                sizes="212px"
-                className="object-contain"
+                width={1508}
+                height={1241}
+                sizes="(min-width: 1024px) 620px, 100vw"
+                className="absolute left-[-25.12%] top-[-89.65%] h-auto w-[145.70%] max-w-none"
               />
             </div>
             <p className="mt-7 max-w-sm text-[14px] leading-relaxed text-white/60">
