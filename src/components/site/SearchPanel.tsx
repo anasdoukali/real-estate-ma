@@ -88,7 +88,7 @@ export default function SearchPanel({
             type="button"
             onClick={() => setTransaction(tab.value)}
             className={`search-transaction-tab label-xs px-8 py-4 transition-colors ${
-              transaction === tab.value ? "bg-warm text-charcoal" : "bg-charcoal/90 text-white/70 hover:text-white"
+              transaction === tab.value ? "bg-charcoal text-white" : "bg-transparent text-charcoal hover:bg-stone"
             }`}
           >
             {tab.label}

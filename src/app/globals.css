@@ -169,10 +169,10 @@ section {
 }
 
 .search-transaction-tab {
-  border-radius: 0 !important;
+  border-radius: var(--interface-radius) !important;
 }
 .search-transaction-tab:first-child {
-  border-top-left-radius: var(--interface-radius) !important;
+  border-radius: var(--interface-radius) !important;
 }
 
 /* Gold pages use dark accents; dark and photographic sections keep gold accents. */

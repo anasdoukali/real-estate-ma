@@ -227,6 +227,22 @@ export async function getSettings() {
 }
 
 export async function listNeighborhoods(onlyPublished = true) {
+  const fallbackImages: Record<string, string> = {
+    palmeraie: "https://images.pexels.com/photos/9730025/pexels-photo-9730025.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    hivernage: "https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    gueliz: "https://images.pexels.com/photos/7005300/pexels-photo-7005300.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    amelkis: "https://images.pexels.com/photos/12715491/pexels-photo-12715491.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    agdal: "https://images.pexels.com/photos/36710315/pexels-photo-36710315.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    medina: "https://images.pexels.com/photos/38891222/pexels-photo-38891222.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    targa: "https://images.pexels.com/photos/6283965/pexels-photo-6283965.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "route-de-l-ourika": "https://images.pexels.com/photos/12715498/pexels-photo-12715498.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "route-de-fes": "https://images.pexels.com/photos/15360707/pexels-photo-15360707.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "route-de-casablanca": "https://images.pexels.com/photos/35156066/pexels-photo-35156066.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    izdihar: "https://images.pexels.com/photos/38785630/pexels-photo-38785630.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    mabrouka: "https://images.pexels.com/photos/2610815/pexels-photo-2610815.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "jamaa-el-fena": "https://images.pexels.com/photos/10573397/pexels-photo-10573397.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    mhamid: "https://images.pexels.com/photos/35156066/pexels-photo-35156066.jpeg?auto=compress&cs=tinysrgb&w=1600",
+  };
   const rows = await db
     .select({
       n: neighborhoods,
@@ -235,7 +251,11 @@ export async function listNeighborhoods(onlyPublished = true) {
     .from(neighborhoods)
     .where(onlyPublished ? eq(neighborhoods.published, true) : undefined)
     .orderBy(asc(neighborhoods.sortOrder), asc(neighborhoods.name));
-  return rows.map((r) => ({ ...r.n, propertyCount: Number(r.propertyCount) }));
+  return rows.map((r) => ({
+    ...r.n,
+    coverImage: r.n.coverImage || fallbackImages[r.n.slug] || null,
+    propertyCount: Number(r.propertyCount),
+  }));
 }
 
 export async function getNeighborhoodBySlug(slug: string) {

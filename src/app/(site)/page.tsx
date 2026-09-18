@@ -43,7 +43,7 @@ const COLLECTION_IMAGES: Record<string, string> = {
   riad: "https://images.pexels.com/photos/10573397/pexels-photo-10573397.jpeg?auto=compress&cs=tinysrgb&w=1200",
   maison: "https://images.pexels.com/photos/6283965/pexels-photo-6283965.jpeg?auto=compress&cs=tinysrgb&w=1200",
   terrain: "https://images.pexels.com/photos/38787221/pexels-photo-38787221.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  bureau: "https://images.pexels.com/photos/8484851/pexels-photo-8484851.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  bureau: "https://images.pexels.com/photos/8606292/pexels-photo-8606292.jpeg?auto=compress&cs=tinysrgb&w=1200",
   commerce: "https://images.pexels.com/photos/2610815/pexels-photo-2610815.jpeg?auto=compress&cs=tinysrgb&w=1200",
 };
 
@@ -381,7 +381,7 @@ export default async function HomePage() {
           <div className="mt-14 grid gap-px border-b border-charcoal/15 bg-charcoal/15 md:grid-cols-2 lg:grid-cols-5">
             {services.map((s, i) => (
               <Reveal key={s.n} delay={i * 80}>
-                <Link href={s.href} className="service-color-card group flex h-full flex-col bg-page p-8 transition-colors duration-300 hover:bg-sand focus-visible:bg-sand">
+                <Link href={s.href} className="service-color-card group flex h-full flex-col border border-charcoal/20 bg-page p-8 transition-colors duration-300 hover:bg-sand focus-visible:bg-sand">
                   <span className="font-display text-[40px] text-sand transition-colors duration-300 group-hover:text-charcoal group-focus-visible:text-charcoal">
                     {s.n}
                   </span>

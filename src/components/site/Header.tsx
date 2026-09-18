@@ -73,7 +73,7 @@ export default function Header({
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-[1100] transition-all duration-300 ${
           solid ? "border-b border-stone bg-warm/95 backdrop-blur-md" : "bg-transparent"
         }`}
       >
@@ -198,7 +198,7 @@ export default function Header({
 
       {/* Mobile / full-screen nav */}
       <div
-        className={`fixed inset-0 z-[60] bg-charcoal text-white transition-all duration-500 ${
+        className={`fixed inset-0 z-[1200] bg-charcoal text-white transition-all duration-500 ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
