@@ -301,8 +301,8 @@ export default async function HomePage() {
       </section>
 
       {/* HOME STAGING */}
-      <section className="relative isolate flex min-h-[85svh] w-full items-center overflow-hidden bg-charcoal py-24 text-white md:min-h-screen md:py-32">
-          <div className="absolute inset-0 -z-10">
+      <section className="relative h-[80vh] min-h-[520px] w-full overflow-hidden">
+          <div className="absolute inset-0">
             <Image
               src="https://images.pexels.com/photos/7005300/pexels-photo-7005300.jpeg?auto=compress&cs=tinysrgb&w=2400"
               alt={en ? "A bright, welcoming interior" : "Un intérieur lumineux et accueillant"}
@@ -310,25 +310,24 @@ export default async function HomePage() {
               sizes="100vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-black/55" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-charcoal/55" />
           </div>
-        <div className="mx-auto w-full max-w-[1600px] px-6 md:px-12 lg:px-20">
+        <div className="relative mx-auto flex h-full max-w-[1600px] flex-col justify-center px-5 md:px-10">
           <Reveal>
-            <p className="label-xs text-white/90">Home Staging</p>
-            <h2 className="display mt-6 max-w-3xl text-[38px] text-white sm:text-[54px] lg:text-[72px]">
+            <p className="label-xs text-white/70">Home Staging</p>
+            <h2 className="display mt-5 text-[44px] text-white sm:text-[68px] lg:text-[92px]">
               {en ? "Reveal your property's potential." : "Révélez le potentiel de votre bien."}
             </h2>
-            <p className="mt-7 max-w-xl text-[16px] leading-relaxed text-white/90 sm:text-[18px]">
+            <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-white/75">
               {en
                 ? "Decluttering, thoughtful layouts and styling: prepare your property for sale or rental and help visitors picture themselves at home, in photos and in person."
                 : "Désencombrement, réorganisation et décoration : préparez votre bien à la vente ou à la location et aidez les visiteurs à s’y projeter, en photo comme en visite."}
             </p>
             <Link
               href="/home-staging"
-              className="label-xs mt-9 inline-block rounded-[20px] bg-surface px-8 py-5 text-charcoal transition-colors hover:bg-sand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="label-xs mt-10 inline-block border border-white/60 px-8 py-4 text-white transition-colors hover:bg-surface hover:text-charcoal"
             >
-              {en ? "Discover Home Staging" : "Découvrir le Home Staging"} →
+              {en ? "Discover Home Staging" : "Découvrir le Home Staging"}
             </Link>
           </Reveal>
         </div>
