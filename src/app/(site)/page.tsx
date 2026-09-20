@@ -441,7 +441,8 @@ export default async function HomePage() {
       </section>
 
       {/* 10 COLLECTIONS */}
-      <section className="mx-auto max-w-[1600px] px-5 py-28 md:px-10">
+      <section className="bg-stone py-28">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
         <Reveal>
           <p className="label-xs text-accent">Collections</p>
           <h2 className="display mt-5 max-w-xl text-[34px] sm:text-[46px]">
@@ -484,6 +485,7 @@ export default async function HomePage() {
               </Link>
             </Reveal>
           ))}
+        </div>
         </div>
       </section>
 
