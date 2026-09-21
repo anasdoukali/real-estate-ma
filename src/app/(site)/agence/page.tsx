@@ -35,14 +35,14 @@ export default async function AgencyPage() {
     {
       fr: "Discrétion",
       en: "Discretion",
-      dfr: "Une part importante de nos biens est proposée en off-market.",
-      den: "A significant share of our portfolio is offered off-market.",
+      dfr: "Une partie de nos biens est proposée en off-market, réservée à nos clients.",
+      den: "Some of our properties are offered off-market, exclusively to our clients.",
     },
     {
       fr: "Accompagnement complet",
       en: "End-to-end support",
-      dfr: "Notaire, financement, travaux, gestion locative : nous coordonnons tout.",
-      den: "Notary, financing, renovation, rental management: we coordinate everything.",
+      dfr: "Notaire, financement, travaux, gestion locative : nous coordonnons chaque étape pour vous.",
+      den: "Notary services, financing, renovations, property management: we coordinate every step for you.",
     },
   ];
 
@@ -54,7 +54,7 @@ export default async function AgencyPage() {
         <div className="relative mx-auto flex h-full max-w-[1600px] flex-col justify-end px-5 pb-16 md:px-10">
           <p className="label-xs text-white/70">{en ? "The agency" : "L'agence"}</p>
           <h1 className="display mt-4 max-w-4xl text-[40px] text-white sm:text-[68px]">
-            {en ? "Marrakech, read by those who live it." : "Marrakech, lue par ceux qui y vivent."}
+            {en ? "Marrakech, experienced from within." : "Marrakech, vécue de l'intérieur."}
           </h1>
         </div>
       </section>
@@ -65,13 +65,13 @@ export default async function AgencyPage() {
             <p className="label-xs text-accent">{en ? "Our mission" : "Notre mission"}</p>
             <p className="display mt-8 text-[28px] sm:text-[36px]">
               {en
-                ? "Connecting exceptional properties with the people who will truly live in them."
-                : "Relier des propriétés d'exception aux personnes qui sauront réellement les habiter."}
+                ? "Connecting exceptional properties with the people who will truly make them home."
+                : "Relier des biens d'exception aux personnes qui sauront les habiter."}
             </p>
             <p className="mt-8 max-w-2xl text-[16px] leading-[1.9] text-ink/80">
               {en
-                ? `${settings.agencyName} is a Marrakech-based agency specialising in villas, riads, apartments and land in the city's most sought-after districts. Our approach combines a deep knowledge of local neighborhoods with the standards of international luxury real estate: precise valuations, editorial photography, confidentiality and rigorous follow-up.`
-                : `${settings.agencyName} est une agence marrakchie spécialisée dans les villas, riads, appartements et terrains situés dans les quartiers les plus recherchés de la ville. Notre approche associe une connaissance fine du terrain aux standards de l'immobilier de luxe international : estimations précises, photographie éditoriale, confidentialité et suivi rigoureux.`}
+                ? `${settings.agencyName} assists with the purchase, sale, and rental of villas, riads, and apartments in Marrakech. Our team combines in-depth local knowledge with international real estate standards.`
+                : `${settings.agencyName} accompagne l'achat, la vente et la location de villas, riads et appartements à Marrakech. Notre équipe allie connaissance du terrain et standards de l'immobilier international.`}
             </p>
           </Reveal>
           <Reveal delay={120}>
@@ -86,7 +86,7 @@ export default async function AgencyPage() {
         <div className="mx-auto grid max-w-[1600px] grid-cols-2 gap-12 px-5 md:px-10 lg:grid-cols-4">
           {[
             { v: `${settings.yearsExperience}+`, l: en ? "Years of experience" : "Années d'expérience" },
-            { v: `${settings.propertiesSold}+`, l: "Transactions" },
+            { v: `${settings.propertiesSold}+`, l: en ? "Properties sold" : "Biens vendus" },
             { v: `${settings.activeProperties}+`, l: en ? "Active listings" : "Biens actifs" },
             { v: `${settings.clientCount}+`, l: en ? "Neighborhoods" : "Quartiers couverts" },
           ].map((s) => (
@@ -145,10 +145,10 @@ export default async function AgencyPage() {
       <section className="bg-stone py-20">
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-8 px-5 md:px-10">
           <h2 className="display max-w-xl text-[30px] sm:text-[42px]">
-            {en ? "Let's discuss your project." : "Discutons de votre projet."}
+            {en ? "Let’s Talk About Your Project." : "Parlons de votre projet."}
           </h2>
           <Link href="/contact" className="label-xs bg-charcoal px-10 py-4 text-white hover:bg-ink">
-            {en ? "Contact us" : "Nous contacter"}
+            {en ? "Contact us →" : "Nous contacter →"}
           </Link>
         </div>
       </section>

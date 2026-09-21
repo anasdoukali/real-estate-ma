@@ -36,6 +36,11 @@ export default async function ContactPage() {
               </>
             )}
           </h1>
+          <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-secondary">
+            {en
+              ? "A question, a property to visit, a project to develop: our team will get back to you promptly."
+              : "Une question, un bien à visiter, un projet à construire : notre équipe vous répond rapidement."}
+          </p>
           <div className="mt-12 space-y-6 text-[14.5px]">
             {settings.phone && (
               <div>

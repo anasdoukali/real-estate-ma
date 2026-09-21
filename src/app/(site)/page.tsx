@@ -6,6 +6,7 @@ import SearchPanel from "@/components/site/SearchPanel";
 import FeaturedCarousel from "@/components/site/FeaturedCarousel";
 import HomeMapSection from "@/components/site/HomeMapSection";
 import Testimonials from "@/components/site/Testimonials";
+import NewsletterForm from "@/components/site/NewsletterForm";
 import { pick } from "@/lib/i18n";
 import { getLang } from "@/lib/lang";
 import { PROPERTY_TYPES, propertyTypePlural } from "@/lib/site";
@@ -69,7 +70,7 @@ export default async function HomePage() {
       n: "01",
       fr: "Acheter",
       en: "Buy",
-      dfr: "Une sélection personnalisée et un accompagnement complet jusqu'à la signature.",
+      dfr: "Une sélection pensée pour vous. Nous identifions les biens qui correspondent à votre projet et vous accompagnons jusqu'à la signature.",
       den: "A personalised selection and full guidance all the way to signature.",
       href: "/biens?transaction=sale",
     },
@@ -77,7 +78,7 @@ export default async function HomePage() {
       n: "02",
       fr: "Vendre",
       en: "Sell",
-      dfr: "Estimation, mise en valeur et commercialisation de votre propriété.",
+      dfr: "Vendez au juste prix. Estimation précise, mise en valeur et diffusion ciblée pour vendre votre bien dans les meilleures conditions.",
       den: "Valuation, staging and marketing of your property.",
       href: "/confiez-nous-votre-bien",
     },
@@ -85,7 +86,7 @@ export default async function HomePage() {
       n: "03",
       fr: "Louer",
       en: "Rent",
-      dfr: "Location longue durée, saisonnière et biens premium.",
+      dfr: "Louez en toute confiance. Location longue durée, saisonnière ou premium : nous trouvons le bon profil pour votre bien.",
       den: "Long-term, seasonal rentals and premium homes.",
       href: "/biens?transaction=rent",
     },
@@ -93,7 +94,7 @@ export default async function HomePage() {
       n: "04",
       fr: "Home Staging",
       en: "Home Staging",
-      dfr: "Désencombrement, aménagement et décoration pour révéler le potentiel de votre bien.",
+      dfr: "Mettez votre bien en valeur. Désencombrement, aménagement et décoration pour révéler tout le potentiel de votre intérieur.",
       den: "Decluttering, layout and styling to reveal your property's potential.",
       href: "/home-staging",
     },
@@ -101,7 +102,7 @@ export default async function HomePage() {
       n: "05",
       fr: "Investir",
       en: "Invest",
-      dfr: "Identification des opportunités et conseil immobilier à Marrakech.",
+      dfr: "Investissez avec discernement. Nous identifions les opportunités du marché marrakchi et vous conseillons sur chaque projet.",
       den: "Opportunity sourcing and real-estate advisory in Marrakech.",
       href: "/contact",
     },
@@ -143,13 +144,13 @@ export default async function HomePage() {
           >
             {en ? (
               <>
-                Find your ideal property
+                Your Property Awaits You Here.
                 <br className="hidden sm:block" />
                 in Marrakech.
               </>
             ) : (
               <>
-                Trouvez votre propriété idéale
+                Votre bien vous attend ici.
                 <br className="hidden sm:block" />
                 à Marrakech.
               </>
@@ -160,8 +161,8 @@ export default async function HomePage() {
             style={{ animationDelay: "240ms" }}
           >
             {en
-              ? "Villas, apartments, riads and exceptional properties curated in the most beautiful neighborhoods of Marrakech."
-              : "Villas, appartements, riads et propriétés d'exception sélectionnés dans les plus beaux quartiers de Marrakech."}
+              ? "Villas, riads, apartments, and plots selected in Marrakech’s most sought-after neighborhoods. Every property is carefully verified and presented by our team."
+              : "Villas, riads, appartements et terrains sélectionnés dans les quartiers les plus recherchés de Marrakech. Chaque bien est vérifié et présenté par notre équipe."}
           </p>
           <div className="fade-up mt-10 w-full max-w-[1380px]" style={{ animationDelay: "340ms" }}>
             <SearchPanel lang={lang} neighborhoods={hoods.map((n) => ({ name: n.name, slug: n.slug }))} />
@@ -236,7 +237,7 @@ export default async function HomePage() {
             <div>
               <p className="label-xs text-accent">{en ? "New listings" : "Nouveautés"}</p>
               <h2 className="display mt-5 text-[34px] sm:text-[46px]">
-                {en ? "Latest properties" : "Dernières propriétés"}
+                {en ? "Our Latest Properties" : "Nos Dernières propriétés"}
               </h2>
               <p className="mt-4 max-w-md text-[14.5px] text-secondary">
                 {en
@@ -270,18 +271,18 @@ export default async function HomePage() {
           <Reveal>
             <p className="label-xs text-white/70">Marrakech</p>
             <h2 className="display mt-5 text-[44px] text-white sm:text-[68px] lg:text-[92px]">
-              {en ? "An art of living" : "Un art de vivre"}
+              {en ? "Marrakech, an Art of Living." : "Marrakech, un art de vivre."}
             </h2>
             <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-white/75">
               {en
-                ? "Between contemporary architecture, historic riads, golf courses and Atlas landscapes, discover another way to live Marrakech."
-                : "Entre architecture contemporaine, riads historiques, golfs et paysages de l'Atlas, découvrez une autre manière de vivre Marrakech."}
+                ? "Contemporary architecture, historic riads, and Atlas Mountain landscapes: discover a different way of living in the city."
+                : "Architecture contemporaine, riads historiques et paysages de l'Atlas : découvrez une autre façon d'habiter la ville."}
             </p>
             <Link
               href="/quartiers"
               className="label-xs mt-10 inline-block border border-white/60 px-8 py-4 text-white transition-colors hover:bg-surface hover:text-charcoal"
             >
-              {en ? "Discover Marrakech" : "Découvrir Marrakech"}
+              {en ? "Discover the Neighborhoods →" : "Découvrir les quartiers →"}
             </Link>
           </Reveal>
         </div>
@@ -320,8 +321,8 @@ export default async function HomePage() {
             </h2>
             <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-white/75">
               {en
-                ? "Decluttering, thoughtful layouts and styling: prepare your property for sale or rental and help visitors picture themselves at home, in photos and in person."
-                : "Désencombrement, réorganisation et décoration : préparez votre bien à la vente ou à la location et aidez les visiteurs à s’y projeter, en photo comme en visite."}
+                ? "Decluttering, rearranging, and decorating: we prepare your property to help every visitor envision themselves in the space."
+                : "Désencombrement, réorganisation et décoration : nous préparons votre bien pour aider chaque visiteur à s'y projeter."}
             </p>
             <Link
               href="/home-staging"
@@ -407,20 +408,15 @@ export default async function HomePage() {
             <Reveal>
               <p className="label-xs text-accent">{en ? "Our expertise" : "Notre expertise"}</p>
               <h2 className="display mt-6 text-[34px] sm:text-[48px]">
-                {en ? (
-                  <>
-                    The local market.
-                    <br />
-                    An international vision.
-                  </>
-                ) : (
-                  <>
-                    Le marché local.
-                    <br />
-                    Une vision internationale.
-                  </>
-                )}
+                {en
+                  ? "Local Market Expertise, International Perspective."
+                  : "Le marché local, un regard international."}
               </h2>
+              <p className="mt-7 max-w-xl text-[15px] leading-relaxed text-white/75">
+                {en
+                  ? "Twelve years of on-the-ground experience, serving a discerning Moroccan and international clientele."
+                  : "Douze ans d'expérience du terrain, au service d'une clientèle marocaine et internationale exigeante."}
+              </p>
             </Reveal>
             <div className="mt-14 grid grid-cols-2 gap-10">
               {stats.map((s, i) => (
@@ -626,26 +622,39 @@ export default async function HomePage() {
                   selling your property?
                 </>
               ) : (
-                <>
-                  Vous souhaitez
-                  <br />
-                  vendre votre bien ?
-                </>
+                "Une estimation, sans engagement."
               )}
             </h2>
             <p className="mt-7 max-w-md text-[15px] leading-relaxed text-secondary">
               {en
                 ? "Receive a personalised valuation from a specialist of the Marrakech property market."
-                : "Recevez une estimation personnalisée réalisée par un spécialiste du marché immobilier marrakchi."}
+                : "Recevez une évaluation précise de votre bien, réalisée par un spécialiste du marché marrakchi."}
             </p>
             <Link
               href="/estimation"
               className="label-xs mt-10 inline-block bg-charcoal px-9 py-4 text-white transition-colors hover:bg-ink"
             >
-              {en ? "Request a valuation" : "Demander une estimation"}
+              {en ? "Request a valuation" : "Demander une estimation →"}
             </Link>
           </Reveal>
         </div>
+      </section>
+      {/* 15 NEWSLETTER */}
+      <section className="bg-page px-5 py-24 md:px-10 md:py-28">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <p className="label-xs text-accent">Newsletter</p>
+          <h2 className="display mt-5 text-[34px] sm:text-[46px]">
+            {en ? "The latest listings, before everyone else." : "Les nouveautés, avant tout le monde."}
+          </h2>
+          <p className="mt-6 text-[15px] leading-relaxed text-secondary">
+            {en
+              ? "Receive newly added properties directly in your inbox."
+              : "Recevez les biens récemment ajoutés directement dans votre boîte mail."}
+          </p>
+          <div className="mx-auto mt-10 max-w-2xl text-left">
+            <NewsletterForm lang={lang} />
+          </div>
+        </Reveal>
       </section>
     </>
   );
