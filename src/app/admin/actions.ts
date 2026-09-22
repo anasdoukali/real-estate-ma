@@ -336,6 +336,19 @@ export async function updateLeadAction(formData: FormData) {
   revalidatePath("/admin/leads");
 }
 
+export async function deleteValuationAction(id: number): Promise<ActionState> {
+  await requireSession();
+  if (!Number.isSafeInteger(id) || id <= 0) return { error: "Demande invalide." };
+  try {
+    await db.delete(valuationRequests).where(eq(valuationRequests.id, id));
+  } catch {
+    return { error: "La suppression a échoué. Veuillez réessayer." };
+  }
+  revalidatePath("/admin/valuations");
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
 export async function updateValuationAction(formData: FormData) {
   await requireSession();
   const id = Number(formData.get("id"));

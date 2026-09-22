@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { valuationRequests } from "@/db/schema";
 import { updateValuationAction } from "../actions";
 import { VALUATION_STATUSES } from "@/lib/site";
+import DeleteValuationButton from "@/components/admin/DeleteValuationButton";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,7 @@ export default async function AdminValuationsPage() {
               {v.message && <p className="mt-2 max-w-3xl whitespace-pre-line text-[13.5px]">{v.message}</p>}
               <p className="mt-2 text-[12px] text-[#6b7280]">{new Date(v.createdAt).toLocaleString("fr-FR")}</p>
             </div>
+            <div className="flex flex-wrap items-start gap-2">
             <form action={updateValuationAction} className="flex items-center gap-2">
               <input type="hidden" name="id" value={v.id} />
               <select name="status" defaultValue={v.status} className="h-9 rounded-md border border-[#d4d4d8] px-2 text-[13px]">
@@ -38,6 +40,8 @@ export default async function AdminValuationsPage() {
               </select>
               <button className="rounded-md bg-black px-4 py-2 text-[13px] text-white">OK</button>
             </form>
+            <DeleteValuationButton id={v.id} name={v.name} />
+            </div>
           </div>
         ))}
         {rows.length === 0 && <p className="text-[13px] text-[#6b7280]">Aucune demande d&apos;estimation.</p>}

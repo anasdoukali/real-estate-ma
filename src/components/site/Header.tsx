@@ -9,6 +9,7 @@ import { useFavorites } from "@/lib/client-store";
 
 const NAV = [
   { fr: "Accueil", en: "Home", href: "/" },
+  { fr: "Home Staging", en: "Home Staging", href: "/home-staging" },
   { fr: "Agence", en: "Agency", href: "/agence" },
   { fr: "Journal", en: "Journal", href: "/blog" },
   { fr: "Contact", en: "Contact", href: "/contact" },
@@ -18,7 +19,6 @@ const LISTING_NAV = [
   { fr: "Acheter", en: "Buy", href: "/biens?transaction=sale" },
   { fr: "Vendre", en: "Sell", href: "/confiez-nous-votre-bien" },
   { fr: "Louer", en: "Rent", href: "/biens?transaction=rent" },
-  { fr: "Home Staging", en: "Home Staging", href: "/home-staging" },
   { fr: "Propriétés", en: "Properties", href: "/biens" },
   { fr: "Quartiers", en: "Neighborhoods", href: "/quartiers" },
 ];

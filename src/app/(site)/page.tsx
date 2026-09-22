@@ -387,7 +387,7 @@ export default async function HomePage() {
                   </span>
                   <h3 className="mt-8 text-[19px] font-semibold uppercase tracking-[0.06em]">{en ? s.en : s.fr}</h3>
                   <p className="mt-4 text-[14px] leading-relaxed text-secondary">{en ? s.den : s.dfr}</p>
-                  <span className="label-xs mt-10 inline-flex items-center gap-2 text-accent">
+                  <span className="label-xs mt-auto inline-flex items-center gap-2 pt-10 text-accent">
                     {en ? "Learn more" : "En savoir plus"}
                     <span className="transition-transform group-hover:translate-x-1">→</span>
                   </span>
