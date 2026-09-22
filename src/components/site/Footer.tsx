@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Lang } from "@/lib/i18n";
 import type { AgencySettings } from "@/db/schema";
-import NewsletterForm from "./NewsletterForm";
 
 export default function Footer({
   lang,
@@ -110,17 +109,6 @@ export default function Footer({
               {settings.email && <li><a href={`mailto:${settings.email}`} className="hover:text-white">{settings.email}</a></li>}
               {settings.address && <li className="leading-relaxed">{settings.address}</li>}
             </ul>
-          </div>
-        </div>
-
-        <div className="mt-20 border-t border-white/10 pt-10">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            <p className="font-display text-[26px] leading-tight lg:col-span-5">
-              {en ? "New properties, straight to your inbox." : "Les nouvelles propriétés, directement dans votre boîte mail."}
-            </p>
-            <div className="lg:col-span-7">
-              <NewsletterForm lang={lang} dark />
-            </div>
           </div>
         </div>
 

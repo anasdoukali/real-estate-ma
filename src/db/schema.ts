@@ -1,7 +1,9 @@
+import type { NeighborhoodProfile } from "@/lib/neighborhood-profile";
 import {
   boolean,
   doublePrecision,
   integer,
+  jsonb,
   numeric,
   pgTable,
   serial,
@@ -20,6 +22,7 @@ export const adminUsers = pgTable("admin_users", {
 });
 
 export const neighborhoods = pgTable("neighborhoods", {
+  profile: jsonb("profile").$type<NeighborhoodProfile>(),
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 160 }).notNull(),
   slug: varchar("slug", { length: 180 }).notNull().unique(),

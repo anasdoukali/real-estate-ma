@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
+import NewsletterSection from "@/components/site/NewsletterSection";
 import { getLang } from "@/lib/lang";
 import { DEFAULT_AGENCY_SETTINGS, getSettings, listNeighborhoods } from "@/lib/queries";
 import { loadPublicData } from "@/lib/public-data";
@@ -23,6 +24,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
     <div className="site-layout flex min-h-screen flex-col bg-page">
       <Header lang={lang} agencyName={settings.agencyName} whatsapp={settings.whatsapp} />
       <main className="flex-1">{children}</main>
+      <NewsletterSection lang={lang} />
       <Footer lang={lang} settings={settings} neighborhoods={hoods} />
     </div>
   );

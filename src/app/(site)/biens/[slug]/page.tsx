@@ -53,6 +53,20 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
 
   const title = pick(lang, property.titleFr, property.titleEn);
   const description = pick(lang, property.descriptionFr, property.descriptionEn);
+  // Some older listings store their equipment list at the end of the description.
+  const equipmentHeading = /(?:^|\n)\s*(?:Équipements(?:\s*\/\s*caractéristiques)?|Equipements(?:\s*\/\s*caracteristiques)?|Features(?:\s*\/\s*amenities)?|Amenities)\s*:?\s*\n/i;
+  const equipmentMatch = equipmentHeading.exec(description ?? "");
+  const descriptionText = equipmentMatch
+    ? (description ?? "").slice(0, equipmentMatch.index).trim()
+    : description;
+  const equipmentText = equipmentMatch
+    ? (description ?? "").slice(equipmentMatch.index + equipmentMatch[0].length).trim()
+    : "";
+  const equipment = Array.from(new Set([
+    ...property.features.map((feature) => featureLabel(feature, lang)),
+    ...equipmentText.split(/[•\n]+/).map((item) => item.trim().replace(/^[-–]\s*/, "")).filter(Boolean),
+  ]));
+
   const agent = property.agent;
   const waNumber = (agent?.whatsapp || settings.whatsapp || "").replace(/[^0-9]/g, "");
   const waMessage = en
@@ -97,11 +111,11 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <>
+    <div className="bg-warm">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="pt-[86px]">
-        <div className="mx-auto max-w-[1600px] px-2 pt-4 md:px-4">
+      <div className="pt-[72px] md:pt-[86px]">
+        <div className="mx-auto max-w-[1600px] px-2 pt-8 md:px-4 md:pt-12">
           <PropertyGallery images={property.images} title={title} lang={lang} />
         </div>
       </div>
@@ -134,59 +148,19 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-px border-b border-sand bg-sand md:grid-cols-3 lg:grid-cols-6">
+        <div className="flex flex-wrap gap-px border-b border-sand bg-sand">
           {specs.map((s) => (
-            <div key={s.label} className="bg-page px-5 py-8 text-center">
+            <div key={s.label} className="min-w-[140px] flex-1 bg-warm px-5 py-8 text-center">
               <p className="font-display text-[28px] leading-none">{s.value}</p>
               <p className="label-xs mt-3 text-secondary">{s.label}</p>
             </div>
           ))}
         </div>
 
-        <div className="grid gap-16 py-16 lg:grid-cols-[64%_36%]">
+        <div className="grid items-start gap-10 py-16 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)_minmax(0,1fr)] xl:gap-12">
           <div>
-            <Reveal>
-              <h2 className="label-xs text-accent">{en ? "About this property" : "À propos"}</h2>
-              <div className="mt-6 whitespace-pre-line text-[16px] leading-[1.9] text-ink/85">{description}</div>
-            </Reveal>
-
-            <Reveal className="mt-16">
-              <h2 className="label-xs text-accent">{en ? "Details" : "Détails"}</h2>
-              <dl className="mt-6 grid gap-x-10 gap-y-4 sm:grid-cols-2">
-                {[
-                  [en ? "Reference" : "Référence", property.reference],
-                  [en ? "Type" : "Type", propertyTypeLabel(property.propertyType, lang)],
-                  [en ? "Transaction" : "Transaction", property.transactionType === "rent" ? (en ? "Rent" : "Location") : en ? "Sale" : "Vente"],
-                  [en ? "Neighborhood" : "Quartier", property.neighborhood?.name ?? "—"],
-                  [en ? "Living rooms" : "Salons", property.livingRooms ?? "—"],
-                  [en ? "Floors" : "Étages", property.totalFloors ?? "—"],
-                  [en ? "Year built" : "Année", property.yearBuilt ?? "—"],
-                  [en ? "Status" : "Statut", property.status],
-                ].map(([k, v]) => (
-                  <div key={String(k)} className="flex justify-between border-b border-stone pb-3 text-[14px]">
-                    <dt className="text-secondary">{k}</dt>
-                    <dd className="font-medium">{String(v)}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-
-            {property.features.length > 0 && (
-              <Reveal className="mt-16">
-                <h2 className="label-xs text-accent">{en ? "Features" : "Équipements"}</h2>
-                <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {property.features.map((f) => (
-                    <li key={f} className="flex items-center gap-3 text-[14.5px]">
-                      <span className="h-1.5 w-1.5 bg-charcoal" />
-                      {featureLabel(f, lang)}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            )}
-
             {property.latitude && property.longitude && property.locationVisibility !== "hidden" && (
-              <Reveal className="mt-16">
+              <Reveal className="mb-16">
                 <h2 className="label-xs text-accent">{en ? "Location" : "Localisation"}</h2>
                 <p className="mt-3 text-[14px] text-secondary">
                   {property.locationVisibility === "approximate"
@@ -205,6 +179,11 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
               </Reveal>
             )}
 
+            <Reveal>
+              <h2 className="label-xs text-accent">{en ? "About this property" : "À propos"}</h2>
+              <div className="mt-6 whitespace-pre-line text-[16px] leading-[1.9] text-ink/85">{descriptionText}</div>
+            </Reveal>
+
             {property.videoUrl && (
               <Reveal className="mt-16">
                 <h2 className="label-xs text-accent">{en ? "Video" : "Vidéo"}</h2>
@@ -215,8 +194,48 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
             )}
           </div>
 
-          <aside>
-            <div className="sticky top-[110px] border border-stone bg-surface p-7">
+          <div className="min-w-0">
+            <Reveal>
+              <h2 className="label-xs text-accent">{en ? "Features" : "Équipements"}</h2>
+              {equipment.length > 0 ? (
+                <ul className="mt-6 space-y-4">
+                  {equipment.map((item) => (
+                    <li key={item} className="flex items-start gap-3 border-b border-sand pb-4 text-[14.5px] leading-relaxed">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-champagne" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-6 text-[14px] text-muted">{en ? "Contact us for equipment details." : "Contactez-nous pour connaître les équipements de ce bien."}</p>
+              )}
+            </Reveal>
+
+            <Reveal className="mt-16">
+              <h2 className="label-xs text-accent">{en ? "Details" : "Détails"}</h2>
+              <dl className="mt-6 grid gap-x-4 gap-y-4 ">
+                {[
+                  [en ? "Reference" : "Référence", property.reference],
+                  [en ? "Type" : "Type", propertyTypeLabel(property.propertyType, lang)],
+                  [en ? "Transaction" : "Transaction", property.transactionType === "rent" ? (en ? "Rent" : "Location") : en ? "Sale" : "Vente"],
+                  [en ? "Neighborhood" : "Quartier", property.neighborhood?.name ?? "—"],
+                  [en ? "Living rooms" : "Salons", property.livingRooms ?? "—"],
+                  [en ? "Floors" : "Étages", property.totalFloors ?? "—"],
+                  [en ? "Year built" : "Année", property.yearBuilt ?? "—"],
+                  [en ? "Status" : "Statut", property.status],
+                ].map(([k, v]) => (
+                  <div key={String(k)} className="flex justify-between border-b border-stone pb-3 text-[14px]">
+                    <dt className="text-secondary">{k}</dt>
+                    <dd className="font-medium">{String(v)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+          </div>
+
+          <aside className="min-w-0 lg:sticky lg:top-[110px]">
+            <div className="border border-sand bg-white p-5 xl:p-7">
               {agent && (
                 <div className="flex items-center gap-4 border-b border-stone pb-6">
                   <div className="relative h-16 w-16 overflow-hidden bg-stone">
@@ -284,6 +303,6 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           Message
         </a>
       </div>
-    </>
+    </div>
   );
 }

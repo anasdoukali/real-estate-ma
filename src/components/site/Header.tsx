@@ -38,6 +38,7 @@ export default function Header({
   const [open, setOpen] = useState(false);
   const { ids } = useFavorites();
   const transparentPage = pathname === "/";
+  const propertyPage = pathname.startsWith("/biens/");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -74,7 +75,9 @@ export default function Header({
     <>
       <header
         className={`fixed inset-x-0 top-0 z-[1100] transition-all duration-300 ${
-          solid ? "border-b border-stone bg-warm/95 backdrop-blur-md" : "bg-transparent"
+          propertyPage
+            ? "border-b border-charcoal/10 bg-sand"
+            : solid ? "border-b border-stone bg-warm/95 backdrop-blur-md" : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-5 md:h-[86px] md:px-10">

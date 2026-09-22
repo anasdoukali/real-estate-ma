@@ -17,6 +17,7 @@ import {
   valuationRequests,
 } from "@/db/schema";
 import { createSession, destroySession, hashPassword, requireSession, verifyPassword } from "@/lib/auth";
+import { parseNeighborhoodProfile } from "@/lib/neighborhood-profile";
 import { slugify } from "@/lib/site";
 
 export type ActionState = { error?: string; ok?: boolean };
@@ -266,6 +267,7 @@ export async function saveNeighborhoodAction(formData: FormData) {
     return Number.isFinite(v) && v !== 0 ? v : null;
   };
   const values = {
+    profile: parseNeighborhoodProfile(formData),
     name,
     slug: String(formData.get("slug") ?? "").trim() || slugify(name),
     descriptorFr: String(formData.get("descriptorFr") ?? "") || null,
@@ -280,7 +282,7 @@ export async function saveNeighborhoodAction(formData: FormData) {
   if (id) await db.update(neighborhoods).set(values).where(eq(neighborhoods.id, id));
   else await db.insert(neighborhoods).values(values);
   revalidatePath("/admin/neighborhoods");
-  revalidatePath("/quartiers");
+  revalidatePath("/quartiers", "layout");
 }
 
 export async function deleteNeighborhoodAction(id: number) {

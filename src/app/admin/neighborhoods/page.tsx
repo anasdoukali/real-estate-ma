@@ -1,3 +1,4 @@
+import NeighborhoodProfileFields from "@/components/admin/NeighborhoodProfileFields";
 import { asc } from "drizzle-orm";
 import { db } from "@/db";
 import { neighborhoods } from "@/db/schema";
@@ -25,6 +26,7 @@ export default async function AdminNeighborhoodsPage() {
           <input className={input} name="longitude" placeholder="Longitude" />
           <textarea className="md:col-span-3 min-h-[90px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="descriptionFr" placeholder="Description FR" />
           <textarea className="md:col-span-3 min-h-[90px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="descriptionEn" placeholder="Description EN" />
+          <NeighborhoodProfileFields />
           <label className="flex items-center gap-2 text-[13px]">
             <input type="checkbox" name="published" defaultChecked /> Publié
           </label>
@@ -34,7 +36,9 @@ export default async function AdminNeighborhoodsPage() {
 
       <div className="space-y-4">
         {rows.map((n) => (
-          <form key={n.id} action={saveNeighborhoodAction} className="grid gap-4 rounded-lg border border-[#e4e4e7] bg-white p-6 md:grid-cols-3">
+          // Remount after profile changes so React's post-submit reset uses the
+          // saved select defaults instead of the previous "Non renseigné" values.
+          <form key={`${n.id}:${JSON.stringify(n.profile)}`} action={saveNeighborhoodAction} className="grid gap-4 rounded-lg border border-[#e4e4e7] bg-white p-6 md:grid-cols-3">
             <input type="hidden" name="id" value={n.id} />
             <input type="hidden" name="slug" value={n.slug} />
             <input className={input} name="name" defaultValue={n.name} />
@@ -45,6 +49,7 @@ export default async function AdminNeighborhoodsPage() {
             <input className={input} name="longitude" defaultValue={n.longitude ?? ""} />
             <textarea className="md:col-span-3 min-h-[90px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="descriptionFr" defaultValue={n.descriptionFr ?? ""} />
             <textarea className="md:col-span-3 min-h-[90px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="descriptionEn" defaultValue={n.descriptionEn ?? ""} />
+            <NeighborhoodProfileFields profile={n.profile} />
             <label className="flex items-center gap-2 text-[13px]">
               <input type="checkbox" name="published" defaultChecked={n.published} /> Publié
             </label>

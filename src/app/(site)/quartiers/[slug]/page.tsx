@@ -1,3 +1,4 @@
+import NeighborhoodProfile from "@/components/site/NeighborhoodProfile";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -58,7 +59,7 @@ export default async function NeighborhoodPage({ params }: { params: Promise<{ s
       </section>
 
       <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10">
-        <div className="grid gap-14 lg:grid-cols-[60%_40%]">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <Reveal>
             <p className="label-xs text-accent">{en ? "The area" : "Le quartier"}</p>
             <p className="mt-6 whitespace-pre-line text-[16.5px] leading-[1.9] text-ink/85">
@@ -78,6 +79,7 @@ export default async function NeighborhoodPage({ params }: { params: Promise<{ s
                 <p className="label-xs mt-3 text-secondary">{en ? "Average price MAD" : "Prix moyen MAD"}</p>
               </div>
             </div>
+            <NeighborhoodProfile profile={hood.profile} lang={lang} />
           </Reveal>
         </div>
       </section>
