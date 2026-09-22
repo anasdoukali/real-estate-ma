@@ -61,7 +61,7 @@ export default async function NeighborhoodPage({ params }: { params: Promise<{ s
       <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <Reveal>
-            <p className="label-xs text-accent">{en ? "The area" : "Le quartier"}</p>
+            <p className="label-xs font-bold text-accent">{en ? "The area" : "Le quartier"}</p>
             <p className="mt-6 whitespace-pre-line text-[16.5px] leading-[1.9] text-ink/85">
               {pick(lang, hood.descriptionFr, hood.descriptionEn)}
             </p>

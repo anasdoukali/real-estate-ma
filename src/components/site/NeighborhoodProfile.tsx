@@ -11,9 +11,9 @@ export default function NeighborhoodProfile({ profile, lang }: { profile: Profil
   if (!ratings.length && !traits.length) return null;
   const en = lang === "en";
   return (
-    <section className="mt-8 border border-charcoal/15 bg-warm p-6 sm:p-8">
-      <h2 className="label-xs text-accent">{en ? "Life in the neighborhood" : "Vie de quartier"}</h2>
-      <dl className="mt-6 divide-y divide-charcoal/10">
+    <section className="mt-8">
+      <h2 className="label-xs font-bold text-accent">{en ? "Our analysis :" : "Notre analyse :"}</h2>
+      <dl className="mt-6 divide-y divide-charcoal/10 border border-charcoal/15 bg-warm p-6 sm:p-8">
         {ratings.slice(0, 6).map(renderRating)}
         {traits.map(({ key, fr, en: labelEn }) => (
           <div key={key} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 py-3 text-[14px]">
