@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import Reveal from "@/components/Reveal";
-import { pick } from "@/lib/i18n";
+import NeighborhoodExplorer from "@/components/site/NeighborhoodExplorer";
 import { getLang } from "@/lib/lang";
 import { listNeighborhoods } from "@/lib/queries";
 import { loadPublicData } from "@/lib/public-data";
@@ -36,33 +33,7 @@ export default async function NeighborhoodsPage() {
       </section>
 
       <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {hoods.map((h, i) => (
-            <Reveal key={h.id} delay={(i % 3) * 70}>
-              <Link href={`/quartiers/${h.slug}`} className="group relative block h-[360px] overflow-hidden">
-                {h.coverImage && (
-                  <Image
-                    src={h.coverImage}
-                    alt={h.name}
-                    fill
-                    sizes="(max-width:768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-[1400ms] group-hover:scale-105"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-white">
-                  <p className="font-display text-[32px] leading-none">{h.name}</p>
-                  <p className="mt-3 line-clamp-2 text-[13px] text-white/70">
-                    {pick(lang, h.descriptorFr, h.descriptorEn)}
-                  </p>
-                  <p className="label-xs mt-4 text-accent">
-                    {h.propertyCount} {en ? "listings" : "biens"}
-                  </p>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
+        <NeighborhoodExplorer neighborhoods={hoods} lang={lang} />
       </section>
     </>
   );

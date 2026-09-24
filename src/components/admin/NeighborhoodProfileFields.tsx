@@ -1,4 +1,4 @@
-import { NEIGHBORHOOD_RATINGS, NEIGHBORHOOD_TRAITS, type NeighborhoodProfile } from "@/lib/neighborhood-profile";
+import { PRICE_LEVELS, NEIGHBORHOOD_RATINGS, NEIGHBORHOOD_TRAITS, type NeighborhoodProfile } from "@/lib/neighborhood-profile";
 
 export default function NeighborhoodProfileFields({ profile }: { profile?: NeighborhoodProfile | null }) {
   return (
@@ -6,6 +6,14 @@ export default function NeighborhoodProfileFields({ profile }: { profile?: Neigh
       <legend className="px-2 text-[14px] font-semibold">Vie de quartier</legend>
       <p className="mb-4 text-[13px] text-[#6b7280]">Les critères non renseignés ne sont pas affichés sur le site.</p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <label className="space-y-2 text-[13px]">
+          <span className="block">Niveau de prix</span>
+          <select name="priceLevel" defaultValue={profile?.priceLevel ?? ""} className="h-10 w-full rounded-md border border-[#d4d4d8] bg-white px-3">
+            <option value="">Non renseigné</option>
+            {PRICE_LEVELS.map((label, i) => <option key={label} value={i + 1}>{i + 1}/5 — {label}</option>)}
+          </select>
+          <span className="block text-[#6b7280]">Affiché sur les cartes avec la note Standing : 1 = accessible, 5 = très élevé.</span>
+        </label>
         {NEIGHBORHOOD_RATINGS.map(({ key, fr }) => (
           <label key={key} className="space-y-2 text-[13px]">
             <span className="block">{fr}</span>

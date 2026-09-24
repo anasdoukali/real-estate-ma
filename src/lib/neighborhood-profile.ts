@@ -3,6 +3,7 @@ export const NEIGHBORHOOD_RATINGS = [
   { key: "restaurants", fr: "Restaurants / hôtels", en: "Restaurants / hotels" },
   { key: "shops", fr: "Commerces", en: "Shops" },
   { key: "healthcare", fr: "Santé", en: "Healthcare" },
+  { key: "schools", fr: "Écoles", en: "Schools" },
   { key: "transport", fr: "Transports / taxis", en: "Transport / taxis" },
   { key: "walkability", fr: "Vie à pied", en: "Walkability" },
   { key: "quietness", fr: "Calme", en: "Quietness" },
@@ -19,7 +20,11 @@ export const NEIGHBORHOOD_TRAITS = [
   { key: "distanceAirport", fr: "Distance aéroport", en: "Distance to the airport", placeholder: "≈ 4–5 km" },
 ] as const;
 
+export const PRICE_LEVELS = ["Accessible", "Modéré", "Intermédiaire", "Élevé", "Très élevé"];
+export const PRICE_LEVELS_EN = ["Affordable", "Moderate", "Mid-range", "High", "Very high"];
+
 export type NeighborhoodProfile = {
+  priceLevel?: number;
   ratings?: Partial<Record<(typeof NEIGHBORHOOD_RATINGS)[number]["key"], number>>;
   traits?: Partial<Record<(typeof NEIGHBORHOOD_TRAITS)[number]["key"], { fr: string; en: string }>>;
 };
@@ -48,5 +53,10 @@ export function parseNeighborhoodProfile(form: FormData): NeighborhoodProfile {
     if (fr.length > 160 || en.length > 160) throw new Error("Les critères sont limités à 160 caractères.");
     if (fr || en) traits[key] = { fr, en };
   }
-  return { ratings, traits };
+  const rawPrice = String(form.get("priceLevel") ?? "").trim();
+  const priceLevel = rawPrice ? Number(rawPrice) : undefined;
+  if (priceLevel !== undefined && (!Number.isInteger(priceLevel) || priceLevel < 1 || priceLevel > 5)) {
+    throw new Error("Le niveau de prix doit être compris entre 1 et 5.");
+  }
+  return { ratings, traits, ...(priceLevel === undefined ? {} : { priceLevel }) };
 }

@@ -17,6 +17,7 @@ export default async function ContactPage() {
   const settings = await loadPublicData(() => getSettings(), DEFAULT_AGENCY_SETTINGS);
 
   return (
+    <>
     <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">
       <div className="grid gap-16 lg:grid-cols-[40%_60%]">
         <div>
@@ -84,5 +85,32 @@ export default async function ContactPage() {
         </div>
       </div>
     </section>
+    {settings.whatsapp && (
+      <section className="bg-white px-5 py-20 md:px-10 md:py-24">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="max-w-2xl">
+            <p className="label-xs text-champagne">WhatsApp</p>
+            <h2 className="display mt-5 text-[32px] sm:text-[44px]">
+              {en ? "Let's talk on WhatsApp." : "Échangeons sur WhatsApp."}
+            </h2>
+            <p className="mt-5 text-[15px] leading-relaxed text-muted">
+              {en
+                ? "A question about a property or your project? Send our team a message directly."
+                : "Une question sur un bien ou votre projet ? Écrivez directement à notre équipe."}
+            </p>
+          </div>
+          <a
+            href={`https://wa.me/${settings.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(en ? "Hello, I would like to discuss my property project." : "Bonjour, je souhaite échanger sur mon projet immobilier.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="label-xs inline-flex shrink-0 items-center gap-3 bg-charcoal px-8 py-5 text-white transition-colors hover:bg-champagne focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal"
+          >
+            {en ? "Contact us on WhatsApp" : "Nous écrire sur WhatsApp"}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+    )}
+    </>
   );
 }
