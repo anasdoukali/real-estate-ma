@@ -67,9 +67,9 @@ function buildConditions(f: PropertyFilters): SQL[] {
   if (f.reference) {
     const ref = `%${f.reference.trim()}%`;
     const like = or(
-      sql`LOWER(${properties.reference}) LIKE LOWER(${ref})`,
-      sql`LOWER(${properties.titleFr}) LIKE LOWER(${ref})`,
-      sql`LOWER(${properties.titleEn}) LIKE LOWER(${ref})`,
+      sql`${properties.reference} ILIKE ${ref}`,
+      sql`${properties.titleFr} ILIKE ${ref}`,
+      sql`${properties.titleEn} ILIKE ${ref}`,
     );
     if (like) conds.push(like);
   }

@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const values = parseServiceRequest(body);
   if (!values) return NextResponse.json({ error: "Invalid service request" }, { status: 400 });
   try {
-    const [row] = await db.insert(leads).values(values).$returningId();
+    const [row] = await db.insert(leads).values(values).returning({ id: leads.id });
     return NextResponse.json({ ok: true, id: row.id }, { status: 201 });
   } catch (error) {
     console.error("Service request failed", error);

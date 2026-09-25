@@ -8,9 +8,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "db:maintenance": "tsx scripts/setup-maintenance.ts",
-    "db:neighborhood-profile": "tsx scripts/setup-neighborhood-profile.ts",
-    "db:generate": "drizzle-kit generate",
-    "db:check": "tsx scripts/check-database.ts"
+    "db:neighborhood-profile": "tsx scripts/setup-neighborhood-profile.ts"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.22",
@@ -18,13 +16,13 @@
     "drizzle-orm": "0.45.2",
     "jose": "^6.2.12",
     "leaflet": "^1.9.4",
-    "mysql2": "^3.24.4",
     "next": "16.2.6",
     "pg": "8.20.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "sharp": "^0.35.4",
-    "tsx": "^4.23.13"
+    "tsx": "^4.23.13",
+    "@supabase/supabase-js": "^2.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.17",

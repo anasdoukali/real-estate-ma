@@ -134,7 +134,7 @@ async function main() {
   await db.delete(testimonials);
   await db.delete(agencySettings);
 
-  await db
+  const hoodRows = await db
     .insert(neighborhoods)
     .values(
       hoodData.map((h, i) => ({
@@ -150,10 +150,10 @@ async function main() {
         published: true,
         sortOrder: i,
       })),
-    );
-  const hoodRows = await db.select().from(neighborhoods);
+    )
+    .returning();
 
-  await db
+  const agentRows = await db
     .insert(agents)
     .values(
       agentData.map((a) => ({
@@ -169,8 +169,8 @@ async function main() {
         languages: a.languages,
         active: true,
       })),
-    );
-  const agentRows = await db.select().from(agents);
+    )
+    .returning();
 
   let counter = 1;
   for (const p of propertyData) {
@@ -214,7 +214,7 @@ async function main() {
         isHotOffer: counter % 6 === 0,
         publishedAt: new Date(),
       })
-      .$returningId();
+      .returning();
 
     await db.insert(propertyImages).values(
       p.imgs.map((id, index) => ({

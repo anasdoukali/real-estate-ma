@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         condition: body.condition ? String(body.condition).slice(0, 60) : null,
         message: body.message ? String(body.message) : null,
       })
-      .$returningId();
+      .returning({ id: valuationRequests.id });
     return NextResponse.json({ ok: true, id: row.id });
   } catch (error) {
     console.error(error);
