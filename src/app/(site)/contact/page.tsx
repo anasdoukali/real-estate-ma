@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import ContactForm from "@/components/site/ContactForm";
 import { getLang } from "@/lib/lang";
 import { DEFAULT_AGENCY_SETTINGS, getSettings } from "@/lib/queries";
@@ -18,11 +19,26 @@ export default async function ContactPage() {
 
   return (
     <>
-    <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">
-      <div className="grid gap-16 lg:grid-cols-[40%_60%]">
+    <section className="relative mt-[72px] h-[40vh] min-h-[280px] max-h-[480px] overflow-hidden md:mt-[86px]">
+      <Image
+        src="/contact-cover-warm.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[center_55%]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-black/10" />
+      <div className="relative mx-auto flex h-full max-w-[1600px] flex-col justify-end px-5 pb-12 md:px-10 md:pb-16">
+        <p className="label-xs text-white/80">Louka & Vendy · Marrakech</p>
+        <h1 className="display mt-4 text-[44px] text-white sm:text-[68px]">Contact</h1>
+      </div>
+    </section>
+    <section className="mx-auto max-w-[1600px] px-5 py-16 md:px-10 md:py-24">
+      <div className="grid gap-16 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <div>
           <p className="label-xs text-accent">Contact</p>
-          <h1 className="display mt-5 text-[42px] sm:text-[60px]">
+          <h2 className="display mt-5 text-[42px] sm:text-[60px]">
             {en ? (
               <>
                 Let&apos;s talk about
@@ -36,7 +52,7 @@ export default async function ContactPage() {
                 votre projet.
               </>
             )}
-          </h1>
+          </h2>
           <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-secondary">
             {en
               ? "A question, a property to visit, a project to develop: our team will get back to you promptly."
@@ -103,10 +119,12 @@ export default async function ContactPage() {
             href={`https://wa.me/${settings.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(en ? "Hello, I would like to discuss my property project." : "Bonjour, je souhaite échanger sur mon projet immobilier.")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="label-xs inline-flex shrink-0 items-center gap-3 bg-charcoal px-8 py-5 text-white transition-colors hover:bg-champagne focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal"
+            className="label-xs inline-flex shrink-0 items-center gap-3 bg-charcoal px-8 py-5 text-white transition-colors hover:bg-[#25D366] hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal"
           >
-            {en ? "Contact us on WhatsApp" : "Nous écrire sur WhatsApp"}
-            <span aria-hidden="true">↗</span>
+            WhatsApp
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.04 2C6.6 2 2.2 6.4 2.2 11.84c0 1.94.53 3.75 1.45 5.31L2 22l4.98-1.6a9.8 9.8 0 0 0 5.06 1.4c5.44 0 9.84-4.4 9.84-9.84S17.48 2 12.04 2Zm5.7 13.9c-.24.68-1.4 1.3-1.93 1.34-.5.05-.98.24-3.3-.7-2.77-1.13-4.53-3.98-4.67-4.17-.13-.19-1.1-1.48-1.1-2.83 0-1.34.7-2 .95-2.28.24-.27.53-.34.7-.34h.5c.16 0 .38-.06.6.46.23.56.77 1.9.84 2.04.07.14.11.3.02.48-.09.19-.13.3-.26.47-.13.16-.28.36-.4.48-.13.14-.27.28-.12.55.15.27.68 1.12 1.46 1.81 1 .9 1.85 1.17 2.12 1.3.27.14.42.11.58-.07.16-.19.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.57.74 1.84.87.27.14.45.2.51.32.07.11.07.65-.17 1.33Z" />
+            </svg>
           </a>
         </div>
       </section>

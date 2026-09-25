@@ -32,8 +32,10 @@ export default async function NeighborhoodsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1600px] px-5 py-20 md:px-10">
-        <NeighborhoodExplorer neighborhoods={hoods} lang={lang} />
+      <section className="bg-white">
+        <div className="mx-auto max-w-[1600px] px-5 py-20 md:px-10">
+          <NeighborhoodExplorer neighborhoods={hoods} lang={lang} />
+        </div>
       </section>
     </>
   );

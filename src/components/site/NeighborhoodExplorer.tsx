@@ -64,7 +64,7 @@ export default function NeighborhoodExplorer({ neighborhoods, lang }: { neighbor
               <p className="label-xs mt-4 text-white/80">{h.propertyCount} {en ? "listings" : "biens"}</p>
             </div>
           </div>
-          <div className="space-y-3 p-5 text-[14px]">
+          <div className="space-y-3 bg-[#ded5c7] p-5 text-[14px]">
             <div className="flex flex-wrap justify-between gap-2"><span>{en ? "Price level" : "Niveau de prix"}</span><span className="font-semibold">{price ? prices[price - 1] + " · " + price + "/5" : en ? "Not rated" : "Non renseigné"}</span></div>
             <div className="flex flex-wrap items-center justify-between gap-2"><span>Standing</span>{rating ? <span aria-label={rating + "/5"} className="text-[20px] tracking-wider text-champagne"><span aria-hidden="true">{"★".repeat(rating)}{"☆".repeat(5 - rating)}</span></span> : <span>{en ? "Not rated" : "Non renseigné"}</span>}</div>
           </div>

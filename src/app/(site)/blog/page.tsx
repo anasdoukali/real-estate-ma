@@ -20,7 +20,8 @@ export default async function BlogPage() {
   const items = await loadPublicData(() => listArticles(true, 24), []);
 
   return (
-    <section className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">
+    <section className="bg-white">
+      <div className="mx-auto max-w-[1600px] px-5 pb-24 pt-[140px] md:px-10 md:pt-[180px]">
       <p className="label-xs text-accent">{en ? "Market insights" : "Le journal"}</p>
       <h1 className="display mt-5 max-w-2xl text-[40px] sm:text-[58px]">
         {en ? (
@@ -65,6 +66,7 @@ export default async function BlogPage() {
         ))}
       </div>
       {items.length === 0 && <p className="py-24 text-secondary">{en ? "No article yet." : "Aucun article pour le moment."}</p>}
+      </div>
     </section>
   );
 }

@@ -178,7 +178,7 @@ export default function Header({
               href={waHref}
               target="_blank"
               rel="noreferrer"
-              className={`hidden transition-colors hover:text-champagne md:block ${solid ? "text-charcoal" : "text-white"}`}
+              className={`hidden transition-colors hover:text-[#25D366] md:block ${solid ? "text-charcoal" : "text-white"}`}
               aria-label="whatsapp"
             >
               <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">

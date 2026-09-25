@@ -99,7 +99,7 @@ export default async function AgencyPage() {
       </section>
 
       <section className="mx-auto max-w-[1600px] px-5 py-24 md:px-10">
-        <div className="grid gap-px bg-sand md:grid-cols-3">
+        <div className="grid gap-px border border-sand bg-sand md:grid-cols-3">
           {values.map((v) => (
             <Reveal key={v.en}>
               <div className="h-full bg-page p-9">
