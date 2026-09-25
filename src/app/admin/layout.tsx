@@ -10,6 +10,7 @@ const NAV = [
   { href: "/admin/leads", label: "Demandes" },
   { href: "/admin/valuations", label: "Estimations" },
   { href: "/admin/agents", label: "Agents" },
+  { href: "/admin/team", label: "Équipe & accès" },
   { href: "/admin/neighborhoods", label: "Quartiers" },
   { href: "/admin/articles", label: "Articles" },
   { href: "/admin/newsletter", label: "Newsletter" },

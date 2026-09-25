@@ -54,6 +54,35 @@ export async function logoutAction() {
   redirect("/admin/login");
 }
 
+export async function createTeamUserAction(formData: FormData) {
+  await requireSession();
+  const name = String(formData.get("name") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const password = String(formData.get("password") ?? "");
+  const role = String(formData.get("role") ?? "worker") === "admin" ? "admin" : "worker";
+
+  if (!name || !email || password.length < 10) {
+    throw new Error("Name, email, and a password of at least 10 characters are required.");
+  }
+
+  const existing = await db.select({ id: adminUsers.id }).from(adminUsers).where(eq(adminUsers.email, email)).limit(1);
+  if (existing.length) throw new Error("An account already exists for this email address.");
+
+  await db.insert(adminUsers).values({ name, email, passwordHash: hashPassword(password), role });
+  revalidatePath("/admin/team");
+}
+
+export async function deleteTeamUserAction(id: number) {
+  const session = await requireSession();
+  if (String(id) === session.sub) throw new Error("You cannot delete the account you are signed in with.");
+
+  const users = await db.select({ id: adminUsers.id }).from(adminUsers);
+  if (users.length <= 1) throw new Error("At least one team account must remain.");
+
+  await db.delete(adminUsers).where(eq(adminUsers.id, id));
+  revalidatePath("/admin/team");
+}
+
 export type PropertyPayload = {
   id?: number;
   reference: string;
