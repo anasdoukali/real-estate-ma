@@ -12,8 +12,7 @@ export async function POST(request: Request) {
     await db
       .insert(newsletterSubscribers)
       .values({ email, language: body.language === "en" ? "en" : "fr" })
-      .onConflictDoUpdate({
-        target: newsletterSubscribers.email,
+      .onDuplicateKeyUpdate({
         set: { active: true },
       });
     return NextResponse.json({ ok: true });

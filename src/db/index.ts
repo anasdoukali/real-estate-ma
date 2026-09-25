@@ -1,31 +1,20 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/mysql2";
+import { createPool, type Pool } from "mysql2/promise";
+import { mysqlCredentials } from "./config";
 
-const databaseUrl = process.env.DATABASE_URL;
+const globalForDb = globalThis as typeof globalThis & { __loukaMySqlPool?: Pool };
 
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
-}
+export const pool = globalForDb.__loukaMySqlPool ?? createPool({
+  ...mysqlCredentials(),
+  connectionLimit: 5,
+  connectTimeout: 5_000,
+  idleTimeout: 30_000,
+  enableKeepAlive: true,
+  charset: "utf8mb4",
+  timezone: "Z",
+  ...(process.env.DB_SSL === "true" ? { ssl: { rejectUnauthorized: true } } : {}),
+});
 
-const globalForDb = globalThis as typeof globalThis & {
-  __arenaNextJsPostgresqlPool?: Pool;
-};
+if (process.env.NODE_ENV !== "production") globalForDb.__loukaMySqlPool = pool;
 
-export const pool =
-  globalForDb.__arenaNextJsPostgresqlPool ??
-  new Pool({
-    connectionString: databaseUrl,
-    // Supabase's hosted PostgreSQL pooler requires TLS.
-    ssl: { rejectUnauthorized: false },
-    // Fail quickly so public pages can render their fallback state instead of
-    // sitting on the Next.js loading screen while a remote database is offline.
-    connectionTimeoutMillis: 5_000,
-    idleTimeoutMillis: 30_000,
-    keepAlive: true,
-  });
-
-if (process.env.NODE_ENV !== "production") {
-  globalForDb.__arenaNextJsPostgresqlPool = pool;
-}
-
-export const db = drizzle(pool);
+export const db = drizzle(pool, { mode: "default" });

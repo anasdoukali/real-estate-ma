@@ -16,7 +16,7 @@ export async function saveMaintenance(_state: MaintenanceState, formData: FormDa
   if (description.length > 2000) return { error: "La description ne doit pas dépasser 2 000 caractères." };
   try {
     const values = { enabled: enabled === "true", description: description || DEFAULT_MAINTENANCE_DESCRIPTION, updatedAt: new Date() };
-    await db.insert(siteMaintenance).values({ id: 1, ...values }).onConflictDoUpdate({ target: siteMaintenance.id, set: values });
+    await db.insert(siteMaintenance).values({ id: 1, ...values }).onDuplicateKeyUpdate({ set: values });
     revalidatePath("/", "layout");
     return { success: values.enabled ? "Maintenance activée. Les visiteurs voient la page Coming soon." : "Maintenance désactivée. Le site est accessible aux visiteurs." };
   } catch {

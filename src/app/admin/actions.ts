@@ -36,8 +36,8 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
       const [created] = await db
         .insert(adminUsers)
         .values({ email, passwordHash: hashPassword(password), name: "Admin" })
-        .returning();
-      user = created;
+        .$returningId();
+      [user] = await db.select().from(adminUsers).where(eq(adminUsers.id, created.id)).limit(1);
     } else {
       return { error: "Identifiants invalides." };
     }
@@ -143,7 +143,7 @@ export async function savePropertyAction(payload: PropertyPayload) {
     const [created] = await db
       .insert(properties)
       .values({ ...base, slug: slugBase })
-      .returning({ id: properties.id });
+      .$returningId();
     id = created.id;
   }
 
@@ -209,7 +209,7 @@ export async function duplicatePropertyAction(id: number) {
       createdAt: new Date(),
       updatedAt: new Date(),
     })
-    .returning({ id: properties.id });
+    .$returningId();
   if (imgs.length) {
     await db.insert(propertyImages).values(
       imgs.map((i) => ({

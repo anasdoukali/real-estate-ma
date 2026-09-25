@@ -20,7 +20,7 @@ export async function POST(request: Request) {
         agentId: body.agentId ? Number(body.agentId) : null,
         source: body.source ? String(body.source).slice(0, 40) : "contact",
       })
-      .returning({ id: leads.id });
+      .$returningId();
     return NextResponse.json({ ok: true, id: row.id });
   } catch (error) {
     console.error(error);

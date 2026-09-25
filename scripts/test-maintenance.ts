@@ -4,7 +4,8 @@ import { SignJWT } from "jose";
 
 async function main() {
   // Isolated test configuration: never connect to or modify the real database.
-  process.env.DATABASE_URL = "postgresql://test:test@127.0.0.1:1/test";
+  delete process.env.DB_HOST;
+  process.env.DATABASE_URL = "mysql://test:test@127.0.0.1:1/test";
   process.env.ADMIN_JWT_SECRET = "maintenance-test-secret-not-used-in-production";
   const { db, pool } = await import("../src/db");
   let enabled = false;
