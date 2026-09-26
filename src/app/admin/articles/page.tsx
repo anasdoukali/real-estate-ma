@@ -2,6 +2,7 @@ import { desc } from "drizzle-orm";
 import { db } from "@/db";
 import { articles } from "@/db/schema";
 import { deleteArticleAction, saveArticleAction } from "../actions";
+import { ArticleImageField } from "@/components/admin/ArticleImageField";
 
 export const dynamic = "force-dynamic";
 
@@ -19,11 +20,11 @@ export default async function AdminArticlesPage() {
         <form action={saveArticleAction} className="mt-5 grid gap-4 md:grid-cols-2">
           <input className={input} name="titleFr" placeholder="Titre FR" required />
           <input className={input} name="titleEn" placeholder="Title EN" />
-          <input className={input} name="coverImage" placeholder="URL image de couverture" />
+          <ArticleImageField />
           <input className={input} name="category" placeholder="Catégorie" />
           <textarea className="min-h-[80px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="excerptFr" placeholder="Chapô FR" />
           <textarea className="min-h-[80px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="excerptEn" placeholder="Excerpt EN" />
-          <textarea className="min-h-[200px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="contentFr" placeholder="Contenu FR" />
+          <textarea className="min-h-[200px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="contentFr" placeholder="Contenu FR — **gras**, *italique*, ou ![description](URL-image)" />
           <textarea className="min-h-[200px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="contentEn" placeholder="Content EN" />
           <select className={input} name="status" defaultValue="draft">
             <option value="draft">Brouillon</option>
@@ -40,11 +41,11 @@ export default async function AdminArticlesPage() {
             <input type="hidden" name="slug" value={a.slug} />
             <input className={input} name="titleFr" defaultValue={a.titleFr} />
             <input className={input} name="titleEn" defaultValue={a.titleEn ?? ""} />
-            <input className={input} name="coverImage" defaultValue={a.coverImage ?? ""} />
+            <ArticleImageField defaultValue={a.coverImage ?? ""} />
             <input className={input} name="category" defaultValue={a.category ?? ""} />
             <textarea className="min-h-[70px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="excerptFr" defaultValue={a.excerptFr ?? ""} />
             <textarea className="min-h-[70px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="excerptEn" defaultValue={a.excerptEn ?? ""} />
-            <textarea className="min-h-[170px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="contentFr" defaultValue={a.contentFr ?? ""} />
+            <textarea className="min-h-[170px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="contentFr" defaultValue={a.contentFr ?? ""} placeholder="**gras**, *italique*, ou ![description](URL-image)" />
             <textarea className="min-h-[170px] rounded-md border border-[#d4d4d8] p-3 text-[13.5px]" name="contentEn" defaultValue={a.contentEn ?? ""} />
             <select className={input} name="status" defaultValue={a.status}>
               <option value="draft">Brouillon</option>

@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) {
     return NextResponse.json(
-      { error: "Stockage non configuré. Ajoutez les variables Supabase dans Vercel." },
+      { error: "Stockage non configuré. Ajoutez les variables Supabase chez votre hébergeur." },
       { status: 503 },
     );
   }

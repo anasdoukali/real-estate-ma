@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { pick } from "@/lib/i18n";
 import { getLang } from "@/lib/lang";
 import { getArticleBySlug } from "@/lib/queries";
+import { ArticleContent } from "@/components/ArticleContent";
 
 export const dynamic = "force-dynamic";
 
@@ -43,8 +44,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </div>
       <div className="mx-auto max-w-[820px] px-5 pt-16 md:px-0">
         <p className="font-display text-[24px] leading-[1.5] text-ink/85">{pick(lang, article.excerptFr, article.excerptEn)}</p>
-        <div className="mt-10 whitespace-pre-line text-[17px] leading-[1.95] text-ink/80">
-          {pick(lang, article.contentFr, article.contentEn)}
+        <div className="mt-10">
+          <ArticleContent content={pick(lang, article.contentFr, article.contentEn)} />
         </div>
       </div>
     </article>
