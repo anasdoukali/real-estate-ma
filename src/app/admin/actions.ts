@@ -27,6 +27,26 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
   const password = String(formData.get("password") ?? "");
   if (!email || !password) return { error: "Email et mot de passe requis." };
 
+  // Hosting providers do not necessarily run the database seed after a deploy.
+  // An explicitly configured bootstrap account gives the site owner a reliable
+  // way to create or reset the first administrator without exposing a password
+  // in client-side code.
+  const bootstrapEmail = process.env.ADMIN_BOOTSTRAP_EMAIL?.trim().toLowerCase();
+  const bootstrapPassword = process.env.ADMIN_BOOTSTRAP_PASSWORD;
+  if (bootstrapEmail && bootstrapPassword && email === bootstrapEmail && password === bootstrapPassword) {
+    const [user] = await db
+      .insert(adminUsers)
+      .values({ email, passwordHash: hashPassword(password), name: "Admin", role: "admin" })
+      .onConflictDoUpdate({
+        target: adminUsers.email,
+        set: { passwordHash: hashPassword(password), role: "admin" },
+      })
+      .returning();
+
+    await createSession({ sub: String(user.id), email: user.email, name: user.name });
+    redirect("/admin");
+  }
+
   const rows = await db.select().from(adminUsers).where(eq(adminUsers.email, email)).limit(1);
   let user = rows[0];
 
