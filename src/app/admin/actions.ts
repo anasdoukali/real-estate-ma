@@ -74,22 +74,28 @@ export async function logoutAction() {
   redirect("/admin/login");
 }
 
-export async function createTeamUserAction(formData: FormData) {
-  await requireSession();
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  const password = String(formData.get("password") ?? "");
-  const role = String(formData.get("role") ?? "worker") === "admin" ? "admin" : "worker";
+export async function createTeamUserAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
+  try {
+    await requireSession();
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim().toLowerCase();
+    const password = String(formData.get("password") ?? "");
+    const role = String(formData.get("role") ?? "worker") === "admin" ? "admin" : "worker";
 
-  if (!name || !email || password.length < 10) {
-    throw new Error("Name, email, and a password of at least 10 characters are required.");
+    if (!name || !email || password.length < 10) {
+      return { error: "Veuillez saisir un nom, un email et un mot de passe d’au moins 10 caractères." };
+    }
+
+    const existing = await db.select({ id: adminUsers.id }).from(adminUsers).where(eq(adminUsers.email, email)).limit(1);
+    if (existing.length) return { error: "Un compte existe déjà avec cette adresse email." };
+
+    await db.insert(adminUsers).values({ name, email, passwordHash: hashPassword(password), role });
+    revalidatePath("/admin/team");
+    return { ok: true };
+  } catch (error) {
+    console.error("Unable to create team user", error);
+    return { error: "Impossible de créer le compte pour le moment. Vérifiez la connexion à la base de données." };
   }
-
-  const existing = await db.select({ id: adminUsers.id }).from(adminUsers).where(eq(adminUsers.email, email)).limit(1);
-  if (existing.length) throw new Error("An account already exists for this email address.");
-
-  await db.insert(adminUsers).values({ name, email, passwordHash: hashPassword(password), role });
-  revalidatePath("/admin/team");
 }
 
 export async function deleteTeamUserAction(id: number) {

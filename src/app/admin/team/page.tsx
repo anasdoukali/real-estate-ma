@@ -1,12 +1,11 @@
 import { asc } from "drizzle-orm";
 import { db } from "@/db";
 import { adminUsers } from "@/db/schema";
-import { deleteTeamUserAction, createTeamUserAction } from "../actions";
+import { deleteTeamUserAction } from "../actions";
 import { getSession } from "@/lib/auth";
+import { TeamUserForm } from "@/components/admin/TeamUserForm";
 
 export const dynamic = "force-dynamic";
-
-const input = "h-10 w-full rounded-md border border-[#d4d4d8] px-3 text-[13.5px] outline-none focus:border-black";
 
 export default async function AdminTeamPage() {
   const [users, session] = await Promise.all([
@@ -23,16 +22,7 @@ export default async function AdminTeamPage() {
 
       <section className="rounded-lg border border-[#e4e4e7] bg-white p-6">
         <h2 className="text-[14px] font-semibold">Ajouter un compte</h2>
-        <form action={createTeamUserAction} className="mt-5 grid gap-4 md:grid-cols-2">
-          <input className={input} name="name" placeholder="Nom complet" required />
-          <input className={input} name="email" type="email" placeholder="Email professionnel" required />
-          <input className={input} name="password" type="password" minLength={10} placeholder="Mot de passe (10 caractères minimum)" required />
-          <select className={input} name="role" defaultValue="worker">
-            <option value="worker">Membre de l&apos;équipe</option>
-            <option value="admin">Administrateur</option>
-          </select>
-          <button className="w-fit rounded-md bg-black px-5 py-2.5 text-[13px] text-white">Créer le compte</button>
-        </form>
+        <TeamUserForm />
       </section>
 
       <section className="overflow-hidden rounded-lg border border-[#e4e4e7] bg-white">
