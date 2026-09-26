@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     default: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
     template: "%s | MAPYGO REAL ESTATE",
   },
+  icons: {
+    icon: "/brand/lv-real-estate-symbol.png",
+  },
   description:
     "Villas, riads, appartements et propriétés d'exception à Marrakech. Achat, location, investissement et estimation par une agence locale.",
   openGraph: {
