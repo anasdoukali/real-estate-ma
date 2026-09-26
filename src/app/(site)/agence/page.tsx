@@ -60,8 +60,8 @@ export default async function AgencyPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1600px] px-5 py-24 md:px-10">
-        <div className="grid gap-16 lg:grid-cols-[55%_45%]">
+      <section className="mx-auto max-w-[1600px] px-5 py-16 md:px-10 lg:py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[60%_40%]">
           <Reveal>
             <p className="label-xs text-accent">{en ? "Our mission" : "Notre mission"}</p>
             <p className="display mt-8 text-[28px] sm:text-[36px]">
@@ -76,7 +76,7 @@ export default async function AgencyPage() {
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <div className="relative ml-auto aspect-[16/10] w-full max-w-[560px] overflow-hidden">
               <Image src={SIDE} alt="Louka & Vendy à Marrakech" fill sizes="45vw" className="object-cover" />
             </div>
           </Reveal>
@@ -118,7 +118,7 @@ export default async function AgencyPage() {
       <section className="mx-auto max-w-[1600px] px-5 py-24 md:px-10">
         <p className="label-xs text-accent">{en ? "Our values" : "Nos valeurs"}</p>
         <h2 className="display mt-5 max-w-2xl text-[34px] sm:text-[46px]">{en ? "What we believe in." : "Ce en quoi nous croyons."}</h2>
-        <div className="grid gap-px border border-sand bg-sand md:grid-cols-3">
+        <div className="mt-10 grid gap-px border border-sand bg-sand md:grid-cols-3">
           {values.map((v) => (
             <Reveal key={v.en}>
               <div className="h-full bg-page p-9">
