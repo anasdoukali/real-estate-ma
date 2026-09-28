@@ -26,13 +26,13 @@ export default async function BlogPage() {
       <h1 className="display mt-5 max-w-2xl text-[40px] sm:text-[58px]">
         {en ? (
           <>
-            The market in Marrakech,
+            The market of Marrakech,
             <br />
             decoded.
           </>
         ) : (
           <>
-            Le marché à Marrakech,
+            Le marché de Marrakech,
             <br />
             décrypté.
           </>
