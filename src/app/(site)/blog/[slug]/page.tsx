@@ -31,7 +31,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article || article.status !== "published") notFound();
 
   return (
-    <article className="pb-24">
+    <article className="bg-white pb-24">
       <div className="relative h-[58vh] min-h-[360px] w-full overflow-hidden">
         {article.coverImage && (
           <Image src={article.coverImage} alt={article.titleFr} fill priority sizes="100vw" className="object-cover" />

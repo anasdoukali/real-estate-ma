@@ -36,15 +36,35 @@ export default function Header({
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const { ids } = useFavorites();
   const transparentPage = pathname === "/";
   const propertyPage = pathname.startsWith("/biens/");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 40);
+      if (currentY <= 24) {
+        setHidden(false);
+      } else if (currentY < lastY - 8) {
+        setHidden(false);
+      } else if (currentY > lastY + 8) {
+        setHidden(true);
+      }
+      lastY = currentY;
+    };
+    const onMouseMove = (event: MouseEvent) => {
+      if (event.clientY < 90) setHidden(false);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMouseMove);
+    };
   }, []);
 
   useEffect(() => {
@@ -75,6 +95,8 @@ export default function Header({
     <>
       <header
         className={`fixed inset-x-0 top-0 z-[1100] transition-all duration-300 ${
+          hidden && !open ? "-translate-y-full" : "translate-y-0"
+        } ${
           propertyPage
             ? "border-b border-charcoal/10 bg-sand"
             : solid ? "border-b border-stone bg-warm/95 backdrop-blur-md" : "bg-transparent"

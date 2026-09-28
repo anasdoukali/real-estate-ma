@@ -159,7 +159,7 @@ export default async function AgencyPage() {
       </section>
 
       {team.length > 0 && (
-        <section className="mx-auto max-w-[1600px] px-5 pb-24 md:px-10">
+        <section className="mx-auto max-w-[1600px] px-5 py-24 md:px-10">
           <p className="label-xs text-accent">{en ? "Our team" : "Notre équipe"}</p>
           <h2 className="display mt-5 text-[34px] sm:text-[46px]">
             {en ? "The people behind the agency." : "Les visages de l'agence."}
@@ -190,7 +190,7 @@ export default async function AgencyPage() {
       )}
 
       <section className="bg-stone py-20">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-8 px-5 md:px-10">
+        <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-center gap-8 px-5 text-center md:px-10">
           <h2 className="display max-w-xl text-[30px] sm:text-[42px]">
             {en ? "Let’s Talk About Your Project." : "Parlons de votre projet."}
           </h2>
