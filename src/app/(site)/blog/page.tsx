@@ -32,7 +32,7 @@ export default async function BlogPage() {
           </>
         ) : (
           <>
-            Le marché à Marrakech
+            Le marché à Marrakech,
             <br />
             décrypté.
           </>
