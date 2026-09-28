@@ -559,13 +559,13 @@ export default async function HomePage() {
                   <h2 className="display mt-5 text-[34px] sm:text-[46px]">
                     {en ? (
                       <>
-                        The market,
+                        The market of Marrakech
                         <br />
                         decoded.
                       </>
                     ) : (
                       <>
-                        Le marché,
+                        Le marché de Marrakech
                         <br />
                         décrypté.
                       </>
