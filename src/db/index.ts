@@ -17,10 +17,13 @@ export const pool =
     connectionString: databaseUrl,
     // Supabase's hosted PostgreSQL pooler requires TLS.
     ssl: { rejectUnauthorized: false },
+    // Vercel can spin up many serverless instances at once. Keep each instance
+    // to a single Postgres client so Supabase's small pool is not exhausted.
+    max: 1,
     // Fail quickly so public pages can render their fallback state instead of
     // sitting on the Next.js loading screen while a remote database is offline.
     connectionTimeoutMillis: 5_000,
-    idleTimeoutMillis: 30_000,
+    idleTimeoutMillis: 10_000,
     keepAlive: true,
   });
 
