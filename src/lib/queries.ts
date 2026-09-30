@@ -218,7 +218,7 @@ export async function getSettings() {
   return {
     ...settings,
     agencyName:
-      !settings.agencyName || settings.agencyName === "[AGENCY NAME]" || settings.agencyName.toUpperCase() === "MAPYGO REAL ESTATE"
+      !settings.agencyName || settings.agencyName === "[AGENCY NAME]"
         ? DEFAULT_AGENCY_SETTINGS.agencyName
         : settings.agencyName,
     logo: settings.logo || DEFAULT_AGENCY_SETTINGS.logo,

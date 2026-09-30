@@ -14,11 +14,11 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.SITE_URL ?? "https://mapygo-real-estate.amine-27.chatgpt.site",
+    process.env.SITE_URL ?? "https://loukavendy.com",
   ),
   title: {
-    default: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
-    template: "%s | MAPYGO REAL ESTATE",
+    default: "Louka & Vendy Real Estate — Immobilier d'exception à Marrakech",
+    template: "%s | Louka & Vendy Real Estate",
   },
   icons: {
     icon: "/brand/lv-real-estate-symbol.png",
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_MA",
-    siteName: "MAPYGO REAL ESTATE",
-    title: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
+    siteName: "Louka & Vendy Real Estate",
+    title: "Louka & Vendy Real Estate — Immobilier d'exception à Marrakech",
     description:
       "Villas, riads, appartements et propriétés d'exception à Marrakech.",
     images: [
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "MAPYGO REAL ESTATE",
+        alt: "Louka & Vendy Real Estate",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MAPYGO REAL ESTATE — Immobilier d'exception à Marrakech",
+    title: "Louka & Vendy Real Estate — Immobilier d'exception à Marrakech",
     description:
       "Villas, riads, appartements et propriétés d'exception à Marrakech.",
     images: ["/og.png"],

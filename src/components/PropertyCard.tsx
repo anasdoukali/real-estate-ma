@@ -104,7 +104,7 @@ export default function PropertyCard({
             <div className="flex h-full items-center justify-center p-10">
               <Image
                 src="/brand/louka-vendy-gold.png"
-                alt="MAPYGO REAL ESTATE"
+                alt="Louka & Vendy Real Estate"
                 width={347}
                 height={111}
                 className="h-auto w-36 opacity-70"

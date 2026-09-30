@@ -6,7 +6,7 @@ import { listNeighborhoods } from "@/lib/queries";
 import { loadPublicData } from "@/lib/public-data";
 
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "Confiez-nous votre bien", description: "Vendez ou louez votre bien à Marrakech avec MAPYGO. Présentez votre projet à notre équipe." };
+export const metadata: Metadata = { title: "Confiez-nous votre bien", description: "Vendez ou louez votre bien à Marrakech avec Louka & Vendy Real Estate. Présentez votre projet à notre équipe." };
 export default async function ListPropertyPage() {
   const lang = await getLang();
   const en = lang === "en";
